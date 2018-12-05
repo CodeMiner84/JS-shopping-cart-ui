@@ -36,6 +36,7 @@
     "only-arrow-functions": [true, "allow-declarations"],
     "ordered-imports": [false],
     "prefer-method-signature": false,
+    "no-console": false,
     "prefer-template": [true, "allow-single-concat"],
     "quotemark": [true, "single", "jsx-double"],
     "semicolon": [true, "always", "ignore-bound-class-methods"],

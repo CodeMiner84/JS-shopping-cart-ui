@@ -1,2 +1,3 @@
 declare module 'reactstrap';
-declare module NavLink'react-router-dom';
+declare module 'react-router-dom';
+declare module 'styled-components';
