@@ -15,10 +15,6 @@ class App extends React.Component {
             <Route path="/products" exact={true} component={Product} />
           </React.Fragment>
         </Router>
-        {/* ROUTER */}
-        {/* LINK: / */}
-        {/* LINK: product/:id */}
-        {/* LINK: cart */}
       </div>
     );
   }
