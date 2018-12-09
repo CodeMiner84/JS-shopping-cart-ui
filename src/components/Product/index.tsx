@@ -1,22 +1,27 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-// import { products } from '../../api/fixtures/products';
 import { Product } from './Product';
+import { ProductModel } from '../../api/models/product';
 import Row from 'reactstrap/lib/Row';
-import { getNews } from '../../actions';
+import { getProducts } from '../../actions';
 
-class Products extends React.Component<any, any> {
+interface IProductProps {
+  readonly getProducts: () => void;
+  readonly products: ProductModel[];
+}
+
+class Products extends React.Component<IProductProps, any> {
+  constructor(props: IProductProps) {
+    super(props);
+
+    props.getProducts();
+  }
+
   render() {
-    console.log('this.props', this.props);
-    console.log('this.state', this.state);
-
     const { products } = this.props;
-
-    console.log('products', products);
 
     return (
       <React.Fragment>
-        <button onClick={this.props.getNews}>Click me</button>
         <h1>Product list</h1>
         <Row>
           {products !== undefined && (
@@ -32,20 +37,13 @@ class Products extends React.Component<any, any> {
   }
 }
 
-function mapStateToProps(state: any) {
-  console.log(state);
-
-  return {
-    products: state.products,
-  };
-}
+const mapStateToProps = (state: Partial<IProductProps>) => state;
 
 const mapDispatchToProps = {
-  getNews: getNews,
+  getProducts: getProducts,
 };
 
-const EnhancedProducts = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(Products);
-export default EnhancedProducts;
