@@ -1,7 +1,13 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 
-export default class Dashboard extends React.Component<{}, {}> {
+class Dashboard extends React.Component<{}, {}> {
   render() {
-    return <div>Product page</div>;
+    console.log('this.props', this.props);
+    return <div>Cart Page</div>;
   }
 }
+
+const mapStateToProps = (state: any) => state;
+
+export default connect(mapStateToProps)(Dashboard);

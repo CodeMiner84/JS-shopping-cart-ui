@@ -3,8 +3,17 @@ import { Card, CardImg, CardText, CardBody, CardTitle, Button } from 'reactstrap
 import { ProductModel } from 'src/models/product';
 import Col from 'reactstrap/lib/Col';
 import Price from './Price';
+import { addToCart } from '../../actions/index';
+import { connect } from 'react-redux';
+import { IAppState } from '../../application/index';
 
-export const Product: React.SFC<ProductModel> = props => (
+interface IProductProps {
+  addToCart: () => void;
+}
+
+const Product: React.SFC<ProductModel & Partial<IAppState> & IProductProps> = (
+  props: ProductModel & Partial<IAppState> & IProductProps,
+) => (
   <Col sm="6" md="3" lg="2" xs="12">
     <Card>
       <CardImg
@@ -20,8 +29,17 @@ export const Product: React.SFC<ProductModel> = props => (
           <strong>{props.description}</strong>
         </CardText>
         <Price>${props.price}</Price>
-        <Button>Add to cart</Button>
+        <Button onClick={props.addToCart}>Add to cart</Button>
       </CardBody>
     </Card>
   </Col>
 );
+
+const mapDispatchToProps = {
+  addToCart: addToCart,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Product);

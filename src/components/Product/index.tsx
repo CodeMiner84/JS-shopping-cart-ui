@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Product } from './Product';
+import Product from './Product';
 import Row from 'reactstrap/lib/Row';
 import { getProducts } from '../../actions';
 import { IAppState } from '../../application/index';

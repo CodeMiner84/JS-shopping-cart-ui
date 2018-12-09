@@ -15,6 +15,17 @@ const reducer = (state: IAppState = DefaultAppProps, action: any) => {
         products: {},
         loading: true,
       };
+    case actionTypes.ADD_TO_CART:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actionTypes.ADDED_TO_CART:
+      return {
+        ...state,
+        loading: false,
+        cart_products: action.addedProduct,
+      };
     default:
       return state;
   }

@@ -33,3 +33,11 @@ export const getProducts = () => ({
   type: actionTypes.GET_PRODUCTS,
   loading: false,
 });
+
+export const addToCart = () => ({
+  type: actionTypes.ADD_TO_CART,
+});
+
+export const AddedToCart = () => ({
+  type: actionTypes.ADDED_TO_CART,
+});
