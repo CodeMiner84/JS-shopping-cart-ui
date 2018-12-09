@@ -4,7 +4,6 @@ export const FAILURE = 'FAILURE';
 import actionTypes from '../actionTypes/product';
 
 export function getDataRequested() {
-  console.log('akcja reduxowa REQUEST');
   return {
     type: 'REQUEST',
   };
@@ -24,6 +23,13 @@ export function getFailure(data: any) {
   };
 }
 
+export const receiveProducts = (products: {}) => ({
+  type: actionTypes.RECV_PRODUCTS,
+  loading: true,
+  products,
+});
+
 export const getProducts = () => ({
   type: actionTypes.GET_PRODUCTS,
+  loading: false,
 });

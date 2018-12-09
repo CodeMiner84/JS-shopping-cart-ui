@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, Button } from 'reactstrap';
-import { ProductModel } from 'src/api/models/product';
+import { ProductModel } from 'src/models/product';
 import Col from 'reactstrap/lib/Col';
 import Price from './Price';
 

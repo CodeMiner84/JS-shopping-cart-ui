@@ -1,24 +1,27 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Product } from './Product';
-import { ProductModel } from '../../api/models/product';
 import Row from 'reactstrap/lib/Row';
 import { getProducts } from '../../actions';
+import { IAppState } from '../../application/index';
 
 interface IProductProps {
   readonly getProducts: () => void;
-  readonly products: ProductModel[];
 }
 
-class Products extends React.Component<IProductProps, any> {
-  constructor(props: IProductProps) {
+class Products extends React.Component<IProductProps & IAppState, any> {
+  constructor(props: IProductProps & IAppState) {
     super(props);
 
     props.getProducts();
   }
 
   render() {
-    const { products } = this.props;
+    const { products, loading } = this.props;
+
+    if (loading) {
+      return <div />;
+    }
 
     return (
       <React.Fragment>

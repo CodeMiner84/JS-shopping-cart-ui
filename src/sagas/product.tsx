@@ -6,11 +6,11 @@ import routes from '../helpers/routes';
 
 function* fetchProducts() {
   try {
+    yield sleep(1);
     const response = yield call(() => getData(routes.products));
     const data = response.data;
 
-    yield put(actions.getSuccess(data));
-    yield put({ type: 'NEWS_RECEIVED', payload: data });
+    yield put({ type: actionTypes.RECV_PRODUCTS, payload: data });
   } catch (e) {
     yield put(actions.getFailure(e));
   }
@@ -18,4 +18,8 @@ function* fetchProducts() {
 
 export function* productListWatcher() {
   yield takeLatest(actionTypes.GET_PRODUCTS, fetchProducts);
+}
+
+function* sleep(time: number) {
+  yield new Promise(resolve => setTimeout(resolve, time * 1000));
 }
