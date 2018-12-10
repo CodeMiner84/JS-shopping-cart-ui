@@ -2,6 +2,7 @@ export const REQUEST = 'REQUEST';
 export const SUCCESS = 'SUCCESS';
 export const FAILURE = 'FAILURE';
 import actionTypes from '../actionTypes/product';
+import { ProductModel } from '../models/product';
 
 export function getDataRequested() {
   return {
@@ -34,8 +35,9 @@ export const getProducts = () => ({
   loading: false,
 });
 
-export const addToCart = () => ({
+export const addToCart = (product: ProductModel) => ({
   type: actionTypes.ADD_TO_CART,
+  product,
 });
 
 export const AddedToCart = () => ({

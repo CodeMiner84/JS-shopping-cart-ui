@@ -10,5 +10,5 @@ export interface IAppState {
 export const DefaultAppProps: IAppState = {
   products: [],
   loading: false,
-  cartItems: { title: '' },
+  cartItems: [],
 };

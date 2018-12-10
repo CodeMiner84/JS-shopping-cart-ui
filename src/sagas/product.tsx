@@ -3,10 +3,11 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import actionTypes from '../actionTypes/product';
 import { getData } from '../helpers/request';
 import routes from '../helpers/routes';
+import { sleep } from '../helpers/index';
 
 function* fetchProducts() {
   try {
-    yield sleep(1);
+    yield sleep(0);
     const response = yield call(() => getData(routes.products));
     const data = response.data;
 
@@ -18,8 +19,4 @@ function* fetchProducts() {
 
 export function* productListWatcher() {
   yield takeLatest(actionTypes.GET_PRODUCTS, fetchProducts);
-}
-
-function* sleep(time: number) {
-  yield new Promise(resolve => setTimeout(resolve, time * 1000));
 }

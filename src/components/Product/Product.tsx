@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { IAppState } from '../../application/index';
 
 interface IProductProps {
-  addToCart: () => void;
+  addToCart: (title: ProductModel) => void;
 }
 
 const Product: React.SFC<ProductModel & Partial<IAppState> & IProductProps> = (
@@ -29,7 +29,7 @@ const Product: React.SFC<ProductModel & Partial<IAppState> & IProductProps> = (
           <strong>{props.description}</strong>
         </CardText>
         <Price>${props.price}</Price>
-        <Button onClick={props.addToCart}>Add to cart</Button>
+        <Button onClick={() => props.addToCart(props)}>Add to cart</Button>
       </CardBody>
     </Card>
   </Col>

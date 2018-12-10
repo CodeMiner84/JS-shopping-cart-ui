@@ -1,5 +1,6 @@
 import actionTypes from '../actionTypes/product';
 import { DefaultAppProps, IAppState } from '../application/index';
+import { CartItem } from '../models/cart';
 
 const reducer = (state: IAppState = DefaultAppProps, action: any) => {
   switch (action.type) {
@@ -21,10 +22,36 @@ const reducer = (state: IAppState = DefaultAppProps, action: any) => {
         loading: true,
       };
     case actionTypes.ADDED_TO_CART:
+      let newCartItems: CartItem[] = state.cartItems;
+
+      newCartItems = Object.keys(state.cartItems).map((key: any) => {
+        if (state.cartItems[key].id === action.payload._id) {
+          return {
+            ...state.cartItems[key],
+            quantity: state.cartItems[key].quantity + 1,
+          };
+        }
+
+        return state.cartItems[key];
+      });
+
+      if (
+        Object.keys(newCartItems).filter(
+          (key: any) => newCartItems[key].id === action.payload._id,
+        ).length === 0
+      ) {
+        newCartItems.push({
+          id: action.payload._id,
+          title: action.payload.title,
+          price: action.payload.price,
+          quantity: 1,
+        });
+      }
+
       return {
         ...state,
         loading: false,
-        cart_products: action.addedProduct,
+        cartItems: newCartItems,
       };
     default:
       return state;
