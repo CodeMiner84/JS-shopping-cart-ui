@@ -4,11 +4,16 @@ import reducer from '../reducers';
 import { rootSaga } from 'src/sagas/rootSaga';
 import { logger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import createHistory from 'history/createBrowserHistory';
+import { routerMiddleware } from 'connected-react-router';
+
+export const history = createHistory();
 
 const sagaMiddleware = createSagaMiddleware();
+const middlewares = [routerMiddleware(history), sagaMiddleware];
 const store = createStore(
   reducer,
-  composeWithDevTools(applyMiddleware(sagaMiddleware, logger)),
+  composeWithDevTools(applyMiddleware(...middlewares, logger)),
 );
 
 sagaMiddleware.run(rootSaga);

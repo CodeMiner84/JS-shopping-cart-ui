@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router';
 import Dashboard from './components/Dashboard';
 import Product from './components/Product/index';
 import { Navbar } from './components/Layout/Navbar';
 import Loading from './components/Loading';
+import { history } from './store/store';
 
 /**
  * It should be SFC Component. But it is main app component,
@@ -12,16 +13,16 @@ import Loading from './components/Loading';
 class App extends React.Component<{}, {}> {
   public render() {
     return (
-      <div className="App">
-        <Router>
+      <Router history={history}>
+        <Switch>
           <React.Fragment>
             <Navbar />
             <Loading />
             <Route path="/" exact={true} component={Dashboard} />
             <Route path="/products" exact={true} component={Product} />
           </React.Fragment>
-        </Router>
-      </div>
+        </Switch>
+      </Router>
     );
   }
 }
