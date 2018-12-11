@@ -2,6 +2,7 @@ export const REQUEST = 'REQUEST';
 export const SUCCESS = 'SUCCESS';
 export const FAILURE = 'FAILURE';
 import actionTypes from '../actionTypes/product';
+import cartActions from '../actionTypes/cart';
 import { ProductModel } from '../models/product';
 
 export function getDataRequested() {
@@ -42,4 +43,10 @@ export const addToCart = (product: ProductModel) => ({
 
 export const AddedToCart = () => ({
   type: actionTypes.ADDED_TO_CART,
+});
+
+export const recalculateCart = (id: string, quantity: number) => ({
+  type: cartActions.RECALCULATE,
+  id,
+  quantity,
 });

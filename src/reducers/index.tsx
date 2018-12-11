@@ -1,6 +1,7 @@
 import actionTypes from '../actionTypes/product';
+import cartTypes from '../actionTypes/cart';
 import { DefaultAppProps, AppState } from '../application/index';
-import { CartItem } from '../models/cart';
+import { CartItem } from 'src/models/cart';
 
 const reducer = (state: AppState = DefaultAppProps, action: any) => {
   switch (action.type) {
@@ -53,6 +54,15 @@ const reducer = (state: AppState = DefaultAppProps, action: any) => {
         ...state,
         loading: false,
         cartItems: newCartItems,
+      };
+    case cartTypes.RECALCULATE:
+      console.log('state', state);
+      return {
+        ...state,
+        cartItems: state.cartItems.map((item: CartItem) => {
+          item.quantity = 3;
+          return item;
+        }),
       };
     default:
       return state;

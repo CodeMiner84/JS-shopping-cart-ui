@@ -9,16 +9,20 @@ class Dashboard extends React.Component<any, {}> {
       <div>
         Cart Page
         <table className={'table table-hover'}>
-          <tr>
-            <th>Image</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Amount</th>
-          </tr>
-          {Object.keys(cartItems).map((key: string) => (
-            <CartElement key={key} product={cartItems[key]} />
-          ))}
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.keys(cartItems).map((key: string) => (
+              <CartElement key={key} product={cartItems[key]} />
+            ))}
+          </tbody>
         </table>
       </div>
     );
