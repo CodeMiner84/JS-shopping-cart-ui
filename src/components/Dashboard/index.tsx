@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import Row from 'reactstrap/lib/Row';
-import Col from 'reactstrap/lib/Col';
+import CartElement from './CartItem';
 
 class Dashboard extends React.Component<any, {}> {
   render() {
@@ -9,13 +8,18 @@ class Dashboard extends React.Component<any, {}> {
     return (
       <div>
         Cart Page
-        <Row>
-          {Object.keys(cartItems).map((key: any) => (
-            <Col key={cartItems[key].id}>
-              {cartItems[key].title} ____ {cartItems[key].quantity}
-            </Col>
+        <table className={'table table-hover'}>
+          <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+          </tr>
+          {Object.keys(cartItems).map((key: string) => (
+            <CartElement key={key} product={cartItems[key]} />
           ))}
-        </Row>
+        </table>
       </div>
     );
   }

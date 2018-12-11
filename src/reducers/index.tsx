@@ -44,6 +44,7 @@ const reducer = (state: AppState = DefaultAppProps, action: any) => {
           id: action.payload._id,
           title: action.payload.title,
           price: action.payload.price,
+          image: action.payload.image,
           quantity: 1,
         });
       }
