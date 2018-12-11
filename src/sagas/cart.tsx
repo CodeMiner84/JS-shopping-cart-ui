@@ -5,12 +5,12 @@ import { sleep } from '../helpers/index';
 import { ProductModel } from '../models/product';
 import { push } from 'react-router-redux';
 
-interface IAddToCart {
+interface AddToCart {
   type: string;
   product: ProductModel;
 }
 
-function* addToCart(action: IAddToCart) {
+function* addToCart(action: AddToCart) {
   try {
     yield sleep(0);
     const response = action.product;

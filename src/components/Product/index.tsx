@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import Product from './Product';
 import Row from 'reactstrap/lib/Row';
 import { getProducts } from '../../actions';
-import { IAppState } from '../../application/index';
+import { AppState } from '../../application/index';
 
-interface IProductProps {
+interface ProductProps {
   readonly getProducts: () => void;
 }
 
-class Products extends React.Component<IProductProps & IAppState, any> {
-  constructor(props: IProductProps & IAppState) {
+class Products extends React.Component<ProductProps & AppState, any> {
+  constructor(props: ProductProps & AppState) {
     super(props);
 
     props.getProducts();
@@ -26,21 +26,19 @@ class Products extends React.Component<IProductProps & IAppState, any> {
     return (
       <React.Fragment>
         <h1>Product list</h1>
-        <Row>
-          {products !== undefined && (
-            <React.Fragment>
-              {Object.keys(products).map(key => (
-                <Product key={key} {...products[key]} />
-              ))}
-            </React.Fragment>
-          )}
-        </Row>
+        {products !== undefined && (
+          <Row>
+            {Object.keys(products).map(key => (
+              <Product key={key} product={products[key]} />
+            ))}
+          </Row>
+        )}
       </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = (state: Partial<IProductProps>) => state;
+const mapStateToProps = (state: Partial<ProductProps>) => state;
 
 const mapDispatchToProps = {
   getProducts: getProducts,

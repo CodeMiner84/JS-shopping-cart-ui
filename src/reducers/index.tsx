@@ -1,8 +1,8 @@
 import actionTypes from '../actionTypes/product';
-import { DefaultAppProps, IAppState } from '../application/index';
+import { DefaultAppProps, AppState } from '../application/index';
 import { CartItem } from '../models/cart';
 
-const reducer = (state: IAppState = DefaultAppProps, action: any) => {
+const reducer = (state: AppState = DefaultAppProps, action: any) => {
   switch (action.type) {
     case actionTypes.RECV_PRODUCTS:
       return {
