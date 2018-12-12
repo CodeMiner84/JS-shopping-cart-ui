@@ -1,3 +1,3 @@
 export default {
-  products: '/products',
+  products: '/product/list',
 };

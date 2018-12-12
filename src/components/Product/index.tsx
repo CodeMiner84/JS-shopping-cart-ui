@@ -4,6 +4,7 @@ import Product from './Product';
 import Row from 'reactstrap/lib/Row';
 import { getProducts } from '../../actions';
 import { AppState } from '../../application/index';
+import { CartItem } from '../../models/cart';
 
 interface ProductProps {
   readonly getProducts: () => void;
@@ -38,7 +39,17 @@ class Products extends React.Component<ProductProps & AppState, any> {
   }
 }
 
-const mapStateToProps = (state: Partial<ProductProps>) => state;
+interface MyProps {
+  product: {
+    products: CartItem;
+  };
+  loading: () => void;
+}
+
+const mapStateToProps = ({ product: { products }, loading }: MyProps) => ({
+  products,
+  loading,
+});
 
 const mapDispatchToProps = {
   getProducts: getProducts,

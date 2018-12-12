@@ -12,6 +12,7 @@ const CartElement: React.SFC<CartElementProps> = ({
   product,
   recalculate,
 }: CartElementProps) => {
+  console.log('product', product);
   return (
     <tr>
       <td>
@@ -30,13 +31,11 @@ const CartElement: React.SFC<CartElementProps> = ({
   );
 };
 
-const mapStateToProps = (state: any) => state;
-
 const mapDispatchToProps = {
   recalculate: recalculateCart,
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 )(CartElement);

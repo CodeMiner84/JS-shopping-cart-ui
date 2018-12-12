@@ -5,6 +5,7 @@ import CartElement from './CartItem';
 class Dashboard extends React.Component<any, {}> {
   render() {
     const { cartItems } = this.props;
+    console.log('cartItems', cartItems);
     return (
       <div>
         Cart Page
@@ -18,17 +19,16 @@ class Dashboard extends React.Component<any, {}> {
               <th>Amount</th>
             </tr>
           </thead>
-          <tbody>
-            {Object.keys(cartItems).map((key: string) => (
-              <CartElement key={key} product={cartItems[key]} />
-            ))}
-          </tbody>
+          {cartItems &&
+            cartItems.map((item: any) => <CartElement key={item._id} product={item} />)}
         </table>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state: any) => state;
+const mapStateToProps = (state: any) => ({
+  cartItems: state.cart.cartItems,
+});
 
 export default connect(mapStateToProps)(Dashboard);
