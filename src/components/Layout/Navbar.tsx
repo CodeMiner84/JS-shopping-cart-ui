@@ -15,5 +15,10 @@ export const Navbar: React.SFC<{}> = () => (
         Product
       </Link>
     </NavItem>
+    <NavItem eventKey={3} title="Sign in">
+      <Link to="/signup" className="nav-link">
+        Sign up
+      </Link>
+    </NavItem>
   </Nav>
 );

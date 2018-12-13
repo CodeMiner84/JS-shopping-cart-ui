@@ -67,6 +67,7 @@
     "jsx-no-multiline-js": false,
     "jsx-no-lambda": false,
     "prettier": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "no-string-literal": false
   }
 }

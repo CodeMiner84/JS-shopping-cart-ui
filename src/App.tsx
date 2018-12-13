@@ -5,6 +5,7 @@ import Product from './components/Product/index';
 import { Navbar } from './components/Layout/Navbar';
 import Loading from './components/Loading';
 import { history } from './store/store';
+import SignUp from './components/SignUp/index';
 
 /**
  * It should be SFC Component. But it is main app component,
@@ -19,6 +20,7 @@ class App extends React.Component<{}, {}> {
             <Navbar />
             <Loading />
             <Route path="/" exact={true} component={Dashboard} />
+            <Route path="/signup" exact={true} component={SignUp} />
             <Route path="/products" exact={true} component={Product} />
           </React.Fragment>
         </Switch>
