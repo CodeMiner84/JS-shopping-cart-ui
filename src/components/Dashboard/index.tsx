@@ -5,7 +5,6 @@ import CartElement from './CartItem';
 class Dashboard extends React.Component<any, {}> {
   render() {
     const { cartItems } = this.props;
-    console.log('cartItems', cartItems);
     return (
       <div>
         Cart Page
