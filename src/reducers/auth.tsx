@@ -43,8 +43,12 @@ export default function(state: AuthState = AuthProps, action: any) {
       return {
         ...state,
         loading: false,
-        auth: true,
         logged: action.payload.id ? true : false,
+      };
+    case actionTypes.REQ_LOGOUT:
+      return {
+        ...state,
+        logged: false,
       };
     default:
       return state;

@@ -4,7 +4,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { UserProps } from '../components/SignUp/index';
 import { callRegisterUser, callLoginUser, me } from '../helpers/request';
 import { push } from 'react-router-redux';
-import { saveToken, getToken } from '../helpers/auth';
+import { saveToken, getToken, logout } from '../helpers/auth';
 
 interface RegisterUserProps {
   type: string;
@@ -51,6 +51,17 @@ function* isUserLogged() {
   }
 }
 
+function* logoutUser() {
+  try {
+    yield put({ type: actionTypes.REQ_LOGOUT });
+    logout();
+
+    yield put(push('/'));
+  } catch (e) {
+    yield put(actions.getFailure(e));
+  }
+}
+
 export function* watchSignUp() {
   yield takeLatest(actionTypes.REQ_USER_REGISTER, registerUser);
 }
@@ -61,4 +72,8 @@ export function* watchSignIn() {
 
 export function* watchMe() {
   yield takeLatest(actionTypes.TOKEN_REQUEST, isUserLogged);
+}
+
+export function* watchLogout() {
+  yield takeLatest(actionTypes.REQ_LOGOUT, logoutUser);
 }

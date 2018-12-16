@@ -4,21 +4,30 @@ import { Nav, NavItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import routes from '../../helpers/routes';
 import { connect } from 'react-redux';
+import { logout } from '../../actions/auth';
 
 interface NavbarProps {
   logged: boolean;
+  logoutUser: () => void;
 }
 
-const Navbar: React.SFC<NavbarProps> = ({ logged }: NavbarProps) => {
+const Navbar: React.SFC<NavbarProps> = ({ logged, logoutUser }: NavbarProps) => {
   console.log('logged', logged);
   return (
     <Nav bsStyle="pills" className="nav" activeKey={1}>
       {!logged ? (
-        <NavItem eventKey={3} title="Sign in">
-          <Link to="/signin" className="nav-link">
-            Sign in
-          </Link>
-        </NavItem>
+        <React.Fragment>
+          <NavItem eventKey={1} title="Sign in">
+            <Link to="/signin" className="nav-link">
+              Sign in
+            </Link>
+          </NavItem>
+          <NavItem eventKey={2} title="Sign in">
+            <Link to={routes.signup} className="nav-link">
+              Sign up
+            </Link>
+          </NavItem>
+        </React.Fragment>
       ) : null}
       {logged ? (
         <React.Fragment>
@@ -32,9 +41,9 @@ const Navbar: React.SFC<NavbarProps> = ({ logged }: NavbarProps) => {
               Product
             </Link>
           </NavItem>
-          <NavItem eventKey={3} title="Sign in">
-            <Link to={routes.signup} className="nav-link">
-              Sign up
+          <NavItem eventKey={3} title="Item">
+            <Link to="#" className="nav-link" onClick={logoutUser}>
+              Logout
             </Link>
           </NavItem>
         </React.Fragment>
@@ -53,7 +62,11 @@ const mapStateToProps = ({ auth: { logged } }: AuthLogged) => ({
   logged,
 });
 
+const mapDispatchToProps = {
+  logoutUser: logout,
+};
+
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(Navbar);

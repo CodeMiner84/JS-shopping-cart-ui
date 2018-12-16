@@ -10,3 +10,7 @@ export const login = (user: UserProps) => ({
   type: actionTypes.REQ_USER_LOGIN,
   user,
 });
+
+export const logout = () => ({
+  type: actionTypes.REQ_LOGOUT,
+});

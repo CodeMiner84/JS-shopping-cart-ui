@@ -13,7 +13,6 @@ import actionTypes from './actionTypes/auth';
 
 const token = getToken();
 if (token) {
-  console.log('wchpdze');
   store.dispatch({ type: actionTypes.TOKEN_REQUEST });
 }
 
