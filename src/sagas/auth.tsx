@@ -15,7 +15,7 @@ function* registerUser(action: RegisterUserProps) {
   try {
     const response = yield call(() => callRegisterUser(action.user));
     if (response.status === 200) {
-      yield put({ type: actionTypes.RECV_USER_REGISTRATION, payload: response._id });
+      yield put({ type: actionTypes.RECV_USER_REGISTRATION, payload: response.data });
       yield put(push('/'));
     }
   } catch (e) {

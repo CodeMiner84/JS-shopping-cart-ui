@@ -4,12 +4,24 @@ interface AuthState {
   readonly loading: boolean;
   readonly token: string;
   readonly logged: boolean;
+  readonly user: LoggedUser;
+}
+
+interface LoggedUser {
+  id: string;
+  name: string;
+  email: string;
 }
 
 const AuthProps = {
   loading: false,
   token: '',
   logged: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+  },
 };
 
 export default function(state: AuthState = AuthProps, action: any) {
@@ -28,6 +40,9 @@ export default function(state: AuthState = AuthProps, action: any) {
       return {
         ...state,
         loading: false,
+        token: action.payload.token,
+        logged: action.payload.token ? true : false,
+        user: action.payload.user,
       };
     case actionTypes.RECV_USER_LOGIN:
       return {
@@ -45,6 +60,7 @@ export default function(state: AuthState = AuthProps, action: any) {
         ...state,
         loading: false,
         logged: action.payload.id ? true : false,
+        user: action.payload,
       };
     case actionTypes.REQ_LOGOUT:
       return {
