@@ -15,10 +15,10 @@ export const getData = (url: string) =>
     headers,
   });
 
-export const callRegisterUser = (url: string, user: UserProps) =>
+export const callRegisterUser = (user: UserProps) =>
   axios({
     method: 'post',
-    url: `${API_URL}${url}`,
+    url: `${API_URL}${routes.register}`,
     data: user,
   });
 

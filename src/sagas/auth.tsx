@@ -13,7 +13,7 @@ interface RegisterUserProps {
 
 function* registerUser(action: RegisterUserProps) {
   try {
-    const response = yield call(() => callRegisterUser('/user', action.user));
+    const response = yield call(() => callRegisterUser(action.user));
     if (response.status === 200) {
       yield put({ type: actionTypes.RECV_USER_REGISTRATION, payload: response._id });
       yield put(push('/'));

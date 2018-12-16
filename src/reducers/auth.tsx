@@ -33,6 +33,7 @@ export default function(state: AuthState = AuthProps, action: any) {
       return {
         ...state,
         loading: false,
+        logged: true,
       };
     case actionTypes.TOKEN_REQUEST:
       return {
