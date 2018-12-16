@@ -4,6 +4,7 @@ import { FormFeedback, Button, Form, FormGroup, Label, Input } from 'reactstrap'
 import { register } from '../../actions/auth';
 
 export interface UserProps {
+  name: string;
   email: string;
   password: string;
 }
@@ -29,15 +30,23 @@ export interface SignUpState extends UserProps {
 
 class SignUpComponent extends React.PureComponent<SignUpProps, SignUpState> {
   readonly state: SignUpState = {
+    name: '',
     email: '',
     password: '',
     errors: {},
   };
 
   validate = () => {
-    const { email, password }: SignUpState = this.state;
+    const { email, password, name }: SignUpState = this.state;
     const errors = {};
 
+    if (name === '') {
+      const key = 'name';
+      errors[key] = {
+        field: 'name',
+        message: 'Name is required',
+      };
+    }
     if (email === '') {
       const key = 'email';
       errors[key] = {
@@ -69,12 +78,13 @@ class SignUpComponent extends React.PureComponent<SignUpProps, SignUpState> {
   onRegister = (e: any) => {
     e.preventDefault();
 
-    const { email, password } = this.state;
+    const { email, password, name } = this.state;
 
     if (this.validate()) {
       this.props.register({
-        email: email,
-        password: password,
+        name,
+        email,
+        password,
       });
     }
   };
@@ -83,6 +93,22 @@ class SignUpComponent extends React.PureComponent<SignUpProps, SignUpState> {
     return (
       <div>
         <Form onSubmit={this.onRegister}>
+          <FormGroup>
+            <Label htmlFor="email">Username</Label>
+            <Input
+              id="name"
+              onChange={(e: React.FormEvent<HTMLInputElement>) =>
+                this.onChange('name', e)
+              }
+              name="name"
+              type="text"
+              invalid={this.state.errors.name ? true : false}
+              value={this.state.name}
+            />
+            {this.state.errors.email ? (
+              <FormFeedback>{this.state.errors.email['message']}</FormFeedback>
+            ) : null}
+          </FormGroup>
           <FormGroup>
             <Label htmlFor="email">Email</Label>
             <Input
