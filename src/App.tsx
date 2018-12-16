@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Router, Route, Switch } from 'react-router';
 import Dashboard from './components/Dashboard';
 import Product from './components/Product/index';
-import { Navbar } from './components/Layout/Navbar';
+import Navbar from './components/Layout/Navbar';
 import Loading from './components/Loading';
 import store, { history } from './store/store';
 import SignUp from './components/SignUp/index';

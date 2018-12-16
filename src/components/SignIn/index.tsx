@@ -8,17 +8,17 @@ export interface UserProps {
   password: string;
 }
 
-interface SignUpProps extends UserProps {
+interface SignInProps extends UserProps {
   token: string;
   loading: boolean;
   login: (user: UserProps) => void;
 }
 
 interface OwnProps {
-  auth: SignUpProps;
+  auth: SignInProps;
 }
 
-export interface SignUpState extends UserProps {
+export interface SignInState extends UserProps {
   errors: {
     [key: string]: {
       field: string;
@@ -27,15 +27,15 @@ export interface SignUpState extends UserProps {
   };
 }
 
-class SignInComponent extends React.PureComponent<SignUpProps, SignUpState> {
-  readonly state: SignUpState = {
+class SignInComponent extends React.PureComponent<SignInProps, SignInState> {
+  readonly state: SignInState = {
     email: '',
     password: '',
     errors: {},
   };
 
   validate = () => {
-    const { email, password }: SignUpState = this.state;
+    const { email, password }: SignInState = this.state;
     const errors = {};
 
     if (email === '') {
@@ -63,7 +63,7 @@ class SignInComponent extends React.PureComponent<SignUpProps, SignUpState> {
   onChange = (field: string, e: any) => {
     this.setState({
       [field]: e.target.value,
-    } as Pick<SignUpState, keyof SignUpState>);
+    } as Pick<SignInState, keyof SignInState>);
   };
 
   onLogin = (e: any) => {
@@ -82,6 +82,7 @@ class SignInComponent extends React.PureComponent<SignUpProps, SignUpState> {
   render() {
     return (
       <div>
+        SIGNIN
         <Form onSubmit={this.onLogin}>
           <FormGroup>
             <Label htmlFor="email">Email</Label>

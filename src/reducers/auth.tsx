@@ -3,18 +3,13 @@ import actionTypes from '../actionTypes/auth';
 interface AuthState {
   readonly loading: boolean;
   readonly token: string;
-  readonly user: UserProps;
-}
-
-interface UserProps {
-  readonly id?: string;
-  readonly email?: string;
+  readonly logged: boolean;
 }
 
 const AuthProps = {
   loading: false,
   token: '',
-  user: {},
+  logged: false,
 };
 
 export default function(state: AuthState = AuthProps, action: any) {
@@ -49,7 +44,7 @@ export default function(state: AuthState = AuthProps, action: any) {
         ...state,
         loading: false,
         auth: true,
-        user: action.payload.id,
+        logged: action.payload.id ? true : false,
       };
     default:
       return state;
