@@ -1,8 +1,14 @@
 import { productListWatcher } from './product';
 import { all } from 'redux-saga/effects';
 import { cartAddWatcher } from './cart';
-import { watchSignUp } from './auth';
+import { watchSignUp, watchSignIn, watchMe } from './auth';
 
 export function* rootSaga() {
-  yield all([productListWatcher(), cartAddWatcher(), watchSignUp()]);
+  yield all([
+    productListWatcher(),
+    cartAddWatcher(),
+    watchSignUp(),
+    watchSignIn(),
+    watchMe(),
+  ]);
 }

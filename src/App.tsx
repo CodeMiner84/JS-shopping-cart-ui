@@ -4,8 +4,18 @@ import Dashboard from './components/Dashboard';
 import Product from './components/Product/index';
 import { Navbar } from './components/Layout/Navbar';
 import Loading from './components/Loading';
-import { history } from './store/store';
+import store, { history } from './store/store';
 import SignUp from './components/SignUp/index';
+import SignIn from './components/SignIn/index';
+import routes from './helpers/routes';
+import { getToken } from './helpers/auth';
+import actionTypes from './actionTypes/auth';
+
+const token = getToken();
+if (token) {
+  console.log('wchpdze');
+  store.dispatch({ type: actionTypes.TOKEN_REQUEST });
+}
 
 /**
  * It should be SFC Component. But it is main app component,
@@ -20,7 +30,8 @@ class App extends React.Component<{}, {}> {
             <Navbar />
             <Loading />
             <Route path="/" exact={true} component={Dashboard} />
-            <Route path="/signup" exact={true} component={SignUp} />
+            <Route path={routes.signin} exact={true} component={SignIn} />
+            <Route path={routes.signup} exact={true} component={SignUp} />
             <Route path="/products" exact={true} component={Product} />
           </React.Fragment>
         </Switch>

@@ -2,6 +2,7 @@ import * as React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Nav, NavItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import routes from '../../helpers/routes';
 
 export const Navbar: React.SFC<{}> = () => (
   <Nav bsStyle="pills" className="nav" activeKey={1}>
@@ -17,6 +18,11 @@ export const Navbar: React.SFC<{}> = () => (
     </NavItem>
     <NavItem eventKey={3} title="Sign in">
       <Link to="/signup" className="nav-link">
+        Sign in
+      </Link>
+    </NavItem>
+    <NavItem eventKey={3} title="Sign in">
+      <Link to={routes.signup} className="nav-link">
         Sign up
       </Link>
     </NavItem>

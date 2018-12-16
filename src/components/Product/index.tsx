@@ -44,11 +44,13 @@ interface MyProps {
     products: CartItem;
   };
   loading: () => void;
+  user: any;
 }
 
-const mapStateToProps = ({ product: { products }, loading }: MyProps) => ({
+const mapStateToProps = ({ product: { products }, loading, user }: MyProps) => ({
   products,
   loading,
+  user,
 });
 
 const mapDispatchToProps = {
