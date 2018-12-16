@@ -37,8 +37,8 @@ const Navbar: React.SFC<NavbarProps> = ({ logged, logoutUser }: NavbarProps) => 
             </Link>
           </NavItem>
           <NavItem eventKey={2} title="Item">
-            <Link to="/products" className="nav-link">
-              Product
+            <Link to="/cart" className="nav-link">
+              Cart
             </Link>
           </NavItem>
           <NavItem eventKey={3} title="Item">

@@ -16,7 +16,7 @@ function* addToCart(action: AddToCart) {
     const response = action.product;
 
     yield put({ type: actionTypes.ADDED_TO_CART, payload: response });
-    yield put(push('/'));
+    yield put(push('/cart'));
   } catch (e) {
     yield put(actions.getFailure(e));
   }

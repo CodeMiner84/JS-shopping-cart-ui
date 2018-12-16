@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Router, Route, Switch } from 'react-router';
+import Cart from './components/Cart/index';
 import Dashboard from './components/Dashboard';
-import Product from './components/Product/index';
 import Navbar from './components/Layout/Navbar';
 import Loading from './components/Loading';
 import store, { history } from './store/store';
@@ -30,7 +30,7 @@ class App extends React.Component<{}, {}> {
             <Route path="/" exact={true} component={Dashboard} />
             <Route path="/signin" exact={true} component={SignIn} />
             <Route path="/signup" exact={true} component={SignUp} />
-            <Route path="/products" exact={true} component={Product} />
+            <Route path="/cart" exact={true} component={Cart} />
           </React.Fragment>
         </Switch>
       </Router>

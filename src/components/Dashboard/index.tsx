@@ -1,33 +1,63 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import CartElement from './CartItem';
+import Product from './Product';
+import Row from 'reactstrap/lib/Row';
+import { getProducts } from '../../actions';
+import { AppState } from '../../application/index';
+import { CartItem } from '../../models/cart';
 
-class Dashboard extends React.Component<any, {}> {
+interface DashboardProps {
+  readonly getProducts: () => void;
+}
+
+class Dashboard extends React.Component<DashboardProps & AppState, any> {
+  constructor(props: DashboardProps & AppState) {
+    super(props);
+
+    props.getProducts();
+  }
+
   render() {
-    const { cartItems } = this.props;
+    const { products, loading } = this.props;
+
+    if (loading) {
+      return <div />;
+    }
+
     return (
-      <div>
-        Cart Page
-        <table className={'table table-hover'}>
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          {cartItems &&
-            cartItems.map((item: any) => <CartElement key={item._id} product={item} />)}
-        </table>
-      </div>
+      <React.Fragment>
+        <h1>Product list</h1>
+        {products !== undefined && (
+          <Row>
+            {Object.keys(products).map(key => (
+              <Product key={key} product={products[key]} />
+            ))}
+          </Row>
+        )}
+      </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = (state: any) => ({
-  cartItems: state.cart.cartItems,
+interface MyProps {
+  product: {
+    products: CartItem;
+  };
+  loading: () => void;
+  user: any;
+}
+
+const mapStateToProps = ({ product: { products }, loading, user }: MyProps) => ({
+  products,
+  loading,
+  user,
 });
 
-export default connect(mapStateToProps)(Dashboard);
+const mapDispatchToProps = {
+  getProducts: getProducts,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Dashboard);
