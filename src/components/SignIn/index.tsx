@@ -1,15 +1,22 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormFeedback, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Form, Icon, Input, Button, Row, Col } from 'antd';
 import { login } from '../../actions/auth';
+import { FormComponentProps } from 'antd/lib/form';
+import Container from './Container';
+
+const FormItem = Form.Item;
 
 export interface UserProps {
   email: string;
   password: string;
 }
 
-interface SignInProps extends UserProps {
+interface SignInProps extends FormComponentProps {
+  email: string;
+  password: string;
   token: string;
+  error: boolean;
   loading: boolean;
   login: (user: UserProps) => void;
 }
@@ -27,12 +34,23 @@ export interface SignInState extends UserProps {
   };
 }
 
+function hasErrors(fieldsError: any) {
+  return Object.keys(fieldsError).some(field => fieldsError[field]);
+}
+
 class SignInComponent extends React.PureComponent<SignInProps, SignInState> {
   readonly state: SignInState = {
     email: '',
     password: '',
     errors: {},
   };
+
+  constructor(props: SignInProps) {
+    super(props);
+
+    console.log('this.props.form', this.props.form);
+    this.props.form.validateFields();
+  }
 
   validate = () => {
     const { email, password }: SignInState = this.state;
@@ -66,74 +84,102 @@ class SignInComponent extends React.PureComponent<SignInProps, SignInState> {
     } as Pick<SignInState, keyof SignInState>);
   };
 
-  onLogin = (e: any) => {
+  handleLogin = (e: any) => {
     e.preventDefault();
 
-    const { email, password } = this.state;
-
-    if (this.validate()) {
-      this.props.login({
-        email: email,
-        password: password,
-      });
-    }
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        this.props.login({
+          email: values.email,
+          password: values.password,
+        });
+      }
+    });
   };
 
   render() {
+    const {
+      getFieldDecorator,
+      getFieldsError,
+      getFieldError,
+      isFieldTouched,
+    } = this.props.form;
+
+    // Only show error after a field is touched.
+    const emailError = isFieldTouched('email') && getFieldError('email');
+    const passwordError = isFieldTouched('password') && getFieldError('password');
+    const formItemLayout = {
+      labelCol: { span: 6 },
+      wrapperCol: { span: 18 },
+    };
+
     return (
-      <div>
-        SIGNIN
-        <Form onSubmit={this.onLogin}>
-          <FormGroup>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              onChange={(e: React.FormEvent<HTMLInputElement>) =>
-                this.onChange('email', e)
-              }
-              name="email"
-              type="text"
-              invalid={this.state.errors.email ? true : false}
-              value={this.state.email}
-            />
-            {this.state.errors.email ? (
-              <FormFeedback>{this.state.errors.email['message']}</FormFeedback>
-            ) : null}
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              onChange={(e: React.FormEvent<HTMLInputElement>) =>
-                this.onChange('password', e)
-              }
-              name="password"
-              type="password"
-              invalid={this.state.errors.password ? true : false}
-              value={this.state.password}
-            />
-            {this.state.errors.password ? (
-              <FormFeedback>{this.state.errors.password['message']}</FormFeedback>
-            ) : null}
-          </FormGroup>
-          <FormGroup>
-            <Button>Submit</Button>
-          </FormGroup>
-        </Form>
-      </div>
+      <Row>
+        <Col span={6} offset={9}>
+          <Container>
+            <Form layout="horizontal" onSubmit={this.handleLogin}>
+              <FormItem
+                {...formItemLayout}
+                label="Email"
+                validateStatus={emailError ? 'error' : ''}
+                help={emailError || ''}
+              >
+                {getFieldDecorator('email', {
+                  rules: [{ required: true, message: 'Please input your email!' }],
+                })(
+                  <Input
+                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    placeholder="email"
+                  />,
+                )}
+              </FormItem>
+              <FormItem
+                {...formItemLayout}
+                label="Password"
+                validateStatus={passwordError ? 'error' : ''}
+                help={passwordError || ''}
+              >
+                {getFieldDecorator('password', {
+                  rules: [{ required: true, message: 'Please input your Password!' }],
+                })(
+                  <Input
+                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    type="password"
+                    placeholder="Password"
+                  />,
+                )}
+              </FormItem>
+              <FormItem>
+                <Col span={18} offset={6}>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    disabled={hasErrors(getFieldsError())}
+                  >
+                    Sign in
+                  </Button>
+                </Col>
+              </FormItem>
+            </Form>
+          </Container>
+        </Col>
+      </Row>
     );
   }
 }
 
-const mapStateToProps = ({ auth: { token } }: OwnProps) => ({
+const mapStateToProps = ({ auth: { token, error } }: OwnProps) => ({
   token,
+  error,
 });
 
 const mapDispatchToProps = {
   login: login,
 };
 
+const WrappedHorizontalLoginForm = Form.create()(SignInComponent);
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SignInComponent);
+)(WrappedHorizontalLoginForm);

@@ -6,7 +6,8 @@
       "node_modules/**/*.ts",
       "coverage/lcov-report/*.js"
     ]
-  },  "rules": {
+  },
+  "rules": {
     "arrow-parens": false,
     "arrow-return-shorthand": [false],
     "comment-format": [true, "check-space"],
@@ -28,7 +29,7 @@
     "no-submodule-imports": [false],
     "no-this-assignment": [true, { "allow-destructuring": true }],
     "no-trailing-whitespace": true,
-    "no-unused-variable": [true, "react"],
+    "no-unused-variable": [false, "react"],
     "object-literal-sort-keys": false,
     "object-literal-shorthand": false,
     "moduleResolution": "node",

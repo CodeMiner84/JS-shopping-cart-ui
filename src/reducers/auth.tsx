@@ -14,6 +14,7 @@ interface LoggedUser {
 }
 
 const AuthProps = {
+  error: false,
   loading: false,
   token: '',
   logged: false,
@@ -59,13 +60,18 @@ export default function(state: AuthState = AuthProps, action: any) {
       return {
         ...state,
         loading: false,
-        logged: action.payload.id ? true : false,
+        logged: action.payload._id ? true : false,
         user: action.payload,
       };
     case actionTypes.REQ_LOGOUT:
       return {
         ...state,
         logged: false,
+      };
+    case actionTypes.RECV_ERROR:
+      return {
+        ...state,
+        error: true,
       };
     default:
       return state;

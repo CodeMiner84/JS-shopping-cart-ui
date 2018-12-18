@@ -9,6 +9,10 @@ import SignUp from './components/SignUp/index';
 import SignIn from './components/SignIn/index';
 import { getToken } from './helpers/auth';
 import actionTypes from './actionTypes/auth';
+import { Layout, Menu, Breadcrumb } from 'antd';
+const { Header, Content, Footer } = Layout;
+import * as moment from 'moment';
+import 'antd/dist/antd.css';
 
 const token = getToken();
 if (token) {
@@ -25,12 +29,16 @@ class App extends React.Component<{}, {}> {
       <Router history={history}>
         <Switch>
           <React.Fragment>
-            <Navbar />
-            <Loading />
-            <Route path="/" exact={true} component={Dashboard} />
-            <Route path="/signin" exact={true} component={SignIn} />
-            <Route path="/signup" exact={true} component={SignUp} />
-            <Route path="/cart" exact={true} component={Cart} />
+            <Header>
+              <Navbar />
+            </Header>
+            <Content>
+              <Loading />
+              <Route path="/" exact={true} component={Dashboard} />
+              <Route path="/signin" exact={true} component={SignIn} />
+              <Route path="/signup" exact={true} component={SignUp} />
+              <Route path="/cart" exact={true} component={Cart} />
+            </Content>
           </React.Fragment>
         </Switch>
       </Router>

@@ -5,6 +5,7 @@ import { UserProps } from '../components/SignUp/index';
 import { callRegisterUser, callLoginUser, me } from '../helpers/request';
 import { push } from 'react-router-redux';
 import { saveToken, getToken, logout } from '../helpers/auth';
+import { message } from 'antd';
 
 interface RegisterUserProps {
   type: string;
@@ -16,6 +17,7 @@ function* registerUser(action: RegisterUserProps) {
     const response = yield call(() => callRegisterUser(action.user));
     if (response.status === 200) {
       yield put({ type: actionTypes.RECV_USER_REGISTRATION, payload: response.data });
+      message.success('You have succesfully register');
       yield put(push('/'));
     }
   } catch (e) {
@@ -29,9 +31,15 @@ function* loginUser(action: RegisterUserProps) {
     if (response.status === 200) {
       yield put({ type: actionTypes.RECV_USER_LOGIN, payload: response.data.token });
       saveToken(response.data.token);
+      message.success('You are logged in');
       yield put(push('/'));
+    } else if (response.status === 500) {
+      message.error('Wrong email or password');
+      yield put({ type: actionTypes.RECV_ERROR });
     }
   } catch (e) {
+    message.error('Wrong email or password');
+    yield put({ type: actionTypes.RECV_ERROR });
     yield put(actions.getFailure(e));
   }
 }
@@ -53,9 +61,8 @@ function* isUserLogged() {
 
 function* logoutUser() {
   try {
-    yield put({ type: actionTypes.REQ_LOGOUT });
     logout();
-
+    message.success('You are logged off');
     yield put(push('/'));
   } catch (e) {
     yield put(actions.getFailure(e));

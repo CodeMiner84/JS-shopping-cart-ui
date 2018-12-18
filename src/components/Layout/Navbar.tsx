@@ -1,10 +1,10 @@
 import * as React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Nav, NavItem, Navbar, Collapse } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import routes from '../../helpers/routes';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
+import { Menu } from 'antd';
+import { Link } from 'react-router-dom';
 
 interface NavbarProps {
   logged: boolean;
@@ -14,47 +14,43 @@ interface NavbarProps {
 const TopNavbar: React.SFC<NavbarProps> = ({ logged, logoutUser }: NavbarProps) => {
   console.log('logged', logged);
   return (
-    <div>
-      <Navbar color="light" light={true} expand="md">
-        <Collapse navbar={true}>
-          <Nav className="ml-auto" navbar={true}>
-            {!logged ? (
-              <React.Fragment>
-                <NavItem eventKey={1} title="Sign in">
-                  <Link to="/signin" className="nav-link">
-                    Sign in
-                  </Link>
-                </NavItem>
-                <NavItem eventKey={2} title="Sign in">
-                  <Link to={routes.signup} className="nav-link">
-                    Sign up
-                  </Link>
-                </NavItem>
-              </React.Fragment>
-            ) : null}
-            {logged ? (
-              <React.Fragment>
-                <NavItem eventKey={1} href="/home">
-                  <Link to="/" className="nav-link">
-                    Home
-                  </Link>
-                </NavItem>
-                <NavItem eventKey={2} title="Item">
-                  <Link to="/cart" className="nav-link">
-                    Cart
-                  </Link>
-                </NavItem>
-                <NavItem eventKey={3} title="Item">
-                  <Link to="#" className="nav-link" onClick={logoutUser}>
-                    Logout
-                  </Link>
-                </NavItem>
-              </React.Fragment>
-            ) : null}
-          </Nav>
-        </Collapse>
-      </Navbar>
-    </div>
+    <React.Fragment>
+      {!logged ? (
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={['2']}
+          style={{ lineHeight: '64px' }}
+        >
+          <Menu.Item eventKey={1}>
+            <Link to="/signin">Sign in</Link>
+          </Menu.Item>
+          <Menu.Item eventKey={2}>
+            <Link to={routes.signup}>Sign up</Link>
+          </Menu.Item>
+        </Menu>
+      ) : null}
+      {logged ? (
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={['2']}
+          style={{ lineHeight: '64px' }}
+        >
+          <Menu.Item eventKey={1}>
+            <Link to="/">Home</Link>
+          </Menu.Item>
+          <Menu.Item eventKey={2}>
+            <Link to="/cart">Cart</Link>
+          </Menu.Item>
+          <Menu.Item eventKey={3}>
+            <Link to="#" onClick={logoutUser}>
+              Logout
+            </Link>
+          </Menu.Item>
+        </Menu>
+      ) : null}
+    </React.Fragment>
   );
 };
 
