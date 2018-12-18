@@ -7,7 +7,7 @@ import Container from './Container';
 
 const FormItem = Form.Item;
 
-export interface UserProps {
+export interface UserState {
   email: string;
   password: string;
 }
@@ -18,71 +18,26 @@ interface SignInProps extends FormComponentProps {
   token: string;
   error: boolean;
   loading: boolean;
-  login: (user: UserProps) => void;
+  login: (user: UserState) => void;
 }
 
 interface OwnProps {
   auth: SignInProps;
 }
 
-export interface SignInState extends UserProps {
-  errors: {
-    [key: string]: {
-      field: string;
-      message: string;
-    };
-  };
-}
-
 function hasErrors(fieldsError: any) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
-class SignInComponent extends React.PureComponent<SignInProps, SignInState> {
-  readonly state: SignInState = {
+class SignInComponent extends React.PureComponent<SignInProps, UserState> {
+  readonly state: UserState = {
     email: '',
     password: '',
-    errors: {},
   };
 
   constructor(props: SignInProps) {
     super(props);
-
-    console.log('this.props.form', this.props.form);
-    this.props.form.validateFields();
   }
-
-  validate = () => {
-    const { email, password }: SignInState = this.state;
-    const errors = {};
-
-    if (email === '') {
-      const key = 'email';
-      errors[key] = {
-        field: 'email',
-        message: 'Email is required',
-      };
-    }
-    if (password === '') {
-      const key = 'password';
-      errors[key] = {
-        field: 'password',
-        message: 'Password is required',
-      };
-    }
-
-    this.setState({
-      errors,
-    });
-
-    return Object.keys(errors).length === 0;
-  };
-
-  onChange = (field: string, e: any) => {
-    this.setState({
-      [field]: e.target.value,
-    } as Pick<SignInState, keyof SignInState>);
-  };
 
   handleLogin = (e: any) => {
     e.preventDefault();
@@ -98,16 +53,8 @@ class SignInComponent extends React.PureComponent<SignInProps, SignInState> {
   };
 
   render() {
-    const {
-      getFieldDecorator,
-      getFieldsError,
-      getFieldError,
-      isFieldTouched,
-    } = this.props.form;
+    const { getFieldDecorator, getFieldsError } = this.props.form;
 
-    // Only show error after a field is touched.
-    const emailError = isFieldTouched('email') && getFieldError('email');
-    const passwordError = isFieldTouched('password') && getFieldError('password');
     const formItemLayout = {
       labelCol: { span: 6 },
       wrapperCol: { span: 18 },
@@ -115,15 +62,15 @@ class SignInComponent extends React.PureComponent<SignInProps, SignInState> {
 
     return (
       <Row>
-        <Col span={6} offset={9}>
+        <Col
+          xs={{ span: 22, offset: 1 }}
+          sm={{ span: 14, offset: 5 }}
+          md={{ span: 12, offset: 6 }}
+          lg={{ span: 12, offset: 6 }}
+        >
           <Container>
             <Form layout="horizontal" onSubmit={this.handleLogin}>
-              <FormItem
-                {...formItemLayout}
-                label="Email"
-                validateStatus={emailError ? 'error' : ''}
-                help={emailError || ''}
-              >
+              <FormItem {...formItemLayout} label="Email">
                 {getFieldDecorator('email', {
                   rules: [{ required: true, message: 'Please input your email!' }],
                 })(
@@ -133,12 +80,7 @@ class SignInComponent extends React.PureComponent<SignInProps, SignInState> {
                   />,
                 )}
               </FormItem>
-              <FormItem
-                {...formItemLayout}
-                label="Password"
-                validateStatus={passwordError ? 'error' : ''}
-                help={passwordError || ''}
-              >
+              <FormItem {...formItemLayout} label="Password">
                 {getFieldDecorator('password', {
                   rules: [{ required: true, message: 'Please input your Password!' }],
                 })(
