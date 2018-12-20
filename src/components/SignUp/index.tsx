@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { FormFeedback, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { register } from '../../actions/auth';
+import { Form, Input, Button, Row, Col } from 'antd';
+import { FormComponentProps } from 'antd/lib/form';
+import Container from '../SignIn/Container';
+const FormItem = Form.Item;
 
 export interface UserProps {
   name: string;
@@ -9,143 +12,100 @@ export interface UserProps {
   password: string;
 }
 
-interface SignUpProps extends UserProps {
+interface SignUpProps extends FormComponentProps {
   token: string;
   loading: boolean;
   register: (user: UserProps) => void;
+  name: string;
+  email: string;
+  password: string;
 }
 
 interface OwnProps {
   auth: SignUpProps;
 }
 
-export interface SignUpState extends UserProps {
-  errors: {
-    [key: string]: {
-      field: string;
-      message: string;
-    };
-  };
+function hasErrors(fieldsError: any) {
+  return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
-class SignUpComponent extends React.PureComponent<SignUpProps, SignUpState> {
-  readonly state: SignUpState = {
+class SignUpComponent extends React.PureComponent<SignUpProps, UserProps> {
+  readonly state: UserProps = {
     name: '',
     email: '',
     password: '',
-    errors: {},
   };
 
-  validate = () => {
-    const { email, password, name }: SignUpState = this.state;
-    const errors = {};
+  constructor(props: SignUpProps) {
+    super(props);
+  }
 
-    if (name === '') {
-      const key = 'name';
-      errors[key] = {
-        field: 'name',
-        message: 'Name is required',
-      };
-    }
-    if (email === '') {
-      const key = 'email';
-      errors[key] = {
-        field: 'email',
-        message: 'Email is required',
-      };
-    }
-    if (password === '') {
-      const key = 'password';
-      errors[key] = {
-        field: 'password',
-        message: 'Password is required',
-      };
-    }
-
-    this.setState({
-      errors,
-    });
-
-    return Object.keys(errors).length === 0;
-  };
-
-  onChange = (field: string, e: any) => {
-    this.setState({
-      [field]: e.target.value,
-    } as Pick<SignUpState, keyof SignUpState>);
-  };
-
-  onRegister = (e: any) => {
+  handleRegister = (e: any) => {
     e.preventDefault();
 
-    const { email, password, name } = this.state;
-
-    if (this.validate()) {
+    this.props.form.validateFields((err, { name, email, password }: any) => {
       this.props.register({
         name,
         email,
         password,
       });
-    }
+    });
   };
 
   render() {
+    console.log('this.props', this.props.form);
+    const {
+      getFieldDecorator,
+      getFieldsError,
+      getFieldError,
+      isFieldTouched,
+    } = this.props.form;
+
+    const formItemLayout = {
+      labelCol: { span: 6 },
+      wrapperCol: { span: 18 },
+    };
+
     return (
-      <div>
-        <Form onSubmit={this.onRegister}>
-          <FormGroup>
-            <Label htmlFor="email">Username</Label>
-            <Input
-              id="name"
-              onChange={(e: React.FormEvent<HTMLInputElement>) =>
-                this.onChange('name', e)
-              }
-              name="name"
-              type="text"
-              invalid={this.state.errors.name ? true : false}
-              value={this.state.name}
-            />
-            {this.state.errors.email ? (
-              <FormFeedback>{this.state.errors.email['message']}</FormFeedback>
-            ) : null}
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              onChange={(e: React.FormEvent<HTMLInputElement>) =>
-                this.onChange('email', e)
-              }
-              name="email"
-              type="text"
-              invalid={this.state.errors.email ? true : false}
-              value={this.state.email}
-            />
-            {this.state.errors.email ? (
-              <FormFeedback>{this.state.errors.email['message']}</FormFeedback>
-            ) : null}
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              onChange={(e: React.FormEvent<HTMLInputElement>) =>
-                this.onChange('password', e)
-              }
-              name="password"
-              type="password"
-              invalid={this.state.errors.password ? true : false}
-              value={this.state.password}
-            />
-            {this.state.errors.password ? (
-              <FormFeedback>{this.state.errors.password['message']}</FormFeedback>
-            ) : null}
-          </FormGroup>
-          <FormGroup>
-            <Button>Submit</Button>
-          </FormGroup>
-        </Form>
-      </div>
+      <Row>
+        <Col
+          xs={{ span: 22, offset: 1 }}
+          sm={{ span: 14, offset: 5 }}
+          md={{ span: 12, offset: 6 }}
+          lg={{ span: 8, offset: 8 }}
+        >
+          <Container>
+            <Form layout="horizontal" onSubmit={this.handleRegister}>
+              <FormItem {...formItemLayout} label="Name">
+                {getFieldDecorator('name', {
+                  rules: [{ required: true, message: 'Please input your name!' }],
+                })(<Input placeholder="name" />)}
+              </FormItem>
+              <FormItem {...formItemLayout} label="Email">
+                {getFieldDecorator('email', {
+                  rules: [{ required: true, message: 'Please input your email!' }],
+                })(<Input placeholder="email" />)}
+              </FormItem>
+              <FormItem {...formItemLayout} label="Password">
+                {getFieldDecorator('password', {
+                  rules: [{ required: true, message: 'Please input your password!' }],
+                })(<Input placeholder="password" />)}
+              </FormItem>
+              <FormItem>
+                <Col span={18} offset={6}>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    disabled={hasErrors(getFieldsError())}
+                  >
+                    Sign in
+                  </Button>
+                </Col>
+              </FormItem>
+            </Form>
+          </Container>
+        </Col>
+      </Row>
     );
   }
 }
@@ -158,7 +118,9 @@ const mapDispatchToProps = {
   register: register,
 };
 
+const WrappedHorizontalSignupForm = Form.create()(SignUpComponent);
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SignUpComponent);
+)(WrappedHorizontalSignupForm);

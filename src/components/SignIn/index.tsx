@@ -66,7 +66,7 @@ class SignInComponent extends React.PureComponent<SignInProps, UserState> {
           xs={{ span: 22, offset: 1 }}
           sm={{ span: 14, offset: 5 }}
           md={{ span: 12, offset: 6 }}
-          lg={{ span: 12, offset: 6 }}
+          lg={{ span: 8, offset: 8 }}
         >
           <Container>
             <Form layout="horizontal" onSubmit={this.handleLogin}>
