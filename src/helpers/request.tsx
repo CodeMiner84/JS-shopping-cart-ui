@@ -8,6 +8,11 @@ const headers = {
   Accept: 'application/json',
 };
 
+const authHeaders = (token?: string) => ({
+  ...headers,
+  Authorization: `Bearer ${token}`,
+});
+
 export const getData = (url: string) =>
   axios({
     method: 'get',
@@ -42,7 +47,8 @@ export const getCart = (token?: string) => {
   }
 
   return axios({
-    method: 'get',
+    method: 'GET',
     url: `${API_URL}/cart`,
+    headers: authHeaders(token),
   });
 };
