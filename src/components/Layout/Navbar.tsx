@@ -12,7 +12,6 @@ interface NavbarProps {
 }
 
 const TopNavbar: React.SFC<NavbarProps> = ({ logged, logoutUser }: NavbarProps) => {
-  console.log('logged', logged);
   return (
     <React.Fragment>
       {!logged ? (

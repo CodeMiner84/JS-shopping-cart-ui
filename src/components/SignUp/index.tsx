@@ -53,7 +53,6 @@ class SignUpComponent extends React.PureComponent<SignUpProps, UserProps> {
   };
 
   render() {
-    console.log('this.props', this.props.form);
     const {
       getFieldDecorator,
       getFieldsError,
