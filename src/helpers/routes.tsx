@@ -1,4 +1,5 @@
 export default {
+  addToCart: '/cart/add',
   products: '/product/list',
   register: '/register',
   signin: '/signin',

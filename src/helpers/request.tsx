@@ -4,7 +4,7 @@ import { UserProps } from '../components/SignUp/index';
 import routes from '../helpers/routes';
 
 const headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
+  // 'Content-Type': 'application/x-www-form-urlencoded',
   Accept: 'application/json',
 };
 
@@ -52,3 +52,17 @@ export const getCart = (token?: string) => {
     headers: authHeaders(token),
   });
 };
+
+export const addProductToCart = (token: string, customerId: string, product: any) =>
+  axios({
+    method: 'POST',
+    url: `${API_URL}${routes.addToCart}`,
+    headers: authHeaders(token),
+    data: {
+      product_id: product._id,
+      customer_id: customerId,
+      name: product.title,
+      price: 1,
+      quantity: 1,
+    },
+  });

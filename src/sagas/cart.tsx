@@ -1,11 +1,11 @@
 import * as actions from '../actions';
-import { put, takeLatest, call } from 'redux-saga/effects';
+import { put, takeLatest, call, select } from 'redux-saga/effects';
 import actionTypes from '../actionTypes/product';
 import cartTypes from '../actionTypes/cart';
 import { sleep } from '../helpers/index';
 import { ProductModel } from '../models/product';
 import { push } from 'react-router-redux';
-import { getCart } from '../helpers/request';
+import { getCart, addProductToCart } from '../helpers/request';
 import { getToken } from '../helpers/auth';
 import { CartItem } from '../models/cart';
 import { message } from 'antd';
@@ -26,6 +26,8 @@ function* getCartItems() {
   }
 }
 
+export const getCustomerId = (state: any) => state.auth.user._id;
+
 function* addToCart(action: AddToCart) {
   try {
     const token = getToken();
@@ -33,7 +35,11 @@ function* addToCart(action: AddToCart) {
       message.error('You need to sign in to add product to cart');
       return;
     }
-    const response = action.product;
+
+    const customerId = yield select(getCustomerId);
+    const response = yield call(() =>
+      addProductToCart(token, customerId, action.product),
+    );
     yield put({ type: actionTypes.ADDED_TO_CART, payload: response });
     yield put(push('/cart'));
   } catch (e) {
