@@ -35,3 +35,14 @@ export const me = (token?: string) =>
     url: `${API_URL}${routes.me}`,
     data: `token=${token}`,
   });
+
+export const getCart = (token?: string) => {
+  if (!token) {
+    return;
+  }
+
+  return axios({
+    method: 'get',
+    url: `${API_URL}/cart`,
+  });
+};

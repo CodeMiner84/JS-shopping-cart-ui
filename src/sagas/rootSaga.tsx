@@ -1,6 +1,6 @@
 import { productListWatcher } from './product';
 import { all } from 'redux-saga/effects';
-import { cartAddWatcher } from './cart';
+import { cartAddWatcher, watchCart } from './cart';
 import { watchSignUp, watchSignIn, watchMe, watchLogout } from './auth';
 
 export function* rootSaga() {
@@ -11,5 +11,6 @@ export function* rootSaga() {
     watchSignIn(),
     watchMe(),
     watchLogout(),
+    watchCart(),
   ]);
 }

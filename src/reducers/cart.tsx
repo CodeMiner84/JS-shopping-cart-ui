@@ -1,10 +1,14 @@
-import actionTypes from '../actionTypes/product';
+import actionTypes from '../actionTypes/cart';
 import cartTypes from '../actionTypes/cart';
 import { DefaultAppProps, AppState } from '../application/index';
 import { CartItem } from 'src/models/cart';
 
 export default function(state: AppState = DefaultAppProps, action: any) {
   switch (action.type) {
+    case actionTypes.RECV_CART:
+      return {
+        cartItems: action.payload,
+      };
     case actionTypes.ADD_TO_CART:
       return {
         ...state,
@@ -31,7 +35,7 @@ export default function(state: AppState = DefaultAppProps, action: any) {
       ) {
         newCartItems.push({
           id: action.payload._id,
-          title: action.payload.title,
+          name: action.payload.name,
           price: action.payload.price,
           image: action.payload.image,
           quantity: 1,

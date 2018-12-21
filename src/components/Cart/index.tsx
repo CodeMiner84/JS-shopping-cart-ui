@@ -1,10 +1,18 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import CartElement from './CartItem';
+import { getCart } from '../../actions/cart';
 
 class Cart extends React.Component<any, {}> {
+  constructor(props: any) {
+    super(props);
+
+    props.getCart();
+  }
+
   render() {
     const { cartItems } = this.props;
+
     return (
       <div>
         Cart Page
@@ -12,7 +20,7 @@ class Cart extends React.Component<any, {}> {
           <thead>
             <tr>
               <th>Image</th>
-              <th>Title</th>
+              <th>Name</th>
               <th>Price</th>
               <th>Quantity</th>
               <th>Amount</th>
@@ -30,4 +38,11 @@ const mapStateToProps = (state: any) => ({
   cartItems: state.cart.cartItems,
 });
 
-export default connect(mapStateToProps)(Cart);
+const mapDispatchToProps = {
+  getCart,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Cart);

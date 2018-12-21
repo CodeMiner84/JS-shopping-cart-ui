@@ -17,7 +17,7 @@ const CartElement: React.SFC<CartElementProps> = ({
       <td>
         <img src="{product.image}" height={50} alt="" />
       </td>
-      <td>{product.title}</td>
+      <td>{product.name}</td>
       <td>{product.price}</td>
       <td>
         <input
