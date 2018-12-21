@@ -8,6 +8,7 @@ import { push } from 'react-router-redux';
 import { getCart } from '../helpers/request';
 import { getToken } from '../helpers/auth';
 import { CartItem } from '../models/cart';
+import { message } from 'antd';
 
 interface AddToCart {
   type: string;
@@ -27,9 +28,12 @@ function* getCartItems() {
 
 function* addToCart(action: AddToCart) {
   try {
-    yield sleep(0);
-    const response = action.product;
     const token = getToken();
+    if (!token) {
+      message.error('You need to sign in to add product to cart');
+      return;
+    }
+    const response = action.product;
     yield put({ type: actionTypes.ADDED_TO_CART, payload: response });
     yield put(push('/cart'));
   } catch (e) {
