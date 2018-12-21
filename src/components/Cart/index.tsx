@@ -26,8 +26,12 @@ class Cart extends React.Component<any, {}> {
               <th>Amount</th>
             </tr>
           </thead>
-          {cartItems &&
-            cartItems.map((item: any) => <CartElement key={item._id} product={item} />)}
+          <tbody>
+            {cartItems &&
+              cartItems.map((item: any) => (
+                <CartElement key={item._id} product={item} />
+              ))}
+          </tbody>
         </table>
       </div>
     );
