@@ -50,6 +50,8 @@ export default function(state: AuthState = AuthProps, action: any) {
         ...state,
         loading: false,
         logged: true,
+        user: action.payload.user,
+        token: action.payload.token,
       };
     case actionTypes.TOKEN_REQUEST:
       return {

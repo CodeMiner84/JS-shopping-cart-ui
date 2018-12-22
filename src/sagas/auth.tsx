@@ -29,7 +29,7 @@ function* loginUser(action: RegisterUserProps) {
   try {
     const response = yield call(() => callLoginUser('/login', action.user));
     if (response.status === 200) {
-      yield put({ type: actionTypes.RECV_USER_LOGIN, payload: response.data.token });
+      yield put({ type: actionTypes.RECV_USER_LOGIN, payload: response.data });
       saveToken(response.data.token);
       message.success('You are logged in');
       yield put(push('/'));
