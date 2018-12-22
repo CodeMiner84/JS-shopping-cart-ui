@@ -2,6 +2,7 @@ import * as React from 'react';
 import { CartItem } from 'src/models/cart';
 import { recalculateCart, removeFromCart } from '../../actions';
 import { connect } from 'react-redux';
+import { Icon } from 'antd';
 
 interface CartElementProps {
   product: CartItem;
@@ -29,7 +30,12 @@ const CartElement: React.SFC<CartElementProps> = ({
       </td>
       <td>{product.quantity * product.price}</td>
       <td>
-        <span onClick={() => remove(product._id)}>remove</span>
+        <Icon
+          type="delete"
+          theme="filled"
+          style={{ cursor: 'pointer' }}
+          onClick={() => remove(product._id)}
+        />
       </td>
     </tr>
   );
