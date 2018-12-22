@@ -13,6 +13,7 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 const { Header, Content, Footer } = Layout;
 import * as moment from 'moment';
 import 'antd/dist/antd.css';
+import './App.css';
 
 const token = getToken();
 if (token) {

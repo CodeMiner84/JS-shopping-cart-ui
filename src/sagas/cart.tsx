@@ -45,7 +45,7 @@ function* addToCart(action: AddToCart) {
       addProductToCart(token, customerId, action.product),
     );
     yield put({ type: actionTypes.ADDED_TO_CART, payload: response });
-    yield put(push('/cart'));
+    message.success('Product is added to cart!');
   } catch (e) {
     yield put(actions.getFailure(e));
   }
