@@ -50,3 +50,8 @@ export const recalculateCart = (id: string, quantity: number) => ({
   id,
   quantity,
 });
+
+export const removeFromCart = (id: string) => ({
+  type: cartActions.REMOVE_FROM_CART,
+  id,
+});

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { API_URL } from '../config';
 import { UserProps } from '../components/SignUp/index';
 import routes from '../helpers/routes';
+import { getToken } from './auth';
 
 const headers = {
   // 'Content-Type': 'application/x-www-form-urlencoded',
@@ -38,7 +39,7 @@ export const me = (token?: string) =>
   axios({
     method: 'post',
     url: `${API_URL}${routes.me}`,
-    data: `token=${token}`,
+    headers: authHeaders(token),
   });
 
 export const getCart = (token?: string) => {
@@ -66,3 +67,15 @@ export const addProductToCart = (token: string, customerId: string, product: any
       quantity: 1,
     },
   });
+
+export const removeFromCart = (id: string) => {
+  const token = getToken();
+  let url = `${API_URL}${routes.removeFromCart}`;
+  url = url.replace(':id', id);
+
+  return axios({
+    method: 'DELETE',
+    url,
+    headers: authHeaders(token),
+  });
+};

@@ -18,7 +18,7 @@ export default function(state: AppState = DefaultAppProps, action: any) {
       let newCartItems: CartItem[] = state.cartItems;
 
       newCartItems = Object.keys(state.cartItems).map((key: any) => {
-        if (state.cartItems[key].id === action.payload._id) {
+        if (state.cartItems[key]._id === action.payload._id) {
           return {
             ...state.cartItems[key],
             quantity: state.cartItems[key].quantity + 1,
@@ -30,11 +30,11 @@ export default function(state: AppState = DefaultAppProps, action: any) {
 
       if (
         Object.keys(newCartItems).filter(
-          (key: any) => newCartItems[key].id === action.payload._id,
+          (key: any) => newCartItems[key]._id === action.payload._id,
         ).length === 0
       ) {
         newCartItems.push({
-          id: action.payload._id,
+          _id: action.payload._id,
           name: action.payload.name,
           price: action.payload.price,
           image: action.payload.image,

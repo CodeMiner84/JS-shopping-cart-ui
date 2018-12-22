@@ -5,7 +5,7 @@ import cartTypes from '../actionTypes/cart';
 import { sleep } from '../helpers/index';
 import { ProductModel } from '../models/product';
 import { push } from 'react-router-redux';
-import { getCart, addProductToCart } from '../helpers/request';
+import { getCart, addProductToCart, removeFromCart } from '../helpers/request';
 import { getToken } from '../helpers/auth';
 import { CartItem } from '../models/cart';
 import { message } from 'antd';
@@ -13,6 +13,10 @@ import { message } from 'antd';
 interface AddToCart {
   type: string;
   product: ProductModel;
+}
+interface RemoveFromCartProps {
+  type: string;
+  id: string;
 }
 
 function* getCartItems() {
@@ -47,10 +51,23 @@ function* addToCart(action: AddToCart) {
   }
 }
 
+function* removeFromCartSaga(action: RemoveFromCartProps) {
+  try {
+    const response = yield call(() => removeFromCart(action.id));
+    yield put({ type: cartTypes.GET_CART });
+  } catch (e) {
+    yield put(actions.getFailure(e));
+  }
+}
+
 export function* cartAddWatcher() {
   yield takeLatest(actionTypes.ADD_TO_CART, addToCart);
 }
 
 export function* watchCart() {
   yield takeLatest(cartTypes.GET_CART, getCartItems);
+}
+
+export function* watchRemoveFromCart() {
+  yield takeLatest(cartTypes.REMOVE_FROM_CART, removeFromCartSaga);
 }
