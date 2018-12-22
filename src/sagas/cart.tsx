@@ -53,8 +53,9 @@ function* addToCart(action: AddToCart) {
 
 function* removeFromCartSaga(action: RemoveFromCartProps) {
   try {
-    const response = yield call(() => removeFromCart(action.id));
+    yield call(() => removeFromCart(action.id));
     yield put({ type: cartTypes.GET_CART });
+    message.success('Product was removed from cart!');
   } catch (e) {
     yield put(actions.getFailure(e));
   }

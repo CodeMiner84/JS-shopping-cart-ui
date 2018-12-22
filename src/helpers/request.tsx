@@ -63,7 +63,7 @@ export const addProductToCart = (token: string, customerId: string, product: any
       product_id: product._id,
       customer_id: customerId,
       name: product.title,
-      price: 1,
+      price: product.price,
       quantity: 1,
     },
   });
