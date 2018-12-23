@@ -30,10 +30,10 @@ class App extends React.Component<{}, {}> {
       <Router history={history}>
         <Switch>
           <React.Fragment>
-            <Header>
+            <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
               <Navbar />
             </Header>
-            <Content>
+            <Content style={{ padding: '75px 50px 0' }}>
               <Loading />
               <Route path="/" exact={true} component={Dashboard} />
               <Route path="/signin" exact={true} component={SignIn} />
