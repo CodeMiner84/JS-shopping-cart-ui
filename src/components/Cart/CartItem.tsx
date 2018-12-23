@@ -31,9 +31,6 @@ class CartElement extends React.PureComponent<CartElementProps, {}> {
 
     return (
       <tr>
-        <td>
-          <img src="{product.image}" height={50} alt="" />
-        </td>
         <td>{product.name}</td>
         <td>{product.price}</td>
         <td>{this.state.quantity}</td>

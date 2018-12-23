@@ -2,6 +2,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import CartElement from './CartItem';
 import { getCart } from '../../actions/cart';
+import { Row, Col } from 'antd';
+import Headers from './components/Headers';
+import CartHeader from './components/CartHeader';
+import Summary from './Summary';
 
 class Cart extends React.Component<any, {}> {
   constructor(props: any) {
@@ -14,26 +18,28 @@ class Cart extends React.Component<any, {}> {
     const { cartItems } = this.props;
 
     return (
-      <div>
-        Cart Page
-        <table className={'table table-hover'}>
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cartItems &&
-              cartItems.map((item: any) => (
-                <CartElement key={item._id} product={item} />
-              ))}
-          </tbody>
-        </table>
-      </div>
+      <Row>
+        <Col md={{ span: 22, offset: 1 }} lg={{ span: 14, offset: 4 }}>
+          <CartHeader>Shopping cart</CartHeader>
+          <table className={'table table-hover'}>
+            <thead>
+              <tr>
+                <Headers>Name</Headers>
+                <Headers>Price</Headers>
+                <Headers>Quantity</Headers>
+                <Headers>Amount</Headers>
+              </tr>
+            </thead>
+            <tbody>
+              {cartItems &&
+                cartItems.map((item: any) => (
+                  <CartElement key={item._id} product={item} />
+                ))}
+            </tbody>
+          </table>
+          <Summary />
+        </Col>
+      </Row>
     );
   }
 }
