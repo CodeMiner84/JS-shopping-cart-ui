@@ -41,8 +41,8 @@ class CartElement extends React.PureComponent<CartElementProps, {}> {
             style={{ width: '60px' }}
             onChange={(e: React.FormEvent<HTMLInputElement>) => {
               const quantity = parseInt((e.target as HTMLInputElement).value, 10);
-              this.setState({ quantity: quantity });
-              recalculate(product._id, quantity);
+              this.setState({ quantity: quantity > 0 ? quantity : 1 });
+              recalculate(product._id, quantity > 0 ? quantity : 1);
             }}
           />
         </td>

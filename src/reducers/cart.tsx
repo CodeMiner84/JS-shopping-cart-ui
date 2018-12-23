@@ -52,7 +52,7 @@ export default function(state: AppState = DefaultAppProps, action: any) {
       return {
         ...state,
         cartItems: state.cartItems.map((item: CartItem) => {
-          if (item._id === id) {
+          if (item._id === id && quantity > 0) {
             item.quantity = quantity;
 
             return item;
