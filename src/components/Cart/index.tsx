@@ -28,6 +28,7 @@ class Cart extends React.Component<any, {}> {
                 <Headers>Price</Headers>
                 <Headers>Quantity</Headers>
                 <Headers>Amount</Headers>
+                <Headers>&nbsp;</Headers>
               </tr>
             </thead>
             <tbody>

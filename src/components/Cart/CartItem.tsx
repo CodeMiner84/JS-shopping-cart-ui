@@ -46,7 +46,6 @@ class CartElement extends React.PureComponent<CartElementProps, {}> {
             }}
           />
         </td>
-        <td>{(product.quantity * product.price).toFixed(2)}</td>
         <td>
           <Icon
             type="delete"

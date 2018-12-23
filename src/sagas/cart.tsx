@@ -31,12 +31,21 @@ interface RecalculateProps {
   quantity: number;
 }
 
-function* getCartItems() {
+export function* loadCartItems() {
   try {
     const token = getToken();
-    const response = yield call(() => getCart(token));
+    if (token) {
+      const response = yield call(() => getCart(token));
+      yield put({ type: cartTypes.RECV_CART, payload: response.data });
+    }
+  } catch (e) {
+    yield put(actions.getFailure(e));
+  }
+}
 
-    yield put({ type: cartTypes.RECV_CART, payload: response.data });
+function* getCartItems() {
+  try {
+    yield loadCartItems();
     yield calculateOrderPrice();
   } catch (e) {
     yield put(actions.getFailure(e));
@@ -47,19 +56,24 @@ export const getCustomerId = (state: any) => state.auth.user._id;
 
 function* addToCart(action: AddToCart) {
   try {
+    yield syncProductOnAdd(action);
+    yield put({ type: actionTypes.ADDED_TO_CART, payload: action.product });
+    yield calculateOrderPrice();
+    message.success('Product is added to cart!');
+  } catch (e) {
+    yield put(actions.getFailure(e));
+  }
+}
+
+function* syncProductOnAdd(action: AddToCart) {
+  try {
     const token = getToken();
     if (!token) {
-      message.error('You need to sign in to add product to cart');
       return;
     }
 
     const customerId = yield select(getCustomerId);
-    const response = yield call(() =>
-      addProductToCart(token, customerId, action.product),
-    );
-    yield put({ type: actionTypes.ADDED_TO_CART, payload: response.data });
-    yield calculateOrderPrice();
-    message.success('Product is added to cart!');
+    yield call(() => addProductToCart(token, customerId, action.product));
   } catch (e) {
     yield put(actions.getFailure(e));
   }
@@ -68,7 +82,7 @@ function* addToCart(action: AddToCart) {
 function* removeFromCartSaga(action: RemoveFromCartProps) {
   try {
     yield call(() => removeFromCart(action.id));
-    yield put({ type: cartTypes.GET_CART });
+    yield put({ type: cartTypes.ITEM_REMOVED, id: action.id });
     message.success('Product was removed from cart!');
     yield calculateOrderPrice();
   } catch (e) {

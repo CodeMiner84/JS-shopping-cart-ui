@@ -14,6 +14,11 @@ export default function(state: AppState = DefaultAppProps, action: any) {
         ...state,
         loading: true,
       };
+    case actionTypes.ITEM_REMOVED:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter(item => item._id !== action.id),
+      };
     case actionTypes.ADDED_TO_CART:
       let newCartItems: CartItem[] = state.cartItems || [];
 
