@@ -1,6 +1,7 @@
 import * as actions from '../actions';
 import { put, takeLatest, call, select } from 'redux-saga/effects';
 import actionTypes from '../actionTypes/product';
+import checkoutTypes from '../actionTypes/checkout';
 import cartTypes from '../actionTypes/cart';
 import { sleep } from '../helpers/index';
 import { ProductModel } from '../models/product';
@@ -36,6 +37,7 @@ function* getCartItems() {
     const response = yield call(() => getCart(token));
 
     yield put({ type: cartTypes.RECV_CART, payload: response.data });
+    yield calculateOrderPrice();
   } catch (e) {
     yield put(actions.getFailure(e));
   }
@@ -56,6 +58,7 @@ function* addToCart(action: AddToCart) {
       addProductToCart(token, customerId, action.product),
     );
     yield put({ type: actionTypes.ADDED_TO_CART, payload: response });
+    yield calculateOrderPrice();
     message.success('Product is added to cart!');
   } catch (e) {
     yield put(actions.getFailure(e));
@@ -67,6 +70,7 @@ function* removeFromCartSaga(action: RemoveFromCartProps) {
     yield call(() => removeFromCart(action.id));
     yield put({ type: cartTypes.GET_CART });
     message.success('Product was removed from cart!');
+    yield calculateOrderPrice();
   } catch (e) {
     yield put(actions.getFailure(e));
   }
@@ -74,13 +78,29 @@ function* removeFromCartSaga(action: RemoveFromCartProps) {
 
 function* cartRecalculate(action: RecalculateProps) {
   try {
-    const token = getToken();
-    const response = yield call(() => recalculateCartItem(action.id, action.quantity));
-
+    yield call(() => recalculateCartItem(action.id, action.quantity));
     yield put({ type: cartTypes.RECALCULATED, payload: action });
+
+    yield calculateOrderPrice();
   } catch (e) {
     yield put(actions.getFailure(e));
   }
+}
+
+export const getCartFromState = (state: any) => state.cart.cartItems;
+
+function* calculateOrderPrice() {
+  const cartItems = yield select(getCartFromState);
+
+  const price = cartItems.reduce((prev: any = 0, current: any) => {
+    if (isNaN(prev)) {
+      prev = 0;
+    }
+
+    return parseFloat(prev) + parseFloat(current.price) * parseFloat(current.quantity);
+  });
+
+  yield put({ type: checkoutTypes.CHECKOUT_CALC, payload: price.toFixed(2) });
 }
 
 export function* cartAddWatcher() {
