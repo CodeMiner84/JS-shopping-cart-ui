@@ -48,10 +48,15 @@ export default function(state: AppState = DefaultAppProps, action: any) {
         cartItems: newCartItems,
       };
     case cartTypes.RECALCULATE:
+      const { id, quantity } = action;
       return {
         ...state,
         cartItems: state.cartItems.map((item: CartItem) => {
-          item.quantity = 3;
+          if (item._id === id) {
+            item.quantity = quantity;
+
+            return item;
+          }
           return item;
         }),
       };

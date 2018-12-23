@@ -5,7 +5,12 @@ import cartTypes from '../actionTypes/cart';
 import { sleep } from '../helpers/index';
 import { ProductModel } from '../models/product';
 import { push } from 'react-router-redux';
-import { getCart, addProductToCart, removeFromCart } from '../helpers/request';
+import {
+  getCart,
+  addProductToCart,
+  removeFromCart,
+  recalculateCartItem,
+} from '../helpers/request';
 import { getToken } from '../helpers/auth';
 import { CartItem } from '../models/cart';
 import { message } from 'antd';
@@ -17,6 +22,12 @@ interface AddToCart {
 interface RemoveFromCartProps {
   type: string;
   id: string;
+}
+
+interface RecalculateProps {
+  type: string;
+  id: string;
+  quantity: number;
 }
 
 function* getCartItems() {
@@ -61,6 +72,17 @@ function* removeFromCartSaga(action: RemoveFromCartProps) {
   }
 }
 
+function* cartRecalculate(action: RecalculateProps) {
+  try {
+    const token = getToken();
+    const response = yield call(() => recalculateCartItem(action.id, action.quantity));
+
+    yield put({ type: cartTypes.RECALCULATED, payload: action });
+  } catch (e) {
+    yield put(actions.getFailure(e));
+  }
+}
+
 export function* cartAddWatcher() {
   yield takeLatest(actionTypes.ADD_TO_CART, addToCart);
 }
@@ -71,4 +93,8 @@ export function* watchCart() {
 
 export function* watchRemoveFromCart() {
   yield takeLatest(cartTypes.REMOVE_FROM_CART, removeFromCartSaga);
+}
+
+export function* watchRecalculate() {
+  yield takeLatest(cartTypes.RECALCULATE, cartRecalculate);
 }

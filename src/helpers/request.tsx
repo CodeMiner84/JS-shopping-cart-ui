@@ -79,3 +79,14 @@ export const removeFromCart = (id: string) => {
     headers: authHeaders(token),
   });
 };
+
+export const recalculateCartItem = (id: string, quantity: number) =>
+  axios({
+    method: 'POST',
+    url: `${API_URL}${routes.cartRecalculate}`,
+    data: {
+      id,
+      quantity,
+    },
+    headers: authHeaders(getToken()),
+  });

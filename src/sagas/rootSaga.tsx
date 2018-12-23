@@ -1,6 +1,11 @@
 import { productListWatcher } from './product';
 import { all } from 'redux-saga/effects';
-import { cartAddWatcher, watchCart, watchRemoveFromCart } from './cart';
+import {
+  cartAddWatcher,
+  watchCart,
+  watchRemoveFromCart,
+  watchRecalculate,
+} from './cart';
 import { watchSignUp, watchSignIn, watchMe, watchLogout } from './auth';
 
 export function* rootSaga() {
@@ -13,5 +18,6 @@ export function* rootSaga() {
     watchLogout(),
     watchCart(),
     watchRemoveFromCart(),
+    watchRecalculate(),
   ]);
 }
