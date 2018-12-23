@@ -15,7 +15,7 @@ export default function(state: AppState = DefaultAppProps, action: any) {
         loading: true,
       };
     case actionTypes.ADDED_TO_CART:
-      let newCartItems: CartItem[] = state.cartItems;
+      let newCartItems: CartItem[] = state.cartItems || [];
 
       newCartItems = Object.keys(state.cartItems).map((key: any) => {
         if (state.cartItems[key]._id === action.payload._id) {

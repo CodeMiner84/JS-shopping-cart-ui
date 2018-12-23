@@ -57,7 +57,7 @@ function* addToCart(action: AddToCart) {
     const response = yield call(() =>
       addProductToCart(token, customerId, action.product),
     );
-    yield put({ type: actionTypes.ADDED_TO_CART, payload: response });
+    yield put({ type: actionTypes.ADDED_TO_CART, payload: response.data });
     yield calculateOrderPrice();
     message.success('Product is added to cart!');
   } catch (e) {
@@ -90,17 +90,18 @@ function* cartRecalculate(action: RecalculateProps) {
 export const getCartFromState = (state: any) => state.cart.cartItems;
 
 function* calculateOrderPrice() {
-  const cartItems = yield select(getCartFromState);
+  try {
+    const cartItems = yield select(getCartFromState);
 
-  const price = cartItems.reduce((prev: any = 0, current: any) => {
-    if (isNaN(prev)) {
-      prev = 0;
-    }
+    let price = 0;
+    cartItems.map((item: any) => {
+      price = price + parseFloat(item.quantity) * parseFloat(item.price);
+    });
 
-    return parseFloat(prev) + parseFloat(current.price) * parseFloat(current.quantity);
-  });
-
-  yield put({ type: checkoutTypes.CHECKOUT_CALC, payload: price.toFixed(2) });
+    yield put({ type: checkoutTypes.CHECKOUT_CALC, payload: price.toFixed(2) });
+  } catch (e) {
+    yield put(actions.getFailure(e));
+  }
 }
 
 export function* cartAddWatcher() {
