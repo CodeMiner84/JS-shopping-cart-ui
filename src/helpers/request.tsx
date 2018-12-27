@@ -90,3 +90,10 @@ export const recalculateCartItem = (id: string, quantity: number) =>
     },
     headers: authHeaders(getToken()),
   });
+
+export const createApiOrder = () =>
+  axios({
+    method: 'POST',
+    url: `${API_URL}${routes.placeOrder}`,
+    headers: authHeaders(getToken()),
+  });

@@ -1,10 +1,11 @@
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeLatest, put, select } from 'redux-saga/effects';
 import actionTypes from '../actionTypes/checkout';
 import { getFailure } from '../actions/index';
+import { createApiOrder } from '../helpers/request';
 
 function* placeOrder(order: any) {
   try {
-    console.log('order', order);
+    yield createApiOrder();
 
     yield put({ type: actionTypes.ORDER_PLACED });
   } catch (e) {

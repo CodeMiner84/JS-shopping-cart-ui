@@ -20,6 +20,8 @@ export default function(state: CheckoutProps = CheckoutState, action: any) {
         ...state,
         price: action.payload,
       };
+    case actionTypes.ORDER_PLACED:
+      return CheckoutState;
     default:
       return state;
   }
