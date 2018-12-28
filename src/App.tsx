@@ -15,6 +15,7 @@ const { Header, Content, Footer } = Layout;
 import * as moment from 'moment';
 import 'antd/dist/antd.css';
 import './App.css';
+import ThankYouPage from './components/Cart/Thx';
 
 const token = getToken();
 if (token) {
@@ -41,6 +42,7 @@ class App extends React.Component<{}, {}> {
               <Route path="/signup" exact={true} component={SignUp} />
               <Route path="/orders" exact={true} component={Orders} />
               <Route path="/cart" exact={true} component={Cart} />
+              <Route path="/thx" exact={true} component={ThankYouPage} />
             </Content>
           </React.Fragment>
         </Switch>

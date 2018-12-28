@@ -4,8 +4,8 @@ import CartElement from './CartItem';
 import { getCart } from '../../actions/cart';
 import { Row, Col } from 'antd';
 import Headers from './components/Headers';
-import CartHeader from './components/CartHeader';
 import Summary from './Summary';
+import TextHeader from '../Layout/TextHeader';
 
 class Cart extends React.Component<any, {}> {
   constructor(props: any) {
@@ -20,7 +20,7 @@ class Cart extends React.Component<any, {}> {
     return (
       <Row>
         <Col md={{ span: 22, offset: 1 }} lg={{ span: 14, offset: 4 }}>
-          <CartHeader>Shopping cart</CartHeader>
+          <TextHeader>Shopping cart</TextHeader>
           <table className={'table table-hover'}>
             <thead>
               <tr>

@@ -32,7 +32,7 @@ class CartElement extends React.PureComponent<CartElementProps, {}> {
     return (
       <tr>
         <td>{product.name}</td>
-        <td>{product.price}</td>
+        <td>${product.price}</td>
         <td>{this.state.quantity}</td>
         <td>
           <Input

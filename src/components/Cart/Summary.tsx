@@ -8,12 +8,8 @@ import { createOrder } from '../../actions/checkout';
 const Summary: React.SFC<any> = props => (
   <Container>
     <Row>
-      <label>SUBTOTAL: </label>
-      <span>{props.price}</span>
-    </Row>
-    <Row>
       <label>ORDER TOTAL: </label>
-      <span>{props.price}</span>
+      <span>${props.price}</span>
     </Row>
     <Row
       style={{

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getOrders } from '../../actions/orders';
 import { Collapse } from 'antd';
 import OrderItem from './Item';
+import TextHeader from '../Layout/TextHeader';
 
 const Panel = Collapse.Panel;
 
@@ -20,7 +21,7 @@ class Orders extends React.Component<any, {}> {
 
     return (
       <React.Fragment>
-        <h3>Orders list</h3>
+        <TextHeader>Orders list</TextHeader>
         <Collapse defaultActiveKey={['1']}>
           {Object.keys(this.props.orders).map((key: any) => {
             const order = this.props.orders[key];

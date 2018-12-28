@@ -5,6 +5,7 @@ import Row from 'reactstrap/lib/Row';
 import { getProducts } from '../../actions';
 import { AppState } from '../../application/index';
 import { CartItem } from '../../models/cart';
+import TextHeader from '../Layout/TextHeader';
 
 interface DashboardProps {
   readonly getProducts: () => void;
@@ -26,7 +27,7 @@ class Dashboard extends React.Component<DashboardProps & AppState, any> {
 
     return (
       <React.Fragment>
-        <h1>Product list</h1>
+        <TextHeader>Product list</TextHeader>
         {products !== undefined && (
           <Row>
             {Object.keys(products).map(key => (
