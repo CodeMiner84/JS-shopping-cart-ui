@@ -97,3 +97,10 @@ export const createApiOrder = () =>
     url: `${API_URL}${routes.placeOrder}`,
     headers: authHeaders(getToken()),
   });
+
+export const getApiOrders = () =>
+  axios({
+    method: 'GET',
+    url: `${API_URL}${routes.ordersList}`,
+    headers: authHeaders(getToken()),
+  });

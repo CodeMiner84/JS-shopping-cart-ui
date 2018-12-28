@@ -43,6 +43,9 @@ const TopNavbar: React.SFC<NavbarProps> = ({ logged, logoutUser }: NavbarProps) 
             <Link to="/cart">Cart</Link>
           </Menu.Item>
           <Menu.Item eventKey={3}>
+            <Link to="/orders">My orders</Link>
+          </Menu.Item>
+          <Menu.Item eventKey={4}>
             <Link to="#" onClick={logoutUser}>
               Logout
             </Link>

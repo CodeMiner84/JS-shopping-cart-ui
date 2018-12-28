@@ -7,6 +7,7 @@ import Loading from './components/Loading';
 import store, { history } from './store/store';
 import SignUp from './components/SignUp/index';
 import SignIn from './components/SignIn/index';
+import Orders from './components/Orders/index';
 import { getToken } from './helpers/auth';
 import actionTypes from './actionTypes/auth';
 import { Layout, Menu, Breadcrumb } from 'antd';
@@ -38,6 +39,7 @@ class App extends React.Component<{}, {}> {
               <Route path="/" exact={true} component={Dashboard} />
               <Route path="/signin" exact={true} component={SignIn} />
               <Route path="/signup" exact={true} component={SignUp} />
+              <Route path="/orders" exact={true} component={Orders} />
               <Route path="/cart" exact={true} component={Cart} />
             </Content>
           </React.Fragment>
