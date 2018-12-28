@@ -2,7 +2,6 @@ import { takeLatest, put, select } from 'redux-saga/effects';
 import actionTypes from '../actionTypes/orders';
 import { getFailure } from '../actions/index';
 import { getApiOrders } from '../helpers/request';
-import orders from '../actionTypes/orders';
 
 function* getOrders() {
   try {
