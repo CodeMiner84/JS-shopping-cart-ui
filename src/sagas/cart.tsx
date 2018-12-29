@@ -92,7 +92,10 @@ function* removeFromCartSaga(action: RemoveFromCartProps) {
 
 function* cartRecalculate(action: RecalculateProps) {
   try {
-    yield call(() => recalculateCartItem(action.id, action.quantity));
+    const token = getToken();
+    if (token) {
+      yield call(() => recalculateCartItem(action.id, action.quantity));
+    }
     yield put({ type: cartTypes.RECALCULATED, payload: action });
 
     yield calculateOrderPrice();
