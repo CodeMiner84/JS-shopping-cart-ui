@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import Price from '../Dashboard/Price';
 import { Container, Row } from './components/SummaryComponents';
 import { Button, Icon } from 'antd';
 import { createOrder } from '../../actions/checkout';
