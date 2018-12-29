@@ -38,7 +38,7 @@ class Cart extends React.Component<any, {}> {
                 ))}
             </tbody>
           </table>
-          <Summary />
+          <Summary canMakeOrder={cartItems.length > 0} />
         </Col>
       </Row>
     );

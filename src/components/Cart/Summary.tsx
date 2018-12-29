@@ -5,6 +5,12 @@ import { Container, Row } from './components/SummaryComponents';
 import { Button, Icon } from 'antd';
 import { createOrder } from '../../actions/checkout';
 
+interface SummaryProps {
+  canMakeOrder: boolean;
+  price: number;
+  createOrder(): void;
+}
+
 const Summary: React.SFC<any> = props => (
   <Container>
     <Row>
@@ -19,7 +25,12 @@ const Summary: React.SFC<any> = props => (
         width: '100%',
       }}
     >
-      <Button type="primary" size="large" onClick={props.createOrder}>
+      <Button
+        disabled={!props.canMakeOrder}
+        type="primary"
+        size="large"
+        onClick={props.createOrder}
+      >
         <Icon type="euro" />
         PLACE ORDER
       </Button>
