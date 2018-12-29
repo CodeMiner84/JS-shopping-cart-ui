@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import Product from './Product';
-import Row from 'reactstrap/lib/Row';
+import { Row, Col } from 'antd';
 import { getProducts } from '../../actions';
 import { AppState } from '../../application/index';
 import { CartItem } from '../../models/cart';
@@ -26,16 +26,18 @@ class Dashboard extends React.Component<DashboardProps & AppState, any> {
     }
 
     return (
-      <React.Fragment>
-        <TextHeader>Product list</TextHeader>
-        {products !== undefined && (
-          <Row>
-            {Object.keys(products).map(key => (
-              <Product key={key} product={products[key]} />
-            ))}
-          </Row>
-        )}
-      </React.Fragment>
+      <Row>
+        <Col md={{ span: 22, offset: 1 }} lg={{ span: 14, offset: 4 }}>
+          <TextHeader>Product list</TextHeader>
+          {products !== undefined && (
+            <Row gutter={12}>
+              {Object.keys(products).map(key => (
+                <Product key={key} product={products[key]} />
+              ))}
+            </Row>
+          )}
+        </Col>
+      </Row>
     );
   }
 }

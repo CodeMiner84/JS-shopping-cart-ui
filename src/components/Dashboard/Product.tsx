@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle, Button } from 'reactstrap';
+import { Card, Button } from 'antd';
 import { ProductModel } from 'src/models/product';
-import Col from 'reactstrap/lib/Col';
+import { Col } from 'antd';
 import Price from './Price';
 import { addToCart } from '../../actions/index';
 import { connect } from 'react-redux';
+import Meta from './components/Meta';
 
 interface ProductProps {
   product: ProductModel;
@@ -12,24 +13,22 @@ interface ProductProps {
 }
 
 const Product: React.SFC<ProductProps> = (props: ProductProps) => (
-  <Col sm="6" md="3" lg="2" xs="12">
-    <Card>
-      <CardImg
-        top={true}
-        width="100%"
-        max-height="80"
-        src={props.product.image}
-        alt={props.product.title}
-      />
-      <CardBody>
-        <CardTitle>{props.product.title}</CardTitle>
-        <CardText>
-          <strong>{props.product.description}</strong>
-        </CardText>
-        <Price>${props.product.price}</Price>
-        <Button onClick={() => props.addToCart(props.product)}>Add to cart</Button>
-      </CardBody>
-    </Card>
+  <Col className="gutter-row" span={6}>
+    <div className="gutter-box">
+      <Card
+        hoverable={true}
+        cover={<img alt={props.product.title} src={props.product.image} />}
+        style={{ marginBottom: '20px' }}
+        actions={[
+          <Price key={1}>${props.product.price}</Price>,
+          <Button key={2} onClick={() => props.addToCart(props.product)}>
+            Add to cart
+          </Button>,
+        ]}
+      >
+        <Meta title={props.product.title} description={props.product.description} />
+      </Card>
+    </div>
   </Col>
 );
 
