@@ -4,9 +4,15 @@ import { getFailure } from '../actions/index';
 import { createApiOrder } from '../helpers/request';
 import { message } from 'antd';
 import { push } from 'connected-react-router';
+import { getToken } from '../helpers/auth';
 
 function* placeOrder(order: any) {
   try {
+    const token = getToken();
+    if (!token) {
+      message.error('Only logged user can create order');
+      return;
+    }
     yield createApiOrder();
     message.success('Order is placed');
 
