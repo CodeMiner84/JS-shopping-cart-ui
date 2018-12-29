@@ -43,7 +43,7 @@ export default function(state: AppState = DefaultAppProps, action: any) {
       ) {
         newCartItems.push({
           _id: action.payload._id,
-          name: action.payload.name,
+          name: action.payload.title,
           price: action.payload.price,
           image: action.payload.image,
           quantity: 1,
