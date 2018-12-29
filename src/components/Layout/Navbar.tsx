@@ -23,6 +23,12 @@ const TopNavbar: React.SFC<NavbarProps> = ({ logged, logoutUser }: NavbarProps) 
             style={{ lineHeight: '64px' }}
           >
             <Menu.Item eventKey={1}>
+              <Link to="/">Home</Link>
+            </Menu.Item>
+            <Menu.Item eventKey={2}>
+              <Link to="/cart">Cart</Link>
+            </Menu.Item>
+            <Menu.Item eventKey={1}>
               <Link to="/signin">Sign in</Link>
             </Menu.Item>
             <Menu.Item eventKey={2}>
