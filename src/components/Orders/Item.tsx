@@ -21,7 +21,7 @@ const OrderItem: React.SFC<any> = ({ order }) => {
         </thead>
         {products.map((product: any) => (
           <tr key={product._id}>
-            <td>{product.name}</td>
+            <td>{product.title}</td>
             <td>${product.price}</td>
             <td>{product.quantity}</td>
             <td>${product.amount}</td>

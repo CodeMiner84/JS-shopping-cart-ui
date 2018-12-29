@@ -1,11 +1,19 @@
 import * as actions from '../actions';
 import actionTypes from '../actionTypes/auth';
-import { call, put, takeLatest } from 'redux-saga/effects';
+import cartTypes from '../actionTypes/cart';
+import { call, put, takeLatest, select } from 'redux-saga/effects';
 import { UserProps } from '../components/SignUp/index';
-import { callRegisterUser, callLoginUser, me } from '../helpers/request';
+import {
+  callRegisterUser,
+  callLoginUser,
+  me,
+  recalculateCartItem,
+  addProductToCart,
+} from '../helpers/request';
 import { push } from 'react-router-redux';
 import { saveToken, getToken, logout } from '../helpers/auth';
 import { message } from 'antd';
+import { getCartFromState, getCustomerId } from './cart';
 
 interface RegisterUserProps {
   type: string;
@@ -32,6 +40,12 @@ function* loginUser(action: RegisterUserProps) {
       yield put({ type: actionTypes.RECV_USER_LOGIN, payload: response.data });
       saveToken(response.data.token);
       message.success('You are logged in');
+
+      const cartItems = yield select(getCartFromState);
+      const customerId = yield select(getCustomerId);
+      cartItems.map((item: any) => {
+        addProductToCart(getToken(), customerId, item);
+      });
       yield put(push('/'));
     } else if (response.status === 500) {
       message.error('Wrong email or password');
@@ -62,6 +76,7 @@ function* isUserLogged() {
 function* logoutUser() {
   try {
     logout();
+    yield put({ type: cartTypes.CLEAR_CART });
     message.success('You are logged off');
     yield put(push('/'));
   } catch (e) {

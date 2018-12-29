@@ -26,7 +26,7 @@ export default function(state: AppState = DefaultAppProps, action: any) {
       let newCartItems: CartItem[] = state.cartItems || [];
 
       newCartItems = Object.keys(state.cartItems).map((key: any) => {
-        if (state.cartItems[key]._id === action.payload._id) {
+        if (state.cartItems[key].product_id === action.payload._id) {
           return {
             ...state.cartItems[key],
             quantity: state.cartItems[key].quantity + 1,
@@ -43,7 +43,7 @@ export default function(state: AppState = DefaultAppProps, action: any) {
       ) {
         newCartItems.push({
           _id: action.payload._id,
-          name: action.payload.title,
+          title: action.payload.title,
           price: action.payload.price,
           image: action.payload.image,
           quantity: 1,
@@ -67,6 +67,11 @@ export default function(state: AppState = DefaultAppProps, action: any) {
           }
           return item;
         }),
+      };
+    case cartTypes.CLEAR_CART:
+      return {
+        ...state,
+        cartItems: [],
       };
     default:
       return state;

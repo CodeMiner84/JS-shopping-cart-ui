@@ -62,9 +62,9 @@ export const addProductToCart = (token: string, customerId: string, product: any
     data: {
       product_id: product._id,
       customer_id: customerId,
-      name: product.title,
+      title: product.title,
       price: product.price,
-      quantity: 1,
+      quantity: product.quantity ? product.quantity : 1,
     },
   });
 
