@@ -4,6 +4,7 @@ import { getOrders } from '../../actions/orders';
 import { Collapse } from 'antd';
 import OrderItem from './Item';
 import TextHeader from '../Layout/TextHeader';
+import { Row, Col } from 'antd';
 
 const Panel = Collapse.Panel;
 
@@ -20,23 +21,24 @@ class Orders extends React.Component<any, {}> {
     }
 
     return (
-      <React.Fragment>
-        <TextHeader>Orders list</TextHeader>
-        <Collapse defaultActiveKey={['1']}>
-          {Object.keys(this.props.orders).map((key: any) => {
-            const order = this.props.orders[key];
-            const date = new Date(order.created_at).toDateString();
-            return (
-              <Panel
-                header={`Order: ${order._id} (Amount: $${order.price})`}
-                key={order._id}
-              >
-                <OrderItem order={order} />
-              </Panel>
-            );
-          })}
-        </Collapse>
-      </React.Fragment>
+      <Row>
+        <Col md={{ span: 22, offset: 1 }} lg={{ span: 14, offset: 4 }}>
+          <TextHeader>Orders list</TextHeader>
+          <Collapse defaultActiveKey={['1']}>
+            {Object.keys(this.props.orders).map((key: any) => {
+              const order = this.props.orders[key];
+              return (
+                <Panel
+                  header={`Order: ${order._id} (Amount: $${order.price})`}
+                  key={order._id}
+                >
+                  <OrderItem order={order} />
+                </Panel>
+              );
+            })}
+          </Collapse>
+        </Col>
+      </Row>
     );
   }
 }
