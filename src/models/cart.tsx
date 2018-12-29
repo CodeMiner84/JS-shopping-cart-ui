@@ -4,6 +4,7 @@ export type CartItem = {
   price: number;
   image: string;
   quantity: number;
+  product_id?: number;
 };
 
 export type Cart = CartItem[];
