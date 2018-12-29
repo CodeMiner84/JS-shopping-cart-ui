@@ -26,6 +26,9 @@ function* registerUser(action: RegisterUserProps) {
     if (response.status === 200) {
       yield put({ type: actionTypes.RECV_USER_REGISTRATION, payload: response.data });
       message.success('You have succesfully register');
+      saveToken(response.data.token);
+
+      yield syncCartItems();
       yield put(push('/'));
     }
   } catch (e) {
@@ -41,11 +44,7 @@ function* loginUser(action: RegisterUserProps) {
       saveToken(response.data.token);
       message.success('You are logged in');
 
-      const cartItems = yield select(getCartFromState);
-      const customerId = yield select(getCustomerId);
-      cartItems.map((item: any) => {
-        addProductToCart(getToken(), customerId, item);
-      });
+      yield syncCartItems();
       yield put(push('/'));
     } else if (response.status === 500) {
       message.error('Wrong email or password');
@@ -56,6 +55,14 @@ function* loginUser(action: RegisterUserProps) {
     yield put({ type: actionTypes.RECV_ERROR });
     yield put(actions.getFailure(e));
   }
+}
+
+function* syncCartItems() {
+  const cartItems = yield select(getCartFromState);
+  const customerId = yield select(getCustomerId);
+  cartItems.map((item: any) => {
+    addProductToCart(getToken(), customerId, item);
+  });
 }
 
 function* isUserLogged() {
