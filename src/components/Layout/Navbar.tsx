@@ -28,11 +28,11 @@ const TopNavbar: React.SFC<NavbarProps> = ({ logged, logoutUser }: NavbarProps) 
             <Menu.Item eventKey={2}>
               <Link to="/cart">Cart</Link>
             </Menu.Item>
-            <Menu.Item eventKey={1}>
-              <Link to="/signin">Sign in</Link>
-            </Menu.Item>
-            <Menu.Item eventKey={2}>
+            <Menu.Item eventKey={2} style={{ float: 'right' }}>
               <Link to={routes.signup}>Sign up</Link>
+            </Menu.Item>
+            <Menu.Item eventKey={1} style={{ float: 'right' }}>
+              <Link to="/signin">Sign in</Link>
             </Menu.Item>
           </Menu>
         ) : null}
@@ -52,7 +52,7 @@ const TopNavbar: React.SFC<NavbarProps> = ({ logged, logoutUser }: NavbarProps) 
             <Menu.Item eventKey={3}>
               <Link to="/orders">My orders</Link>
             </Menu.Item>
-            <Menu.Item eventKey={4}>
+            <Menu.Item eventKey={4} style={{ float: 'right' }}>
               <Link to="#" onClick={logoutUser}>
                 Logout
               </Link>
