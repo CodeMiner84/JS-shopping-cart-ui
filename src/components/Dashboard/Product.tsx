@@ -1,17 +1,16 @@
 import * as React from 'react';
-import { Card, Button } from 'antd';
-import { ProductModel } from 'src/models/product';
-import { Col } from 'antd';
-import { addToCart } from '../../actions/index';
+import { Card, Col } from 'antd';
 import { connect } from 'react-redux';
+import { addToCart } from '../../actions/index';
 import Meta from './components/Meta';
 import Icon from './components/Icon';
 import Price from './components/Price';
+import { ProductModel } from '../../models/product';
 
-interface ProductProps {
+type ProductProps = {
   product: ProductModel;
-  addToCart: (title: ProductModel) => void;
-}
+  addToCart: (product: ProductModel) => void;
+};
 
 const Product: React.SFC<ProductProps> = (props: ProductProps) => (
   <Col className="gutter-row" span={6}>
@@ -35,11 +34,9 @@ const Product: React.SFC<ProductProps> = (props: ProductProps) => (
   </Col>
 );
 
-const mapDispatchToProps = {
-  addToCart: addToCart,
-};
-
 export default connect(
   null,
-  mapDispatchToProps,
+  {
+    addToCart,
+  },
 )(Product);
