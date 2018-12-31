@@ -3,43 +3,38 @@ import { connect } from 'react-redux';
 import { Form, Icon, Input, Button, Row, Col } from 'antd';
 import { login } from '../../actions/auth';
 import { FormComponentProps } from 'antd/lib/form';
-import Container from './Container';
+import Container from './components/Container';
+import TextHeader from '../Layout/TextHeader';
+import { hasErrors } from 'src/helpers/selectors';
 
 const FormItem = Form.Item;
 
-export interface UserState {
-  email: string;
-  password: string;
-}
+type State = typeof initialState;
 
-interface SignInProps extends FormComponentProps {
+type Props = {
   email: string;
   password: string;
   token: string;
   error: boolean;
   loading: boolean;
-  login: (user: UserState) => void;
-}
+  login: (user: State) => void;
+};
 
-interface OwnProps {
-  auth: SignInProps;
-}
+type StateProps = {
+  auth: Partial<Props>;
+};
 
-function hasErrors(fieldsError: any) {
-  return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
+const initialState = { email: '', password: '' };
 
-class SignInComponent extends React.PureComponent<SignInProps, UserState> {
-  readonly state: UserState = {
-    email: '',
-    password: '',
-  };
+const formItemLayout = {
+  labelCol: { span: 6 },
+  wrapperCol: { span: 18 },
+};
 
-  constructor(props: SignInProps) {
-    super(props);
-  }
+class SignInComponent extends React.PureComponent<Props & FormComponentProps, State> {
+  readonly state: State = initialState;
 
-  handleLogin = (e: any) => {
+  handleLogin = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     this.props.form.validateFields((err, values) => {
@@ -55,11 +50,6 @@ class SignInComponent extends React.PureComponent<SignInProps, UserState> {
   render() {
     const { getFieldDecorator, getFieldsError } = this.props.form;
 
-    const formItemLayout = {
-      labelCol: { span: 6 },
-      wrapperCol: { span: 18 },
-    };
-
     return (
       <Row>
         <Col
@@ -70,6 +60,7 @@ class SignInComponent extends React.PureComponent<SignInProps, UserState> {
         >
           <Container>
             <Form layout="horizontal" onSubmit={this.handleLogin}>
+              <TextHeader title="Sign in" />
               <FormItem {...formItemLayout} label="Email">
                 {getFieldDecorator('email', {
                   rules: [{ required: true, message: 'Please input your email!' }],
@@ -110,18 +101,16 @@ class SignInComponent extends React.PureComponent<SignInProps, UserState> {
   }
 }
 
-const mapStateToProps = ({ auth: { token, error } }: OwnProps) => ({
+const mapStateToProps = ({ auth: { token, error } }: StateProps) => ({
   token,
   error,
 });
-
-const mapDispatchToProps = {
-  login: login,
-};
 
 const WrappedHorizontalLoginForm = Form.create()(SignInComponent);
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  {
+    login,
+  },
 )(WrappedHorizontalLoginForm);

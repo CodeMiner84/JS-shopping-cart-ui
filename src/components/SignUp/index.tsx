@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { register } from '../../actions/auth';
 import { Form, Input, Button, Row, Col } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import Container from '../SignIn/Container';
+import Container from '../SignIn/components/Container';
 const FormItem = Form.Item;
 
 export interface UserProps {

@@ -1,9 +1,12 @@
-import styled from 'styled-components';
+import * as React from 'react';
+import HeaderComponent from './components/TextHeader';
 
-export default styled.div`
-  font-weight: 100;
-  font-size: 1.5rem;
-  padding: 1rem 0;
-  text-shadow: 1px 1px #aaa;
-  color: #000;
-`;
+type Props = {
+  title: string;
+};
+
+const TextHeader: React.SFC<Props> = ({ title }: Props) => (
+  <HeaderComponent>{title}</HeaderComponent>
+);
+
+export default TextHeader;

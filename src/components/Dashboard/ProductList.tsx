@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Row, Col } from 'antd';
-import TextHeader from '../Layout/TextHeader';
+import TextHeader from '../Layout/components/TextHeader';
 import Product from './Product';
 import { ProductModel } from '../../models/product';
 
@@ -11,7 +11,7 @@ type Props = {
 const ProductList: React.SFC<Props> = ({ products }) => (
   <Row>
     <Col md={{ span: 22, offset: 1 }} lg={{ span: 14, offset: 4 }}>
-      <TextHeader>Product list</TextHeader>
+      <TextHeader title="Product list" />
       {products !== undefined && (
         <Row gutter={12}>
           {Object.keys(products).map(key => (
