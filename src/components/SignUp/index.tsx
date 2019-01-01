@@ -4,46 +4,51 @@ import { register } from '../../actions/auth';
 import { Form, Input, Button, Row, Col } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import Container from '../SignIn/components/Container';
+import TextHeader from '../Layout/TextHeader';
 const FormItem = Form.Item;
 
-export interface UserProps {
-  name: string;
-  email: string;
-  password: string;
-}
+export type UserState = typeof initialUserProps;
 
-interface SignUpProps extends FormComponentProps {
+type Props = {
   token: string;
   loading: boolean;
-  register: (user: UserProps) => void;
+  register: (user: UserState) => void;
   name: string;
   email: string;
   password: string;
-}
+};
 
-interface OwnProps {
-  auth: SignUpProps;
+type StateProps = {
+  auth: Props;
+};
+
+interface ParseErrorType {
+  name: any;
+  email: any;
+  password: any;
 }
 
 function hasErrors(fieldsError: any) {
+  console.log('fieldsError', fieldsError);
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
-class SignUpComponent extends React.PureComponent<SignUpProps, UserProps> {
-  readonly state: UserProps = {
-    name: '',
-    email: '',
-    password: '',
-  };
+const initialUserProps = {
+  name: '',
+  email: '',
+  password: '',
+};
 
-  constructor(props: SignUpProps) {
-    super(props);
-  }
+class SignUpComponent extends React.PureComponent<
+  Props & FormComponentProps,
+  UserState
+> {
+  readonly UserProps: UserState = initialUserProps;
 
-  handleRegister = (e: any) => {
+  handleRegister = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
 
-    this.props.form.validateFields((err, { name, email, password }: any) => {
+    this.props.form.validateFields((err, { name, email, password }: UserState) => {
       this.props.register({
         name,
         email,
@@ -53,12 +58,7 @@ class SignUpComponent extends React.PureComponent<SignUpProps, UserProps> {
   };
 
   render() {
-    const {
-      getFieldDecorator,
-      getFieldsError,
-      getFieldError,
-      isFieldTouched,
-    } = this.props.form;
+    const { getFieldDecorator, getFieldsError } = this.props.form;
 
     const formItemLayout = {
       labelCol: { span: 6 },
@@ -75,6 +75,7 @@ class SignUpComponent extends React.PureComponent<SignUpProps, UserProps> {
         >
           <Container>
             <Form layout="horizontal" onSubmit={this.handleRegister}>
+              <TextHeader title="Sign up" />
               <FormItem {...formItemLayout} label="Name">
                 {getFieldDecorator('name', {
                   rules: [{ required: true, message: 'Please input your name!' }],
@@ -109,17 +110,15 @@ class SignUpComponent extends React.PureComponent<SignUpProps, UserProps> {
   }
 }
 
-const mapStateToProps = ({ auth: { token } }: OwnProps) => ({
+const mapUserPropsToProps = ({ auth: { token } }: StateProps) => ({
   token,
 });
-
-const mapDispatchToProps = {
-  register: register,
-};
 
 const WrappedHorizontalSignupForm = Form.create()(SignUpComponent);
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+  mapUserPropsToProps,
+  {
+    register,
+  },
 )(WrappedHorizontalSignupForm);

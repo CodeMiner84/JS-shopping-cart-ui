@@ -2,7 +2,7 @@ import * as actions from '../actions';
 import actionTypes from '../actionTypes/auth';
 import cartTypes from '../actionTypes/cart';
 import { call, put, takeLatest, select } from 'redux-saga/effects';
-import { UserProps } from '../components/SignUp/index';
+import { UserState } from '../components/SignUp/index';
 import {
   callRegisterUser,
   callLoginUser,
@@ -17,7 +17,7 @@ import { getCartFromState, getCustomerId } from './cart';
 
 interface RegisterUserProps {
   type: string;
-  user: UserProps;
+  user: UserState;
 }
 
 function* registerUser(action: RegisterUserProps) {

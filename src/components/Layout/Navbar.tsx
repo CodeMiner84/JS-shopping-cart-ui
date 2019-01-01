@@ -6,12 +6,12 @@ import { logout } from '../../actions/auth';
 import { Menu, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import { userInfo } from 'os';
-import { UserProps } from '../SignUp/index';
+import { UserState } from '../SignUp/index';
 
 interface NavbarProps {
   logged: boolean;
   logoutUser: () => void;
-  user: UserProps;
+  user: UserState;
 }
 
 const TopNavbar: React.SFC<NavbarProps> = ({
@@ -76,7 +76,7 @@ const TopNavbar: React.SFC<NavbarProps> = ({
 
 interface AuthLogged {
   auth: {
-    user: UserProps;
+    user: UserState;
     logged: boolean;
   };
 }

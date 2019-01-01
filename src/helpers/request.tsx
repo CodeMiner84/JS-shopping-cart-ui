@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '../config';
-import { UserProps } from '../components/SignUp/index';
+import { UserState } from '../components/SignUp/index';
 import routes from '../helpers/routes';
 import { getToken } from './auth';
 
@@ -21,14 +21,14 @@ export const getData = (url: string) =>
     headers,
   });
 
-export const callRegisterUser = (user: UserProps) =>
+export const callRegisterUser = (user: UserState) =>
   axios({
     method: 'post',
     url: `${API_URL}${routes.register}`,
     data: user,
   });
 
-export const callLoginUser = (url: string, user: UserProps) =>
+export const callLoginUser = (url: string, user: UserState) =>
   axios({
     method: 'post',
     url: `${API_URL}${url}`,

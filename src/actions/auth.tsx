@@ -1,12 +1,12 @@
 import actionTypes from '../actionTypes/auth';
-import { UserProps } from '../components/SignUp/index';
+import { UserState } from '../components/SignUp/index';
 
-export const register = (user: UserProps) => ({
+export const register = (user: UserState) => ({
   type: actionTypes.REQ_USER_REGISTER,
   user,
 });
 
-export const login = (user: UserProps) => ({
+export const login = (user: UserState) => ({
   type: actionTypes.REQ_USER_LOGIN,
   user,
 });
