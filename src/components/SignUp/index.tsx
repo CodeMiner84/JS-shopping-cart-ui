@@ -22,12 +22,6 @@ type StateProps = {
   auth: Props;
 };
 
-interface ParseErrorType {
-  name: any;
-  email: any;
-  password: any;
-}
-
 function hasErrors(fieldsError: any) {
   console.log('fieldsError', fieldsError);
   return Object.keys(fieldsError).some(field => fieldsError[field]);
