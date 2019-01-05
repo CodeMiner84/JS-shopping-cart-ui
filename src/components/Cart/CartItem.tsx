@@ -4,26 +4,24 @@ import { recalculateCart, removeFromCart } from '../../actions';
 import { connect } from 'react-redux';
 import { Icon, Input } from 'antd';
 
-interface CartElementProps {
+type Props = {
   product: CartItem;
   recalculate: (id: string, quantity: number) => void;
   remove: (id: string) => void;
   ShouldComponentUpdate: (nextProps: any) => boolean;
-}
+};
 
-interface CartState {
-  quantity: number;
-}
+type State = typeof initialState;
 
-class CartElement extends React.PureComponent<CartElementProps, {}> {
-  readonly state: CartState = {
-    quantity: 0,
-  };
+const initialState = { quantity: 0 };
 
-  constructor(props: CartElementProps) {
-    super(props);
+class CartElement extends React.PureComponent<Props, State> {
+  readonly state: State = initialState;
 
-    this.state.quantity = props.product.quantity;
+  componentDidMount() {
+    this.setState({
+      quantity: this.props.product.quantity,
+    });
   }
 
   render() {
@@ -36,7 +34,7 @@ class CartElement extends React.PureComponent<CartElementProps, {}> {
         <td>{this.state.quantity}</td>
         <td>
           <Input
-            type="number"
+            type={'number'}
             value={product.quantity}
             style={{ width: '60px' }}
             onChange={(e: React.FormEvent<HTMLInputElement>) => {
@@ -48,8 +46,8 @@ class CartElement extends React.PureComponent<CartElementProps, {}> {
         </td>
         <td>
           <Icon
-            type="delete"
-            theme="filled"
+            type={'delete'}
+            theme={'filled'}
             style={{ cursor: 'pointer' }}
             onClick={() => remove(product._id)}
           />
