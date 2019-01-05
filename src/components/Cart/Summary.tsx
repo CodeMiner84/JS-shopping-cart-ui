@@ -4,13 +4,19 @@ import { Container, Row } from './components/SummaryComponents';
 import { Button, Icon } from 'antd';
 import { createOrder } from '../../actions/checkout';
 
-interface SummaryProps {
+type Props = {
   canMakeOrder: boolean;
   price: number;
   createOrder(): void;
-}
+};
 
-const Summary: React.SFC<any> = props => (
+type StateProps = {
+  checkout: {
+    price: number;
+  };
+};
+
+const Summary: React.SFC<Props> = props => (
   <Container>
     <Row>
       <label>ORDER TOTAL: </label>
@@ -37,17 +43,15 @@ const Summary: React.SFC<any> = props => (
   </Container>
 );
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: StateProps) => {
   return {
     price: state.checkout.price,
   };
 };
 
-const mapDispatchToProps = {
-  createOrder: createOrder,
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  {
+    createOrder: createOrder,
+  },
 )(Summary);

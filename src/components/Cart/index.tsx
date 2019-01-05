@@ -6,12 +6,22 @@ import { Row, Col } from 'antd';
 import Headers from './components/Headers';
 import Summary from './Summary';
 import TextHeader from '../Layout/components/TextHeader';
+import { CartItem } from '../../models/cart';
 
-class Cart extends React.Component<any, {}> {
-  constructor(props: any) {
-    super(props);
+type Props = {
+  cartItems: CartItem[];
+  getCart: () => void;
+};
 
-    props.getCart();
+type StateProps = {
+  cart: {
+    cartItems: CartItem[];
+  };
+};
+
+class Cart extends React.Component<Props> {
+  componentDidMount() {
+    this.props.getCart();
   }
 
   render() {
@@ -45,15 +55,13 @@ class Cart extends React.Component<any, {}> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: StateProps) => ({
   cartItems: state.cart.cartItems,
 });
 
-const mapDispatchToProps = {
-  getCart,
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  {
+    getCart,
+  },
 )(Cart);
