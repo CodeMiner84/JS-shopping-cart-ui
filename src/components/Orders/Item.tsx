@@ -2,9 +2,13 @@ import * as React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Headers from '../Cart/components/Headers';
 import { Container, Row as SummaryRow } from '../Cart/components/SummaryComponents';
-import { Row, Col } from 'antd';
+import { OrderProps } from './index';
 
-const OrderItem: React.SFC<any> = ({ order }) => {
+type Props = {
+  order: OrderProps;
+};
+
+const OrderItem: React.SFC<any> = ({ order }: Props) => {
   const products = order.products;
   return (
     <React.Fragment>
