@@ -1,14 +1,12 @@
 import actionTypes from '../actionTypes/orders';
 
-interface OrdersState {
-  orders: any[];
-}
+type State = typeof initialState;
 
-const InitialState = {
+const initialState = {
   orders: [],
 };
 
-export default (state: OrdersState = InitialState, action: any) => {
+export default (state: State = initialState, action: any) => {
   switch (action.type) {
     case actionTypes.RECV_ORDERS:
       return {

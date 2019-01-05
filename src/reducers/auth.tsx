@@ -1,19 +1,8 @@
 import actionTypes from '../actionTypes/auth';
 
-interface AuthState {
-  readonly loading: boolean;
-  readonly token: string;
-  readonly logged: boolean;
-  readonly user: LoggedUser;
-}
+type State = typeof initialState;
 
-interface LoggedUser {
-  id: string;
-  name: string;
-  email: string;
-}
-
-const AuthProps = {
+const initialState = {
   error: false,
   loading: false,
   token: '',
@@ -25,7 +14,7 @@ const AuthProps = {
   },
 };
 
-export default function(state: AuthState = AuthProps, action: any) {
+export default function(state: State = initialState, action: any) {
   switch (action.type) {
     case actionTypes.REQ_USER_LOGIN:
       return {

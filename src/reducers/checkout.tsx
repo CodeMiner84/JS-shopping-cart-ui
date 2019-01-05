@@ -1,19 +1,14 @@
 import actionTypes from '../actionTypes/checkout';
-import { DefaultAppProps, AppState } from '../application/index';
 
-interface CheckoutProps {
-  price: number;
-  shippingCost: number;
-  paymentCost: number;
-}
+type State = typeof initialState;
 
-const CheckoutState: CheckoutProps = {
+const initialState = {
   price: 0,
   shippingCost: 0,
   paymentCost: 0,
 };
 
-export default function(state: CheckoutProps = CheckoutState, action: any) {
+export default function(state: State = initialState, action: any) {
   switch (action.type) {
     case actionTypes.CHECKOUT_CALC:
       return {
@@ -21,7 +16,7 @@ export default function(state: CheckoutProps = CheckoutState, action: any) {
         price: action.payload,
       };
     case actionTypes.ORDER_PLACED:
-      return CheckoutState;
+      return initialState;
     default:
       return state;
   }

@@ -1,13 +1,20 @@
 import actionTypes from '../actionTypes/cart';
 import cartTypes from '../actionTypes/cart';
 import checkoutTypes from '../actionTypes/checkout';
-import { DefaultAppProps, AppState } from '../application/index';
 import { CartItem } from 'src/models/cart';
 
-export default function(state: AppState = DefaultAppProps, action: any) {
+type State = {
+  cartItems: CartItem[];
+};
+
+const initialState = {
+  cartItems: [],
+};
+
+export default function(state: State = initialState, action: any) {
   switch (action.type) {
     case checkoutTypes.ORDER_PLACED:
-      return DefaultAppProps;
+      return initialState;
     case actionTypes.RECV_CART:
       return {
         cartItems: action.payload,
