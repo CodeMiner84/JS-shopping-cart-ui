@@ -8,17 +8,20 @@ import { Link } from 'react-router-dom';
 import { userInfo } from 'os';
 import { UserState } from '../SignUp/index';
 
-interface NavbarProps {
+type Props = {
   logged: boolean;
   logoutUser: () => void;
   user: UserState;
-}
+};
 
-const TopNavbar: React.SFC<NavbarProps> = ({
-  logged,
-  user,
-  logoutUser,
-}: NavbarProps) => {
+type StateProps = {
+  auth: {
+    user: UserState;
+    logged: boolean;
+  };
+};
+
+const TopNavbar: React.SFC<Props> = ({ logged, user, logoutUser }: Props) => {
   return (
     <Row>
       <Col md={{ span: 22, offset: 1 }} lg={{ span: 14, offset: 4 }}>
@@ -74,23 +77,14 @@ const TopNavbar: React.SFC<NavbarProps> = ({
   );
 };
 
-interface AuthLogged {
-  auth: {
-    user: UserState;
-    logged: boolean;
-  };
-}
-
-const mapStateToProps = ({ auth: { logged, user } }: AuthLogged) => ({
+const mapStateToProps = ({ auth: { logged, user } }: StateProps) => ({
   logged,
   user,
 });
 
-const mapDispatchToProps = {
-  logoutUser: logout,
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  {
+    logoutUser: logout,
+  },
 )(TopNavbar);
