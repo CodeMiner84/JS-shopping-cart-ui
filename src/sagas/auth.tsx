@@ -7,7 +7,6 @@ import {
   callRegisterUser,
   callLoginUser,
   me,
-  recalculateCartItem,
   addProductToCart,
 } from '../helpers/request';
 import { push } from 'react-router-redux';

@@ -3,9 +3,7 @@ import { put, takeLatest, call, select } from 'redux-saga/effects';
 import actionTypes from '../actionTypes/product';
 import checkoutTypes from '../actionTypes/checkout';
 import cartTypes from '../actionTypes/cart';
-import { sleep } from '../helpers/index';
 import { ProductModel } from '../models/product';
-import { push } from 'react-router-redux';
 import {
   getCart,
   addProductToCart,
@@ -13,7 +11,6 @@ import {
   recalculateCartItem,
 } from '../helpers/request';
 import { getToken } from '../helpers/auth';
-import { CartItem } from '../models/cart';
 import { message } from 'antd';
 
 interface AddToCart {
