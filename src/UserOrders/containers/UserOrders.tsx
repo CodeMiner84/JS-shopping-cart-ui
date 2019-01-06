@@ -20,7 +20,6 @@ class Orders extends React.Component<Props> {
   }
 
   render() {
-    console.log('this.props', this.props);
     if (Object.keys(this.props.orders).length === 0) {
       return <div />;
     }
