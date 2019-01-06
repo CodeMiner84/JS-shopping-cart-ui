@@ -9,16 +9,16 @@ import { SignUp } from 'src/Auth/Signup';
 import { SignIn } from 'src/Auth/Signin';
 import { UserOrders } from './UserOrders';
 import { getToken } from './Auth/selectors';
-import actionTypes from './Auth/actionTypes';
 import { Layout } from 'antd';
 const { Header, Content } = Layout;
 import 'antd/dist/antd.css';
 import './App.css';
 import ThankYouPage from './Cart/containers/Thx';
+import { TOKEN_REQUEST } from './Auth/actionTypes';
 
 const token = getToken();
 if (token) {
-  store.dispatch({ type: actionTypes.TOKEN_REQUEST });
+  store.dispatch({ type: TOKEN_REQUEST });
 }
 
 /**

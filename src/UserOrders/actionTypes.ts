@@ -1,4 +1,2 @@
-export default {
-  REQ_ORDERS: 'REQ_ORDERS',
-  RECV_ORDERS: 'RECV_ORDERS',
-};
+export const REQ_ORDERS = 'REQ_ORDERS';
+export const RECV_ORDERS = 'RECV_ORDERS';

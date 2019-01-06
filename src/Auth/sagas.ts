@@ -2,13 +2,22 @@ import { call, put, takeLatest, select } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { message } from 'antd';
 import * as actions from 'src/Common/actions';
-import cartTypes from 'src/Cart/actionTypes';
-import actionTypes from './actionTypes';
 import { UserState } from 'src/Auth/Signup';
 import { callRegisterUser, callLoginUser, me } from 'src/Auth/api';
 import { addProductToCart } from 'src/Dashboard/api';
 import { saveToken, getToken, logout } from './selectors';
 import { getCartFromState, getCustomerId } from 'src/Cart/sagas';
+import { CLEAR_CART } from '../Cart/actionTypes';
+import {
+  RECV_USER_REGISTRATION,
+  RECV_USER_LOGIN,
+  RECV_ERROR,
+  USER_AUTH,
+  REQ_USER_REGISTER,
+  REQ_USER_LOGIN,
+  TOKEN_REQUEST,
+  REQ_LOGOUT,
+} from './actionTypes';
 
 interface RegisterUserProps {
   type: string;
@@ -19,7 +28,7 @@ function* registerUser(action: RegisterUserProps) {
   try {
     const response = yield call(() => callRegisterUser(action.user));
     if (response.status === 200) {
-      yield put({ type: actionTypes.RECV_USER_REGISTRATION, payload: response.data });
+      yield put({ type: RECV_USER_REGISTRATION, payload: response.data });
       message.success('You have succesfully register');
       saveToken(response.data.token);
 
@@ -35,7 +44,7 @@ function* loginUser(action: RegisterUserProps) {
   try {
     const response = yield call(() => callLoginUser('/login', action.user));
     if (response.status === 200) {
-      yield put({ type: actionTypes.RECV_USER_LOGIN, payload: response.data });
+      yield put({ type: RECV_USER_LOGIN, payload: response.data });
       saveToken(response.data.token);
       message.success('You are logged in');
 
@@ -43,11 +52,11 @@ function* loginUser(action: RegisterUserProps) {
       yield put(push('/'));
     } else if (response.status === 500) {
       message.error('Wrong email or password');
-      yield put({ type: actionTypes.RECV_ERROR });
+      yield put({ type: RECV_ERROR });
     }
   } catch (e) {
     message.error('Wrong email or password');
-    yield put({ type: actionTypes.RECV_ERROR });
+    yield put({ type: RECV_ERROR });
     yield put(actions.getFailure(e));
   }
 }
@@ -69,7 +78,7 @@ function* isUserLogged() {
       yield put(push('/'));
     }
 
-    yield put({ type: actionTypes.USER_AUTH, payload: response.data });
+    yield put({ type: USER_AUTH, payload: response.data });
   } catch (e) {
     yield put(actions.getFailure(e));
   }
@@ -78,7 +87,7 @@ function* isUserLogged() {
 function* logoutUser() {
   try {
     logout();
-    yield put({ type: cartTypes.CLEAR_CART });
+    yield put({ type: CLEAR_CART });
     message.success('You are logged off');
     yield put(push('/'));
   } catch (e) {
@@ -87,17 +96,17 @@ function* logoutUser() {
 }
 
 export function* watchSignUp() {
-  yield takeLatest(actionTypes.REQ_USER_REGISTER, registerUser);
+  yield takeLatest(REQ_USER_REGISTER, registerUser);
 }
 
 export function* watchSignIn() {
-  yield takeLatest(actionTypes.REQ_USER_LOGIN, loginUser);
+  yield takeLatest(REQ_USER_LOGIN, loginUser);
 }
 
 export function* watchMe() {
-  yield takeLatest(actionTypes.TOKEN_REQUEST, isUserLogged);
+  yield takeLatest(TOKEN_REQUEST, isUserLogged);
 }
 
 export function* watchLogout() {
-  yield takeLatest(actionTypes.REQ_LOGOUT, logoutUser);
+  yield takeLatest(REQ_LOGOUT, logoutUser);
 }

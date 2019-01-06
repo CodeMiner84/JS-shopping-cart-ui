@@ -1,12 +1,8 @@
-import actionTypes from './actionTypes';
+import { createActions } from 'redux-actions';
+import { RECV_PRODUCTS, GET_PRODUCTS } from './actionTypes';
 
-export const receiveProducts = (products: {}) => ({
-  type: actionTypes.RECV_PRODUCTS,
-  loading: true,
-  products,
-});
-
-export const getProducts = () => ({
-  type: actionTypes.GET_PRODUCTS,
-  loading: false,
-});
+export const { receiveProducts, getProducts } = createActions(
+  {},
+  RECV_PRODUCTS,
+  GET_PRODUCTS,
+);

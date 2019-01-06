@@ -1,19 +1,20 @@
-import actionTypes from './actionTypes';
+import { handleActions } from 'redux-actions';
+import { OrderProps } from './models/UserOrder';
 
-type State = typeof initialState;
+type State = {
+  orders: OrderProps[];
+};
 
 const initialState = {
   orders: [],
 };
 
-export default (state: State = initialState, action: any) => {
-  switch (action.type) {
-    case actionTypes.RECV_ORDERS:
-      return {
-        ...state,
-        orders: action.orders,
-      };
-    default:
-      return state;
-  }
-};
+export default handleActions(
+  {
+    RECV_ORDERS: (state: State = initialState, action: any) => ({
+      ...state,
+      orders: action.orders,
+    }),
+  },
+  initialState,
+);

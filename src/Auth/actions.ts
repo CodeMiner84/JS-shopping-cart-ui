@@ -1,16 +1,15 @@
-import actionTypes from './actionTypes';
 import { UserState } from 'src/Auth/Signup';
+import { createActions } from 'redux-actions';
+import { REQ_LOGOUT } from './actionTypes';
 
-export const register = (user: UserState) => ({
-  type: actionTypes.REQ_USER_REGISTER,
-  user,
-});
+const actions = createActions(
+  {
+    REQ_USER_REGISTER: (user: UserState) => user,
+    REQ_USER_LOGIN: (user: UserState) => user,
+  },
+  REQ_LOGOUT,
+);
 
-export const login = (user: UserState) => ({
-  type: actionTypes.REQ_USER_LOGIN,
-  user,
-});
-
-export const logout = () => ({
-  type: actionTypes.REQ_LOGOUT,
-});
+export const logout = actions.reqLogout;
+export const login = actions.reqUserLogin;
+export const register = actions.reqUserRegister;

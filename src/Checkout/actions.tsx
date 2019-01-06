@@ -1,5 +1,4 @@
-import actionTypes from './actionTypes';
+import { createAction } from 'redux-actions';
+import { PLACE_ORDER } from './actionTypes';
 
-export const createOrder = (order: any) => ({
-  type: actionTypes.PLACE_ORDER,
-});
+export const createOrder = createAction(PLACE_ORDER);

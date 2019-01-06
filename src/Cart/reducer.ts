@@ -1,7 +1,5 @@
-import actionTypes from './actionTypes';
-import cartTypes from './actionTypes';
-import checkoutTypes from '../Checkout/actionTypes';
 import { CartItemModel } from './models';
+import { handleActions } from 'redux-actions';
 
 type State = {
   cartItems: CartItemModel[];
@@ -11,25 +9,23 @@ const initialState = {
   cartItems: [],
 };
 
-export default function(state: State = initialState, action: any) {
-  switch (action.type) {
-    case checkoutTypes.ORDER_PLACED:
-      return initialState;
-    case actionTypes.RECV_CART:
-      return {
-        cartItems: action.payload,
-      };
-    case actionTypes.ADD_TO_CART:
-      return {
-        ...state,
-        loading: true,
-      };
-    case actionTypes.ITEM_REMOVED:
-      return {
-        ...state,
-        cartItems: state.cartItems.filter(item => item._id !== action.id),
-      };
-    case actionTypes.ADDED_TO_CART:
+export default handleActions(
+  {
+    ORDER_PLACED: (state: State = initialState, action: any) => ({
+      initialState,
+    }),
+    RECV_CART: (state: State = initialState, action: any) => ({
+      cartItems: action.payload,
+    }),
+    ADD_TO_CART: (state: State = initialState, action: any) => ({
+      ...state,
+      loading: true,
+    }),
+    ITEM_REMOVED: (state: State = initialState, action: any) => ({
+      ...state,
+      cartItems: state.cartItems.filter(item => item._id !== action.id),
+    }),
+    ADDED_TO_CART: (state: State = initialState, action: any) => {
       let newCartItems: CartItemModel[] = state.cartItems || [];
 
       newCartItems = Object.keys(state.cartItems).map((key: any) => {
@@ -62,8 +58,10 @@ export default function(state: State = initialState, action: any) {
         loading: false,
         cartItems: newCartItems,
       };
-    case cartTypes.RECALCULATE:
-      const { id, quantity } = action;
+    },
+    RECALCULATE_CART: (state: State = initialState, action: any) => {
+      const { id, quantity } = action.payload;
+
       return {
         ...state,
         cartItems: state.cartItems.map((item: CartItemModel) => {
@@ -75,12 +73,11 @@ export default function(state: State = initialState, action: any) {
           return item;
         }),
       };
-    case cartTypes.CLEAR_CART:
-      return {
-        ...state,
-        cartItems: [],
-      };
-    default:
-      return state;
-  }
-}
+    },
+    CLEAR_CART: (state: State = initialState) => ({
+      ...state,
+      cartItems: [],
+    }),
+  },
+  initialState,
+);

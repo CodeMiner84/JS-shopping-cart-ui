@@ -2,7 +2,7 @@ import * as React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Headers } from 'src/Cart';
 import { Container, Row as SummaryRow } from 'src/Cart/components/SummaryComponents';
-import { OrderProps } from './UserOrders';
+import { OrderProps } from '../models/UserOrder';
 
 type Props = {
   order: OrderProps;

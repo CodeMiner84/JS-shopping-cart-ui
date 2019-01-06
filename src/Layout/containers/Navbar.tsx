@@ -2,10 +2,10 @@ import * as React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import routes from 'src/Common/routes';
 import { connect } from 'react-redux';
-import { logout } from 'src/Auth/actions';
 import { Menu, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import { UserState } from 'src/Auth/Signup';
+import { logout } from '../../Auth/actions';
 
 type Props = {
   logged: boolean;

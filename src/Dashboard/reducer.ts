@@ -1,4 +1,4 @@
-import actionTypes from './actionTypes';
+import { handleActions } from 'redux-actions';
 import { ProductModel } from '.';
 
 type State = {
@@ -9,21 +9,16 @@ export const initialState: State = {
   products: [],
 };
 
-export default function(state: State = initialState, action: any) {
-  switch (action.type) {
-    case actionTypes.RECV_PRODUCTS:
-      return {
-        ...state,
-        loading: false,
-        products: action.payload,
-      };
-    case actionTypes.GET_PRODUCTS:
-      return {
-        ...state,
-        products: {},
-        loading: true,
-      };
-    default:
-      return state;
-  }
-}
+export default handleActions(
+  {
+    RECV_PRODUCTS: (state: State = initialState, action: any) => ({
+      ...state,
+      products: action.payload,
+    }),
+    GET_PRODUCTS: (state: State = initialState, action: any) => ({
+      ...state,
+      products: {},
+    }),
+  },
+  initialState,
+);

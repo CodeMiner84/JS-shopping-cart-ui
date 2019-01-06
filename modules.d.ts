@@ -9,3 +9,4 @@ declare module 'react-redux';
 declare module 'react-router-redux';
 declare module 'connected-react-router';
 declare module 'antd';
+declare module 'redux-actions';

@@ -1,4 +1,4 @@
-import actionTypes from './actionTypes';
+import { handleActions } from 'redux-actions';
 
 type State = typeof initialState;
 
@@ -8,16 +8,13 @@ const initialState = {
   paymentCost: 0,
 };
 
-export default function(state: State = initialState, action: any) {
-  switch (action.type) {
-    case actionTypes.CHECKOUT_CALC:
-      return {
-        ...state,
-        price: action.payload,
-      };
-    case actionTypes.ORDER_PLACED:
-      return initialState;
-    default:
-      return state;
-  }
-}
+export default handleActions(
+  {
+    CHECKOUT_CALC: (state: State = initialState, action: any) => ({
+      ...state,
+      price: action.payload,
+    }),
+    ORDER_PLACED: (state: State = initialState, action: any) => initialState,
+  },
+  initialState,
+);

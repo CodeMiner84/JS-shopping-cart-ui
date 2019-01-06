@@ -1,4 +1,13 @@
-import actionTypes from './actionTypes';
+import {
+  REQ_USER_LOGIN,
+  REQ_USER_REGISTER,
+  RECV_USER_REGISTRATION,
+  RECV_USER_LOGIN,
+  TOKEN_REQUEST,
+  USER_AUTH,
+  REQ_LOGOUT,
+  RECV_ERROR,
+} from './actionTypes';
 
 type State = typeof initialState;
 
@@ -16,17 +25,17 @@ const initialState = {
 
 export default function(state: State = initialState, action: any) {
   switch (action.type) {
-    case actionTypes.REQ_USER_LOGIN:
+    case REQ_USER_LOGIN:
       return {
         ...state,
         loading: true,
       };
-    case actionTypes.REQ_USER_REGISTER:
+    case REQ_USER_REGISTER:
       return {
         ...state,
         loading: true,
       };
-    case actionTypes.RECV_USER_REGISTRATION:
+    case RECV_USER_REGISTRATION:
       return {
         ...state,
         loading: false,
@@ -34,7 +43,7 @@ export default function(state: State = initialState, action: any) {
         logged: action.payload.token ? true : false,
         user: action.payload.user,
       };
-    case actionTypes.RECV_USER_LOGIN:
+    case RECV_USER_LOGIN:
       return {
         ...state,
         loading: false,
@@ -42,24 +51,24 @@ export default function(state: State = initialState, action: any) {
         user: action.payload.user,
         token: action.payload.token,
       };
-    case actionTypes.TOKEN_REQUEST:
+    case TOKEN_REQUEST:
       return {
         ...state,
         loading: false,
       };
-    case actionTypes.USER_AUTH:
+    case USER_AUTH:
       return {
         ...state,
         loading: false,
         logged: action.payload._id ? true : false,
         user: action.payload,
       };
-    case actionTypes.REQ_LOGOUT:
+    case REQ_LOGOUT:
       return {
         ...state,
         logged: false,
       };
-    case actionTypes.RECV_ERROR:
+    case RECV_ERROR:
       return {
         ...state,
         error: true,

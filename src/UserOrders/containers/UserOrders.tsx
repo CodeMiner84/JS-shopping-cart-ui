@@ -5,27 +5,9 @@ import { Collapse } from 'antd';
 import OrderItem from './Item';
 import { TextHeader } from 'src/Layout';
 import { Row, Col } from 'antd';
+import { OrderProps } from '../models/UserOrder';
 
 const Panel = Collapse.Panel;
-
-export type OrderProps = {
-  _id: string;
-  customer_id: number;
-  price: number;
-  created_at: Date;
-  products: OrderProductProps[];
-};
-
-export type OrderProductProps = {
-  _id: string;
-  amount: number;
-  created_at: Date;
-  order_id: string;
-  price: number;
-  product_id: string;
-  quantity: number;
-  title: string;
-};
 
 type Props = {
   getOrders: () => void;
@@ -38,6 +20,7 @@ class Orders extends React.Component<Props> {
   }
 
   render() {
+    console.log('this.props', this.props);
     if (Object.keys(this.props.orders).length === 0) {
       return <div />;
     }

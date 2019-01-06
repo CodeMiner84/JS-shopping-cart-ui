@@ -1,27 +1,22 @@
-import actionTypes from './actionTypes';
 import { ProductModel } from 'src/Dashboard';
-import cartActions from './actionTypes';
+import { GET_CART, ADDED_TO_CART } from './actionTypes';
+import { createActions } from 'redux-actions';
 
-export const getCart = () => ({
-  type: actionTypes.GET_CART,
-});
-
-export const addToCart = (product: ProductModel) => ({
-  type: actionTypes.ADD_TO_CART,
-  product,
-});
-
-export const AddedToCart = () => ({
-  type: actionTypes.ADDED_TO_CART,
-});
-
-export const recalculateCart = (id: string, quantity: number) => ({
-  type: cartActions.RECALCULATE,
-  id,
-  quantity,
-});
-
-export const removeFromCart = (id: string) => ({
-  type: cartActions.REMOVE_FROM_CART,
-  id,
-});
+export const {
+  getCart,
+  addToCart,
+  AddedToCart,
+  recalculateCart,
+  removeFromCart,
+} = createActions(
+  {
+    ADD_TO_CART: (product: ProductModel) => product,
+    RECALCULATE_CART: (id: string, quantity: number) => ({
+      id,
+      quantity,
+    }),
+    REMOVE_FROM_CART: (id: number) => id,
+  },
+  GET_CART,
+  ADDED_TO_CART,
+);
