@@ -1,4 +1,9 @@
-import { createAction } from 'redux-actions';
-import { PLACE_ORDER } from './actionTypes';
+import { createActions } from 'redux-actions';
+import { PLACE_ORDER, CHECKOUT_CALC, ORDER_PLACED } from './actionTypes';
 
-export const createOrder = createAction(PLACE_ORDER);
+export const { placeOrder, checkoutCalc, orderPlaced } = createActions(
+  {},
+  PLACE_ORDER,
+  CHECKOUT_CALC,
+  ORDER_PLACED,
+);

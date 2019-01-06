@@ -13,7 +13,7 @@ export default handleActions(
   {
     RECV_ORDERS: (state: State = initialState, action: any) => ({
       ...state,
-      orders: action.orders,
+      orders: action.payload,
     }),
   },
   initialState,

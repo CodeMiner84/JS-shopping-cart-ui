@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Container, Row } from 'src/Cart/components/SummaryComponents';
-import { Button, Icon } from 'antd';
-import { createOrder } from 'src/Checkout/actions';
+import { Button } from 'antd';
+import { placeOrder } from 'src/Checkout/actions';
 
 type Props = {
   canMakeOrder: boolean;
   price: number;
-  createOrder(): void;
+  placeOrder(): void;
 };
 
 type StateProps = {
@@ -34,9 +34,8 @@ const Summary: React.SFC<Props> = props => (
         disabled={!props.canMakeOrder}
         type="primary"
         size="large"
-        onClick={props.createOrder}
+        onClick={props.placeOrder}
       >
-        <Icon type="euro" />
         PLACE ORDER
       </Button>
     </Row>
@@ -52,6 +51,6 @@ const mapStateToProps = (state: StateProps) => {
 export default connect(
   mapStateToProps,
   {
-    createOrder: createOrder,
+    placeOrder,
   },
 )(Summary);

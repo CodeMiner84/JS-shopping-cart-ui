@@ -1,8 +1,13 @@
 import { createActions } from 'redux-actions';
-import { RECV_PRODUCTS, GET_PRODUCTS } from './actionTypes';
+import { GET_PRODUCTS } from './actionTypes';
+import { ProductModel } from './models/product';
 
-export const { receiveProducts, getProducts } = createActions(
-  {},
-  RECV_PRODUCTS,
+const actions = createActions(
+  {
+    RECV_PRODUCTS: (products: ProductModel[]) => products,
+  },
   GET_PRODUCTS,
 );
+
+export const receiveProducts = actions.recvProducts;
+export const getProducts = actions.getProducts;

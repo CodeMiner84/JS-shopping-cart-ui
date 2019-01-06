@@ -6,3 +6,6 @@
 - [ ] restore cart session when user login
 - [ ] order process withou anonymous
 - [ ] account orders
+
+
+https://github.com/nguyenbathanh/react-loading-screen

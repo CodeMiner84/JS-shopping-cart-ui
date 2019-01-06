@@ -3,16 +3,22 @@ import { connect } from 'react-redux';
 import { getProducts } from '../actions';
 import { ProductModel } from '../index';
 import ProductList from './ProductList';
+import withLoading from 'src/Loading/WithLoading';
+import Loading from '../../Loading/Loading';
 
 type Props = {
   getProducts: () => void;
   products: ProductModel[];
+  app: any;
+  loading: boolean;
 };
 
 type StateProps = {
   product: {
     products: ProductModel[];
   };
+  app: any;
+  loading: boolean;
 };
 
 class Dashboard extends React.Component<Props> {
@@ -21,6 +27,10 @@ class Dashboard extends React.Component<Props> {
   }
 
   render() {
+    if (this.props.loading) {
+      return <Loading />;
+    }
+
     return <ProductList products={this.props.products} />;
   }
 }
@@ -34,4 +44,4 @@ export default connect(
   {
     getProducts,
   },
-)(Dashboard);
+)(withLoading(Dashboard));

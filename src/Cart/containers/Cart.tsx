@@ -7,10 +7,13 @@ import { Headers } from 'src/Cart';
 import Summary from './Summary';
 import { TextHeader } from 'src/Layout';
 import { CartItemModel } from '../models';
+import Loading from '../../Loading/Loading';
+import withLoading from 'src/Loading/WithLoading';
 
 type Props = {
   cartItems: CartItemModel[];
   getCart: () => void;
+  loading: boolean;
 };
 
 type StateProps = {
@@ -26,6 +29,9 @@ class Cart extends React.Component<Props> {
 
   render() {
     const { cartItems } = this.props;
+    if (this.props.loading) {
+      return <Loading />;
+    }
 
     return (
       <Row>
@@ -64,4 +70,4 @@ export default connect(
   {
     getCart,
   },
-)(Cart);
+)(withLoading(Cart));

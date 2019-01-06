@@ -11,19 +11,8 @@ const initialState = {
 
 export default handleActions(
   {
-    ORDER_PLACED: (state: State = initialState, action: any) => ({
-      initialState,
-    }),
     RECV_CART: (state: State = initialState, action: any) => ({
       cartItems: action.payload,
-    }),
-    ADD_TO_CART: (state: State = initialState, action: any) => ({
-      ...state,
-      loading: true,
-    }),
-    ITEM_REMOVED: (state: State = initialState, action: any) => ({
-      ...state,
-      cartItems: state.cartItems.filter(item => item._id !== action.id),
     }),
     ADDED_TO_CART: (state: State = initialState, action: any) => {
       let newCartItems: CartItemModel[] = state.cartItems || [];
@@ -55,10 +44,13 @@ export default handleActions(
 
       return {
         ...state,
-        loading: false,
         cartItems: newCartItems,
       };
     },
+    ITEM_REMOVED: (state: State = initialState, action: any) => ({
+      ...state,
+      cartItems: state.cartItems.filter(item => item._id !== action.payload),
+    }),
     RECALCULATE_CART: (state: State = initialState, action: any) => {
       const { id, quantity } = action.payload;
 

@@ -6,12 +6,15 @@ import OrderItem from './Item';
 import { TextHeader } from 'src/Layout';
 import { Row, Col } from 'antd';
 import { OrderProps } from '../models/UserOrder';
+import Loading from '../../Loading/Loading';
+import withLoading from 'src/Loading/WithLoading';
 
 const Panel = Collapse.Panel;
 
 type Props = {
   getOrders: () => void;
   orders: OrderProps[];
+  loading: boolean;
 };
 
 class Orders extends React.Component<Props> {
@@ -20,6 +23,10 @@ class Orders extends React.Component<Props> {
   }
 
   render() {
+    if (this.props.loading) {
+      return <Loading />;
+    }
+
     if (Object.keys(this.props.orders).length === 0) {
       return <div />;
     }
@@ -58,4 +65,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Orders);
+)(withLoading(Orders));

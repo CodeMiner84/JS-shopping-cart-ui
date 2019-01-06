@@ -17,14 +17,13 @@ export const getCart = (token?: string) => {
 };
 
 export const removeFromCart = (id: string) => {
-  const token = getToken();
   let url = `${API_URL}${routes.removeFromCart}`;
   url = url.replace(':id', id);
 
   return axios({
     method: 'DELETE',
     url,
-    headers: authHeaders(token),
+    headers: authHeaders(getToken()),
   });
 };
 

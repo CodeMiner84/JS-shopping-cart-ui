@@ -1,4 +1,5 @@
-import { FAILURE, REQUEST, SUCCESS } from './actionTypes';
+import { FAILURE, REQUEST, SUCCESS, LOADING, LOADED } from './actionTypes';
+import { createActions } from 'redux-actions';
 
 export function getDataRequested() {
   return {
@@ -19,3 +20,8 @@ export function getFailure(data: any) {
     payload: data,
   };
 }
+
+export const { loading, loaded } = createActions({
+  LOADING: () => true,
+  LOADED: () => false,
+});

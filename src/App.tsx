@@ -1,9 +1,9 @@
 import * as React from 'react';
+import 'antd/dist/antd.css';
 import { Router, Route, Switch } from 'react-router';
 import { Cart } from './Cart/index';
 import { Dashboard } from './Dashboard';
 import { Navbar } from './Layout';
-import { Loading } from './Loading';
 import store, { history } from 'src/Common/store/store';
 import { SignUp } from 'src/Auth/Signup';
 import { SignIn } from 'src/Auth/Signin';
@@ -11,9 +11,8 @@ import { UserOrders } from './UserOrders';
 import { getToken } from './Auth/selectors';
 import { Layout } from 'antd';
 const { Header, Content } = Layout;
-import 'antd/dist/antd.css';
 import './App.css';
-import ThankYouPage from './Cart/containers/Thx';
+import ThankYouPage from './Checkout/containers/Thx';
 import { TOKEN_REQUEST } from './Auth/actionTypes';
 
 const token = getToken();
@@ -21,11 +20,11 @@ if (token) {
   store.dispatch({ type: TOKEN_REQUEST });
 }
 
-/**
- * It should be SFC Component. But it is main app component,
- * and only because of that its class component
- */
-class App extends React.Component<{}, {}> {
+type Props = {
+  loading?: boolean;
+};
+
+class App extends React.Component<Props> {
   public render() {
     return (
       <Router history={history}>
@@ -35,7 +34,6 @@ class App extends React.Component<{}, {}> {
               <Navbar />
             </Header>
             <Content style={{ padding: '75px 50px 0' }}>
-              <Loading />
               <Route path="/" exact={true} component={Dashboard} />
               <Route path="/signin" exact={true} component={SignIn} />
               <Route path="/signup" exact={true} component={SignUp} />

@@ -10,11 +10,11 @@ const initialState = {
 
 export default handleActions(
   {
+    ORDER_PLACED: (state: State = initialState, action: any) => initialState,
     CHECKOUT_CALC: (state: State = initialState, action: any) => ({
       ...state,
       price: action.payload,
     }),
-    ORDER_PLACED: (state: State = initialState, action: any) => initialState,
   },
   initialState,
 );
