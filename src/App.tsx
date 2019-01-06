@@ -1,21 +1,20 @@
 import * as React from 'react';
 import { Router, Route, Switch } from 'react-router';
-import Cart from './components/Cart/index';
-import Dashboard from './components/Dashboard';
-import Navbar from './components/Layout/Navbar';
-import Loading from './components/Loading';
-import store, { history } from './store/store';
-import SignUp from './components/SignUp/index';
-import SignIn from './components/SignIn/index';
-import Orders from './components/Orders/index';
-import { getToken } from './helpers/auth';
-import actionTypes from './actionTypes/auth';
-import { Layout, Menu, Breadcrumb } from 'antd';
-const { Header, Content, Footer } = Layout;
-import * as moment from 'moment';
+import { Cart } from './Cart/index';
+import { Dashboard } from './Dashboard';
+import { Navbar } from './Layout';
+import { Loading } from './Loading';
+import store, { history } from 'src/Common/store/store';
+import { SignUp } from 'src/Auth/Signup';
+import { SignIn } from 'src/Auth/Signin';
+import { UserOrders } from './UserOrders';
+import { getToken } from './Auth/selectors';
+import actionTypes from './Auth/actionTypes';
+import { Layout } from 'antd';
+const { Header, Content } = Layout;
 import 'antd/dist/antd.css';
 import './App.css';
-import ThankYouPage from './components/Cart/Thx';
+import ThankYouPage from './Cart/containers/Thx';
 
 const token = getToken();
 if (token) {
@@ -40,7 +39,7 @@ class App extends React.Component<{}, {}> {
               <Route path="/" exact={true} component={Dashboard} />
               <Route path="/signin" exact={true} component={SignIn} />
               <Route path="/signup" exact={true} component={SignUp} />
-              <Route path="/orders" exact={true} component={Orders} />
+              <Route path="/orders" exact={true} component={UserOrders} />
               <Route path="/cart" exact={true} component={Cart} />
               <Route path="/thx" exact={true} component={ThankYouPage} />
             </Content>
