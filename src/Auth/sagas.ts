@@ -72,9 +72,8 @@ function* isUserLogged() {
 
     if (response != null && response.code === 500) {
       yield put(push('/'));
+      yield put(userAuth(response.data));
     }
-
-    yield put(userAuth(response.data));
   } catch (e) {
     yield put(getFailure(e));
   }
