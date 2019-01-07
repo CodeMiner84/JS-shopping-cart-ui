@@ -1,5 +1,5 @@
 import { createActions } from 'redux-actions';
-import { REQ_ORDERS, RECV_ORDERS } from './actionTypes';
+import { REQ_ORDERS } from './actionTypes';
 import { OrderProps } from './models/UserOrder';
 
 const actions = createActions(

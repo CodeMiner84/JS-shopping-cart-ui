@@ -15,7 +15,7 @@ export default handleActions(
       cartItems: action.payload,
     }),
     ADDED_TO_CART: (state: State = initialState, action: any) => {
-      let newCartItems: CartItemModel[] = state.cartItems || [];
+      let newCartItems: CartItemModel[] = state.cartItems;
 
       newCartItems = Object.keys(state.cartItems).map((key: any) => {
         if (state.cartItems[key].product_id === action.payload._id) {

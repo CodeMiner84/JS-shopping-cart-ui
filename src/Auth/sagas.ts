@@ -70,7 +70,7 @@ function* isUserLogged() {
     const token = getToken();
     const response = yield call(() => me(token));
 
-    if (response !== undefined && response.code === 500) {
+    if (response != null && response.code === 500) {
       yield put(push('/'));
     }
 

@@ -1,4 +1,4 @@
-import { takeLatest, put, select } from 'redux-saga/effects';
+import { takeLatest, put } from 'redux-saga/effects';
 import { getFailure, loading, loaded } from '../Common/actions';
 import { createApiOrder } from './api';
 import { message } from 'antd';

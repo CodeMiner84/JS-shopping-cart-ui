@@ -1,4 +1,3 @@
-import { FAILURE, REQUEST, SUCCESS, LOADING, LOADED } from './actionTypes';
 import { createActions } from 'redux-actions';
 
 export function getDataRequested() {
