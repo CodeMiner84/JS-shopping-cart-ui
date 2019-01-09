@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { API_URL } from 'src/config';
+import { API_URL } from '../config';
 
 export const headers = {
   // 'Content-Type': 'application/x-www-form-urlencoded',

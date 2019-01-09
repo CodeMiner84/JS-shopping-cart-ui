@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { API_URL } from '../config';
-import routes from 'src/Common/routes';
-import { authHeaders } from 'src/Common/api';
-import { UserState } from 'src/Auth/Signup';
+import routes from '../Common/routes';
+import { authHeaders } from '../Common/api';
+import { UserState } from '../Auth/Signup';
 
 export const me = (token?: string) =>
   axios({

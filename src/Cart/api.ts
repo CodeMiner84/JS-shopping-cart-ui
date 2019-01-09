@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { API_URL } from '../config';
-import routes from 'src/Common/routes';
-import { getToken } from 'src/Auth/selectors';
-import { authHeaders } from 'src/Common/api';
+import routes from '../Common/routes';
+import { getToken } from '../Auth/selectors';
+import { authHeaders } from '../Common/api';
 
 export const getCart = (token?: string) => {
   if (!token) {

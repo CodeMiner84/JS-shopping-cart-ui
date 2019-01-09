@@ -1,7 +1,7 @@
 import { put, takeLatest, call, select } from 'redux-saga/effects';
 import { ProductModel } from '../Dashboard';
 import { getCart, removeFromCart, recalculateCartItem } from './api';
-import { addProductToCart } from 'src/Dashboard/api';
+import { addProductToCart } from '../Dashboard/api';
 import { getToken } from '../Auth/selectors';
 import { message } from 'antd';
 import {
@@ -10,10 +10,10 @@ import {
   GET_CART,
   ADD_TO_CART,
 } from './actionTypes';
-import { loading, loaded } from 'src/Common/actions';
+import { loading, loaded } from '../Common/actions';
 import { getFailure } from '../Common/actions';
 import { recvCart, addedToCart, itemRemoved, recalculated } from './actions';
-import { checkoutCalc } from 'src/Checkout/actions';
+import { checkoutCalc } from '../Checkout/actions';
 
 interface AddToCart {
   type: string;

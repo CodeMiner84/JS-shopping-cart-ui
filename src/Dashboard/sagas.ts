@@ -1,7 +1,7 @@
 import * as actions from '../Common/actions';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { GET_PRODUCTS } from './actionTypes';
-import { getData } from 'src/Common/api';
+import { getData } from '../Common/api';
 import routes from '../Common/routes';
 import { loading, loaded } from '../Common/actions';
 import { receiveProducts } from './actions';

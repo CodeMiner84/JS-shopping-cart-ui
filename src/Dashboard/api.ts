@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API_URL } from '../config';
-import routes from 'src/Common/routes';
-import { authHeaders } from 'src/Common/api';
+import routes from '../Common/routes';
+import { authHeaders } from '../Common/api';
 
 export const addProductToCart = (token: string, customerId: string, product: any) =>
   axios({

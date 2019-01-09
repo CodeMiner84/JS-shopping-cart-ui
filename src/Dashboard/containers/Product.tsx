@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Card, Col } from 'antd';
 import { connect } from 'react-redux';
-import { addToCart } from 'src/Cart/actions';
+import { addToCart } from '../../Cart/actions';
 import Meta from '../components/Meta';
 import Icon from '../components/Icon';
 import Price from '../components/Price';
