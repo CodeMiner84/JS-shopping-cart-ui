@@ -24,6 +24,7 @@ interface RegisterUserProps {
 function* registerUser(action: RegisterUserProps) {
   try {
     const response = yield call(() => callRegisterUser(action.payload));
+    console.log('response', response);
     if (response.status === 200) {
       yield put(userRegister(response.data));
       message.success('You have succesfully register');

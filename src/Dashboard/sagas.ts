@@ -10,7 +10,6 @@ function* fetchProducts() {
   try {
     yield put(loading());
     const response = yield call(() => getData(routes.products));
-
     yield put(receiveProducts(response.data));
     yield put(loaded());
   } catch (e) {
