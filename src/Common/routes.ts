@@ -4,9 +4,8 @@ export default {
   placeOrder: '/order/create',
   ordersList: '/order/list',
   products: '/product/list',
-  register: '/register',
   removeFromCart: '/cart/:id',
-  signin: '/signin',
-  signup: '/signup',
-  me: '/me',
+  signin: '/auth/login',
+  signup: '/auth/register',
+  me: '/auth/me',
 };

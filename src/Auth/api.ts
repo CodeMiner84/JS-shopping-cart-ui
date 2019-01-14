@@ -6,7 +6,7 @@ import { UserState } from 'src/Auth/Signup';
 
 export const me = (token?: string) =>
   axios({
-    method: 'post',
+    method: 'get',
     url: `${API_URL}${routes.me}`,
     headers: authHeaders(token),
   });
@@ -14,13 +14,13 @@ export const me = (token?: string) =>
 export const callRegisterUser = (user: UserState) =>
   axios({
     method: 'post',
-    url: `${API_URL}${routes.register}`,
+    url: `${API_URL}${routes.signup}`,
     data: user,
   });
 
-export const callLoginUser = (url: string, user: UserState) =>
+export const callLoginUser = (user: UserState) =>
   axios({
     method: 'post',
-    url: `${API_URL}${url}`,
+    url: `${API_URL}${routes.signin}`,
     data: user,
   });

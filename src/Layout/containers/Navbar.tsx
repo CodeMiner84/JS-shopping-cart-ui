@@ -38,7 +38,7 @@ const Navbar: React.SFC<Props> = ({ logged, user, logoutUser }: Props) => {
               <Link to="/cart">Cart</Link>
             </Menu.Item>
             <Menu.Item eventKey={4} style={{ float: 'right' }}>
-              <Link to={routes.signup}>Sign up</Link>
+              <Link to="/signup">Sign up</Link>
             </Menu.Item>
             <Menu.Item eventKey={3} style={{ float: 'right' }}>
               <Link to="/signin">Sign in</Link>

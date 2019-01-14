@@ -11,8 +11,8 @@ export const authHeaders = (token?: string) => ({
   Authorization: `Bearer ${token}`,
 });
 
-export const getData = (url: string) =>
-  Axios({
+export const getData = async (url: string) =>
+  await Axios({
     method: 'get',
     url: `${API_URL}${url}`,
     headers,

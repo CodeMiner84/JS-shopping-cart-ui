@@ -39,7 +39,7 @@ function* registerUser(action: RegisterUserProps) {
 
 function* loginUser(action: RegisterUserProps) {
   try {
-    const response = yield call(() => callLoginUser('/login', action.payload));
+    const response = yield call(() => callLoginUser(action.payload));
     if (response.status === 200) {
       yield put(userLogin(response.data));
       saveToken(response.data.token);
@@ -70,7 +70,7 @@ function* isUserLogged() {
     const token = getToken();
     const response = yield call(() => me(token));
 
-    if (response != null && response.code === 500) {
+    if (response != null && response.status === 200) {
       yield put(push('/'));
       yield put(userAuth(response.data));
     }
