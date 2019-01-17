@@ -13,7 +13,7 @@ type Props = {
   token: string;
   loading: boolean;
   register: (user: UserState) => void;
-  name: string;
+  username: string;
   email: string;
   password: string;
 };
@@ -27,7 +27,7 @@ function hasErrors(fieldsError: any) {
 }
 
 const initialUserProps = {
-  name: '',
+  username: '',
   email: '',
   password: '',
 };
@@ -41,9 +41,9 @@ class SignUpComponent extends React.PureComponent<
   handleRegister = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
 
-    this.props.form.validateFields((err, { name, email, password }: UserState) => {
+    this.props.form.validateFields((err, { username, email, password }: UserState) => {
       this.props.register({
-        name,
+        username,
         email,
         password,
       });
@@ -69,10 +69,10 @@ class SignUpComponent extends React.PureComponent<
           <Container>
             <Form layout="horizontal" onSubmit={this.handleRegister}>
               <TextHeader title="Sign up" />
-              <FormItem {...formItemLayout} label="Name">
-                {getFieldDecorator('name', {
-                  rules: [{ required: true, message: 'Please input your name!' }],
-                })(<Input placeholder="name" />)}
+              <FormItem {...formItemLayout} label="Username">
+                {getFieldDecorator('username', {
+                  rules: [{ required: true, message: 'Please input your username!' }],
+                })(<Input placeholder="username" />)}
               </FormItem>
               <FormItem {...formItemLayout} label="Email">
                 {getFieldDecorator('email', {

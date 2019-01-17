@@ -1,6 +1,5 @@
 import * as React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import routes from 'src/Common/routes';
 import { connect } from 'react-redux';
 import { Menu, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
@@ -67,7 +66,7 @@ const Navbar: React.SFC<Props> = ({ logged, user, logoutUser }: Props) => {
               </Link>
             </Menu.Item>
             <Menu.Item eventKey={4} style={{ float: 'right' }}>
-              Welcome, {user.name}
+              Welcome, {user.username}
             </Menu.Item>
           </Menu>
         ) : null}
