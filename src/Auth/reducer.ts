@@ -28,12 +28,14 @@ export default handleActions(
       user: action.payload.user,
       token: action.payload.token,
     }),
-    USER_AUTH: (state: State = initialState, action: any) => ({
-      ...state,
-      loading: false,
-      logged: action.payload._id ? true : false,
-      user: action.payload,
-    }),
+    USER_AUTH: (state: State = initialState, action: any) => {
+      return {
+        ...state,
+        loading: false,
+        logged: action.payload.id ? true : false,
+        user: action.payload,
+      };
+    },
     REQ_LOGOUT: (state: State = initialState, action: any) => ({
       ...state,
       logged: false,

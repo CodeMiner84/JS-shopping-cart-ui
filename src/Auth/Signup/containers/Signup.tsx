@@ -82,7 +82,7 @@ class SignUpComponent extends React.PureComponent<
               <FormItem {...formItemLayout} label="Password">
                 {getFieldDecorator('password', {
                   rules: [{ required: true, message: 'Please input your password!' }],
-                })(<Input placeholder="password" />)}
+                })(<Input placeholder="password" type="password" />)}
               </FormItem>
               <FormItem>
                 <Col span={18} offset={6}>
