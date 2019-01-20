@@ -5,7 +5,7 @@ import { UserState } from 'src/Auth/Signup';
 import { callRegisterUser, callLoginUser, me } from 'src/Auth/api';
 import { addProductToCart } from 'src/Dashboard/api';
 import { saveToken, getToken, logout } from './selectors';
-import { getCartFromState, getCustomerId } from 'src/Cart/sagas';
+import { getCartFromState, getUserId } from 'src/Cart/sagas';
 import { userRegister, userLogin, userAuth } from './actions';
 import { getFailure } from '../Common/actions';
 import {
@@ -59,9 +59,9 @@ function* loginUser(action: RegisterUserProps) {
 
 function* syncCartItems() {
   const cartItems = yield select(getCartFromState);
-  const customerId = yield select(getCustomerId);
+  const userId = yield select(getUserId);
   cartItems.map((item: any) => {
-    addProductToCart(getToken(), customerId, item);
+    addProductToCart(getToken(), userId, item);
   });
 }
 

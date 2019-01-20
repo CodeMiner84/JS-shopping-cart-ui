@@ -50,7 +50,7 @@ class Cart extends React.Component<Props> {
             <tbody>
               {cartItems &&
                 cartItems.map((item: any) => (
-                  <CartElement key={item._id} product={item} />
+                  <CartElement key={item.id} product={item} />
                 ))}
             </tbody>
           </table>

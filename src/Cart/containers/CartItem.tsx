@@ -40,7 +40,7 @@ class CartElement extends React.PureComponent<Props, State> {
             onChange={(e: React.FormEvent<HTMLInputElement>) => {
               const quantity = parseInt((e.target as HTMLInputElement).value, 10);
               this.setState({ quantity: quantity > 0 ? quantity : 1 });
-              recalculate(product._id, quantity > 0 ? quantity : 1);
+              recalculate(product.id, quantity > 0 ? quantity : 1);
             }}
           />
         </td>
@@ -49,7 +49,7 @@ class CartElement extends React.PureComponent<Props, State> {
             type={'delete'}
             theme={'filled'}
             style={{ cursor: 'pointer' }}
-            onClick={() => remove(product._id)}
+            onClick={() => remove(product.id)}
           />
         </td>
       </tr>

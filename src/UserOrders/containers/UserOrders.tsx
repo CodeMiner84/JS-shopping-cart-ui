@@ -40,8 +40,8 @@ class Orders extends React.Component<Props> {
               const order = this.props.orders[key];
               return (
                 <Panel
-                  header={`Order: ${order._id} (Amount: $${order.price})`}
-                  key={order._id}
+                  header={`Order: ${order.id} (Amount: $${order.price})`}
+                  key={order.id}
                 >
                   <OrderItem order={order} />
                 </Panel>

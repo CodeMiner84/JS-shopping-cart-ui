@@ -1,18 +1,18 @@
 export interface OrderProps {
-  _id: string;
-  customer_id: number;
+  id: string;
+  userId: number;
   price: number;
   created_at: Date;
   products: OrderProductProps[];
 }
 
 export interface OrderProductProps {
-  _id: string;
+  id: string;
   amount: number;
   created_at: Date;
-  order_id: string;
+  orderId: string;
   price: number;
-  product_id: string;
+  productId: string;
   quantity: number;
   title: string;
 }

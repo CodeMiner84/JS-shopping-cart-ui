@@ -18,7 +18,7 @@ export default handleActions(
       let newCartItems: CartItemModel[] = state.cartItems;
 
       newCartItems = Object.keys(state.cartItems).map((key: any) => {
-        if (state.cartItems[key].product_id === action.payload._id) {
+        if (state.cartItems[key].productId === action.payload.id) {
           return {
             ...state.cartItems[key],
             quantity: state.cartItems[key].quantity + 1,
@@ -30,11 +30,11 @@ export default handleActions(
 
       if (
         Object.keys(newCartItems).filter(
-          (key: any) => newCartItems[key]._id === action.payload._id,
+          (key: any) => newCartItems[key].id === action.payload.id,
         ).length === 0
       ) {
         newCartItems.push({
-          _id: action.payload._id,
+          id: action.payload.id,
           title: action.payload.title,
           price: action.payload.price,
           image: action.payload.image,
@@ -49,7 +49,7 @@ export default handleActions(
     },
     ITEM_REMOVED: (state: State = initialState, action: any) => ({
       ...state,
-      cartItems: state.cartItems.filter(item => item._id !== action.payload),
+      cartItems: state.cartItems.filter(item => item.id !== action.payload),
     }),
     RECALCULATE_CART: (state: State = initialState, action: any) => {
       const { id, quantity } = action.payload;
@@ -57,7 +57,7 @@ export default handleActions(
       return {
         ...state,
         cartItems: state.cartItems.map((item: CartItemModel) => {
-          if (item._id === id && quantity > 0) {
+          if (item.id === id && quantity > 0) {
             item.quantity = quantity;
 
             return item;
