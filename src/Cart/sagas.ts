@@ -56,7 +56,7 @@ function* getCartItems() {
   }
 }
 
-export const getCustomerId = (state: any) => state.auth.user._id;
+export const getUserId = (state: any) => state.auth.user.id;
 
 function* addToCart(action: AddToCart) {
   try {
@@ -79,8 +79,9 @@ function* syncProductOnAdd(action: ProductModel) {
       return;
     }
 
-    const customerId = yield select(getCustomerId);
-    yield call(() => addProductToCart(token, customerId, action));
+    const userId = yield select(getUserId);
+    console.log('userId', userId);
+    yield call(() => addProductToCart(token, userId, action));
   } catch (e) {
     yield put(getFailure(e));
   }
