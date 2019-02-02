@@ -1,9 +1,10 @@
+import OrderItem from '../containers/Item';
 export interface OrderProps {
   id: string;
   userId: number;
   price: number;
   created_at: Date;
-  products: OrderProductProps[];
+  orderItems: OrderProductProps[];
 }
 
 export interface OrderProductProps {

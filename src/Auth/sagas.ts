@@ -69,7 +69,7 @@ function* isUserLogged() {
   try {
     const token = getToken();
     const response = yield call(() => me(token));
-    if (response != null && response.status === 200) {
+    if (response != null && response.status !== 200) {
       yield put(push('/'));
       yield put(userAuth(response.data));
     }

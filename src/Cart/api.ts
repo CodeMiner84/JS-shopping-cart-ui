@@ -29,7 +29,7 @@ export const removeFromCart = (id: string) => {
 
 export const recalculateCartItem = (id: string, quantity: number) =>
   axios({
-    method: 'POST',
+    method: 'PATCH',
     url: `${API_URL}${routes.cartRecalculate}`,
     data: {
       id,
