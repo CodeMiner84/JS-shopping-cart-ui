@@ -1,4 +1,3 @@
-import OrderItem from '../containers/Item';
 export interface OrderProps {
   id: string;
   userId: number;
