@@ -12,25 +12,33 @@ const OrderItem: React.SFC<Props> = ({ order }: Props) => {
   return (
     <React.Fragment>
       <h5>Ordered products</h5>
-      <table className={'table table-hover'}>
-        <thead>
-          <tr>
-            <Headers>Name</Headers>
-            <Headers>Price</Headers>
-            <Headers>Quantity</Headers>
-            <Headers>Amount</Headers>
-            <Headers>&nbsp;</Headers>
-          </tr>
-        </thead>
-        {products.map((product: any) => (
-          <tr key={product.id}>
-            <td>{product.title}</td>
-            <td>${product.price}</td>
-            <td>{product.quantity}</td>
-            <td>${product.amount}</td>
-          </tr>
-        ))}
-      </table>
+      <div className="ant-table ant-table-default ant-table-scroll-position-left">
+        <div className="ant-table-content">
+          <div className="ant-table-body">
+            <table className={'table table-hover'}>
+              <thead className="ant-table-thead">
+                <tr>
+                  <Headers>Name</Headers>
+                  <Headers>Price</Headers>
+                  <Headers>Quantity</Headers>
+                  <Headers>Amount</Headers>
+                  <Headers>&nbsp;</Headers>
+                </tr>
+              </thead>
+              <tbody className="ant-table-tbody">
+                {products.map((product: any) => (
+                  <tr key={product.id} className="ant-table-row">
+                    <td>{product.title}</td>
+                    <td>${product.price}</td>
+                    <td>{product.quantity}</td>
+                    <td>${product.amount}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
       <Container>
         <SummaryRow>
           <label>TOTAL: </label>

@@ -37,23 +37,29 @@ class Cart extends React.Component<Props> {
       <Row>
         <Col md={{ span: 22, offset: 1 }} lg={{ span: 14, offset: 4 }}>
           <TextHeader title="Shopping cart" />
-          <table className={'table table-hover'}>
-            <thead>
-              <tr>
-                <Headers>Name</Headers>
-                <Headers>Price</Headers>
-                <Headers>Quantity</Headers>
-                <Headers>Amount</Headers>
-                <Headers>&nbsp;</Headers>
-              </tr>
-            </thead>
-            <tbody>
-              {cartItems &&
-                cartItems.map((item: any) => (
-                  <CartElement key={item.id} product={item} />
-                ))}
-            </tbody>
-          </table>
+          <div className="ant-table ant-table-default ant-table-scroll-position-left">
+            <div className="ant-table-content">
+              <div className="ant-table-body">
+                <table className={'table table-hover'}>
+                  <thead className="ant-table-thead">
+                    <tr>
+                      <Headers>Name</Headers>
+                      <Headers>Price</Headers>
+                      <Headers>Quantity</Headers>
+                      <Headers>Amount</Headers>
+                      <Headers>&nbsp;</Headers>
+                    </tr>
+                  </thead>
+                  <tbody className="ant-table-tbody">
+                    {cartItems &&
+                      cartItems.map((item: any) => (
+                        <CartElement key={item.id} product={item} />
+                      ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
           <Summary canMakeOrder={cartItems.length > 0} />
         </Col>
       </Row>

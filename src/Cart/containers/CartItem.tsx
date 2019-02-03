@@ -28,7 +28,7 @@ class CartElement extends React.PureComponent<Props, State> {
     const { product, recalculate, remove } = this.props;
 
     return (
-      <tr>
+      <tr className="ant-table-row">
         <td>{product.title}</td>
         <td>${product.price}</td>
         <td>{this.state.quantity}</td>
