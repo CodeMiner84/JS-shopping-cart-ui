@@ -33,6 +33,9 @@ function* registerUser(action: RegisterUserProps) {
       yield put(push('/'));
     }
   } catch (e) {
+    if (e.response.status === 409) {
+      message.error('User already exist');
+    }
     yield put(getFailure(e));
   }
 }
