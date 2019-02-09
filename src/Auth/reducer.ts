@@ -1,4 +1,5 @@
 import { handleActions } from 'redux-actions';
+import { RegisterHandler } from './dto/RegisterHandler';
 type State = typeof initialState;
 
 const initialState = {
@@ -20,7 +21,6 @@ export default handleActions(
       ...state,
       token: action.payload.token,
       logged: action.payload.token ? true : false,
-      user: action.payload.user,
     }),
     USER_LOGIN: (state: State = initialState, action: any) => ({
       ...state,

@@ -29,7 +29,8 @@
     "redux-saga": "^0.16.2",
     "redux-saga-router": "^2.2.0",
     "redux-saga-thunk": "^0.7.3",
-    "styled-components": "^4.1.2"
+    "styled-components": "^4.1.2",
+    "uuid": "^3.3.2"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css}": [
