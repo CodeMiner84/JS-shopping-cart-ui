@@ -1,6 +1,6 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import { REQ_ORDERS } from './actionTypes';
-import { getFailure, loading, loaded } from '../Common/actions';
+import { getFailure, loading, loaded } from 'src/Common/actions';
 import { getApiOrders } from './api';
 import { recvOrders } from './actions';
 

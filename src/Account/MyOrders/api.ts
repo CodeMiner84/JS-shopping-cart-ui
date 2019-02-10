@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL } from '../config';
+import { API_URL } from 'src/config';
 import routes from 'src/Common/routes';
 import { getToken } from 'src/Auth/selectors';
 import { authHeaders } from 'src/Common/api';

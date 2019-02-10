@@ -8,7 +8,7 @@ import {
 } from './Cart/sagas';
 import { watchSignUp, watchSignIn, watchMe, watchLogout } from './Auth/sagas';
 import { watchCheckout } from './Checkout/sagas';
-import { watchOrders } from './UserOrders/sagas';
+import { watchOrders } from './Account/MyOrders/sagas';
 
 export function* rootSaga() {
   yield all([
