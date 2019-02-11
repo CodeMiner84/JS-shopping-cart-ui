@@ -1,8 +1,8 @@
 import { call, put, takeLatest, select } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { message } from 'antd';
-import { UserState } from 'src/Auth/Signup';
-import { callRegisterUser, callLoginUser, me } from 'src/Auth/api';
+import { UserState } from 'src/User/containers/Signup';
+import { callRegisterUser, callLoginUser, me } from 'src/User/api';
 import { addProductToCart } from 'src/Dashboard/api';
 import { saveToken, getToken, logout } from './selectors';
 import { getCartFromState, getUserId } from 'src/Cart/sagas';

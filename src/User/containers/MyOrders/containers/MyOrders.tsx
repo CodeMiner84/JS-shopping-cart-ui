@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getOrders } from '../actions';
 import { Collapse } from 'antd';
 import OrderItem from './Item';
-import { TextHeader } from 'src/Layout';
+import { TextHeader } from 'src/Layout/index';
 import { Row, Col } from 'antd';
 import { OrderProps } from '../models/UserOrder';
 import withLoading from 'src/Loading/WithLoading';

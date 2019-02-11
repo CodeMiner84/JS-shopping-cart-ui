@@ -2,7 +2,7 @@ import { put, takeLatest, call, select } from 'redux-saga/effects';
 import { ProductModel } from '../Dashboard';
 import { getCart, removeFromCart, recalculateCartItem } from './api';
 import { addProductToCart } from 'src/Dashboard/api';
-import { getToken } from '../Auth/selectors';
+import { getToken } from '../User/selectors';
 import { message } from 'antd';
 import {
   RECALCULATE_CART,

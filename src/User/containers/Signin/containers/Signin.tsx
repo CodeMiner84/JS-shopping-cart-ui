@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Form, Icon, Input, Button, Row, Col } from 'antd';
-import { login } from 'src/Auth/actions';
+import { login } from 'src/User/actions';
 import { FormComponentProps } from 'antd/lib/form';
 import Container from '../components/Container';
-import { TextHeader } from 'src/Layout';
-import { hasErrors } from 'src/Auth/selectors';
+import { TextHeader } from 'src/Layout/index';
+import { hasErrors } from 'src/User/selectors';
 
 const FormItem = Form.Item;
 

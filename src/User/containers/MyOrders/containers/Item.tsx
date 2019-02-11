@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Headers } from 'src/Cart';
+import { Headers } from 'src/Cart/index';
 import { Container, Row as SummaryRow } from 'src/Cart/components/SummaryComponents';
 import { OrderProps } from '../models/UserOrder';
 

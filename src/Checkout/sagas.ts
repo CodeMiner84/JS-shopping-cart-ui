@@ -3,7 +3,7 @@ import { getFailure, loading, loaded } from '../Common/actions';
 import { createApiOrder } from './api';
 import { message } from 'antd';
 import { push } from 'connected-react-router';
-import { getToken } from '../Auth/selectors';
+import { getToken } from '../User/selectors';
 import { PLACE_ORDER } from './actionTypes';
 import { orderPlaced } from './actions';
 

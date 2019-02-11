@@ -6,14 +6,14 @@ import { Cart } from './Cart/index';
 import { Dashboard } from './Dashboard';
 import { Navbar } from './Layout';
 import store, { history } from 'src/Common/store/store';
-import { SignUp } from 'src/Auth/Signup';
-import { SignIn } from 'src/Auth/Signin';
-import { getToken } from './Auth/selectors';
+import { SignUp } from 'src/User/containers/Signup';
+import { SignIn } from 'src/User/containers/Signin';
+import { getToken } from './User/selectors';
 import { Layout } from 'antd';
 const { Header, Content } = Layout;
 import ThankYouPage from './Checkout/containers/Thx';
-import { TOKEN_REQUEST } from './Auth/actionTypes';
-import { AccountLayoutSwitch } from './Account/AccountLayoutSwitch';
+import { TOKEN_REQUEST } from './User/actionTypes';
+import { AccountLayoutSwitch } from './User/containers/AccountLayoutSwitch';
 
 const token = getToken();
 if (token) {

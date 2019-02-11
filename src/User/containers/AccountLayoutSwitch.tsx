@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Switch, Route } from 'react-router';
 import { AccountLayout } from './Layout';
-import { MyOrders } from './MyOrders';
-import { MyAccount } from './MyAccount';
+import { MyOrders } from './MyOrders/index';
+import { MyAccount } from './MyAccount/index';
 
 export class AccountLayoutSwitch extends React.Component<{}, {}> {
   render() {

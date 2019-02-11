@@ -2,7 +2,7 @@ import axios from 'axios';
 import { API_URL } from '../config';
 import routes from 'src/Common/routes';
 import { authHeaders } from 'src/Common/api';
-import { UserState } from 'src/Auth/Signup';
+import { UserState } from 'src/User/containers/Signup';
 
 export const me = (token?: string) =>
   axios({

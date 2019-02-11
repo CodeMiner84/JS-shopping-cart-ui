@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
-import { TextHeader } from 'src/Layout';
+import { TextHeader } from 'src/Layout/index';
 import { connect } from 'react-redux';
 import { updatePersonalData } from '../actions';
 

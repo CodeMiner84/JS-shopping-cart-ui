@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { register } from 'src/Auth/actions';
+import { register } from 'src/User/actions';
 import { Form, Input, Button, Row, Col } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import { Container } from 'src/Auth/Signin';
-import { TextHeader } from 'src/Layout';
+import { Container } from 'src/User/containers/Signin/index';
+import { TextHeader } from 'src/Layout/index';
 const FormItem = Form.Item;
 
 export type UserState = typeof initialUserProps;
