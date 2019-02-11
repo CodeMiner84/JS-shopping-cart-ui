@@ -32,7 +32,17 @@ class UserDetailsForm extends React.Component<any, {}> {
           <Form.Item {...formItemLayout} label="Username">
             {getFieldDecorator('userName', {
               rules: [{ required: true, message: 'Please input your username!' }],
-            })(<Input prefix={<Icon type="user" />} />)}
+            })(<Input prefix={<Icon />} />)}
+          </Form.Item>
+          <Form.Item {...formItemLayout} label="First name">
+            {getFieldDecorator('firstName', {
+              rules: [{ required: true, message: 'Please input your first name!' }],
+            })(<Input />)}
+          </Form.Item>
+          <Form.Item {...formItemLayout} label="Last name">
+            {getFieldDecorator('lastName', {
+              rules: [{ required: true, message: 'Please input your last name!' }],
+            })(<Input />)}
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">
