@@ -3,6 +3,7 @@ export default {
   cartRecalculate: '/cart/recalculate',
   placeOrder: '/order/create',
   ordersList: '/order/list',
+  personalData: '/user/update',
   products: '/product/list',
   removeFromCart: '/cart/:id',
   signin: '/auth/login',

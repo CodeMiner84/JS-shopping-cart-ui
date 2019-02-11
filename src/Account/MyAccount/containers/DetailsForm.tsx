@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { TextHeader } from 'src/Layout';
+import { connect } from 'react-redux';
+import { updatePersonalData } from '../actions';
 
 const formItemLayout = {
   labelCol: {
@@ -18,7 +20,7 @@ class UserDetailsForm extends React.Component<any, {}> {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        this.props.updatePersonalData(values);
       }
     });
   };
@@ -32,7 +34,7 @@ class UserDetailsForm extends React.Component<any, {}> {
           <Form.Item {...formItemLayout} label="Username">
             {getFieldDecorator('userName', {
               rules: [{ required: true, message: 'Please input your username!' }],
-            })(<Input prefix={<Icon />} />)}
+            })(<Input />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="First name">
             {getFieldDecorator('firstName', {
@@ -55,6 +57,21 @@ class UserDetailsForm extends React.Component<any, {}> {
   }
 }
 
-const DetailsForm = Form.create({ name: 'user_details' })(UserDetailsForm);
+const mapStateToProps = (state: any) => {
+  console.log('state in composnent', state);
+
+  return {
+    test: 123,
+  };
+};
+
+const AntUserForm = Form.create({ name: 'user_details' })(UserDetailsForm);
+
+const DetailsForm = connect(
+  mapStateToProps,
+  {
+    updatePersonalData,
+  },
+)(AntUserForm);
 
 export { DetailsForm };

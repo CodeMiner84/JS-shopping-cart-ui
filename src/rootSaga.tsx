@@ -9,6 +9,7 @@ import {
 import { watchSignUp, watchSignIn, watchMe, watchLogout } from './Auth/sagas';
 import { watchCheckout } from './Checkout/sagas';
 import { watchOrders } from './Account/MyOrders/sagas';
+import { watchUpdateUser } from './Account/MyAccount/saga';
 
 export function* rootSaga() {
   yield all([
@@ -23,5 +24,6 @@ export function* rootSaga() {
     watchRecalculate(),
     watchCheckout(),
     watchOrders(),
+    watchUpdateUser(),
   ]);
 }
