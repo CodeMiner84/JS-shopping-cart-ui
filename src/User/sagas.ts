@@ -1,4 +1,4 @@
-import { call, put, takeLatest, select } from 'redux-saga/effects';
+import { call, put, takeLatest, select, take } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { message } from 'antd';
 import { UserState } from 'src/User/containers/Signup';
@@ -72,11 +72,13 @@ function* isUserLogged() {
   try {
     const token = getToken();
     const response = yield call(() => me(token));
+
     if (response != null && response.status === 200) {
       // yield put(push('/'));
       yield put(userAuth(response.data));
     }
   } catch (e) {
+    console.log('e.message', e.message);
     yield put(getFailure(e));
   }
 }

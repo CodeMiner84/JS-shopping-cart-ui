@@ -5,7 +5,6 @@ import auth from './User/reducer';
 import checkout from './Checkout/reducer';
 import orders from './User/containers/MyOrders/reducer';
 import app from './Common/reducer';
-import user from './User/containers/MyAccount/reducer';
 
 export default combineReducers({
   app,
@@ -14,5 +13,4 @@ export default combineReducers({
   product,
   checkout,
   orders,
-  user,
 });

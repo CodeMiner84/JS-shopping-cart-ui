@@ -13,11 +13,11 @@ import { watchUpdateUser } from './User/containers/MyAccount/saga';
 
 export function* rootSaga() {
   yield all([
+    watchMe(),
     productListWatcher(),
     cartAddWatcher(),
     watchSignUp(),
     watchSignIn(),
-    watchMe(),
     watchLogout(),
     watchCart(),
     watchRemoveFromCart(),
