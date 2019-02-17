@@ -1,6 +1,7 @@
 export default {
   addToCart: '/cart/add',
   cartRecalculate: '/cart/recalculate',
+  changePassword: '/user/change-password',
   placeOrder: '/order/create',
   ordersList: '/order/list',
   personalData: '/user/update',

@@ -1,25 +1,21 @@
 import * as React from 'react';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { connect } from 'react-redux';
+import { Form, Icon, Input, Button } from 'antd';
 import { TextHeader } from 'src/Layout/index';
 import { ValidationRule, ValidateCallback } from 'antd/lib/form';
-
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 5 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 12 },
-  },
-};
+import { formItemLayout } from './constants';
+import { changePassword } from '../actions';
 
 class UserPasswordForm extends React.Component<any, {}> {
   handleSubmit = (e: any) => {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        console.log('test');
+        this.props.changePassword({
+          oldPassword: values.currentPassword,
+          newPassword: values.password,
+        });
       }
     });
   };
@@ -86,7 +82,7 @@ class UserPasswordForm extends React.Component<any, {}> {
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">
-              Submit
+              Save
             </Button>
           </Form.Item>
         </Form>
@@ -95,6 +91,9 @@ class UserPasswordForm extends React.Component<any, {}> {
   }
 }
 
-const PasswordForm = Form.create({ name: 'user_details' })(UserPasswordForm);
+const PasswordForm = connect(
+  null,
+  { changePassword },
+)(Form.create({ name: 'user_details' })(UserPasswordForm));
 
 export { PasswordForm };

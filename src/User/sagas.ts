@@ -78,7 +78,6 @@ function* isUserLogged() {
       yield put(userAuth(response.data));
     }
   } catch (e) {
-    console.log('e.message', e.message);
     yield put(getFailure(e));
   }
 }

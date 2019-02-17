@@ -9,7 +9,7 @@ import {
 import { watchSignUp, watchSignIn, watchMe, watchLogout } from './User/sagas';
 import { watchCheckout } from './Checkout/sagas';
 import { watchOrders } from './User/containers/MyOrders/sagas';
-import { watchUpdateUser } from './User/containers/MyAccount/saga';
+import { watchUpdateUser, watchChangePassword } from './User/containers/MyAccount/saga';
 
 export function* rootSaga() {
   yield all([
@@ -25,5 +25,6 @@ export function* rootSaga() {
     watchCheckout(),
     watchOrders(),
     watchUpdateUser(),
+    watchChangePassword(),
   ]);
 }

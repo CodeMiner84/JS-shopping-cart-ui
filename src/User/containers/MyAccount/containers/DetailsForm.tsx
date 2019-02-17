@@ -1,22 +1,12 @@
 import * as React from 'react';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button } from 'antd';
 import { TextHeader } from 'src/Layout/index';
 import { connect } from 'react-redux';
 import { updatePersonalData } from '../actions';
 import { tokenRequest } from '../../../actions';
 import { InputPersonalDataModel } from '../dtos/input.personal-data.model';
 import { FormComponentProps } from 'antd/lib/form';
-
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 5 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 12 },
-  },
-};
+import { formItemLayout } from './constants';
 
 type Props = {
   updatePersonalData: (values: any) => void;
