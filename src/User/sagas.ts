@@ -6,7 +6,7 @@ import { callRegisterUser, callLoginUser, me } from 'src/User/api';
 import { addProductToCart } from 'src/Dashboard/api';
 import { saveToken, getToken, logout } from './selectors';
 import { getCartFromState, getUserId } from 'src/Cart/sagas';
-import { userRegister, userLogin, userAuth } from './actions';
+import { userRegister, userLogin, userAuth, toggleSignin } from './actions';
 import { getFailure } from '../Common/actions';
 import {
   REQ_USER_REGISTER,
@@ -30,7 +30,6 @@ function* registerUser(action: RegisterUserProps) {
       saveToken(response.data.token);
 
       yield syncCartItems();
-      yield put(push('/'));
     }
   } catch (e) {
     if (e.response.status === 409) {
@@ -49,7 +48,6 @@ function* loginUser(action: RegisterUserProps) {
       message.success('You are logged in');
 
       yield syncCartItems();
-      yield put(push('/'));
     } else if (response.status === 500) {
       message.error('Wrong email or password');
       yield put(getFailure('Wrong email or password'));

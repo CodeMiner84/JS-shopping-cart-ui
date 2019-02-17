@@ -7,6 +7,8 @@ import {
   USER_LOGIN,
   USER_AUTH,
   TOKEN_REQUEST,
+  TOGGLE_SIGNIN,
+  TOGGLE_SIGNUP,
 } from './actionTypes';
 
 export const {
@@ -17,6 +19,8 @@ export const {
   userLogin,
   userAuth,
   tokenRequest,
+  toggleSignin,
+  toggleSignup,
 } = createActions(
   {},
   REQ_USER_REGISTER,
@@ -26,4 +30,6 @@ export const {
   USER_LOGIN,
   USER_AUTH,
   TOKEN_REQUEST,
+  TOGGLE_SIGNIN,
+  TOGGLE_SIGNUP,
 );

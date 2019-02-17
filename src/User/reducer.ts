@@ -14,6 +14,8 @@ const initialState = {
     email: '',
     password: '',
   },
+  toggleSignIn: false,
+  toggleSignUp: false,
 };
 
 const combinedReducers = {

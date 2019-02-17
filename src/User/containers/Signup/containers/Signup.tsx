@@ -59,46 +59,34 @@ class SignUpComponent extends React.PureComponent<
     };
 
     return (
-      <Row>
-        <Col
-          xs={{ span: 22, offset: 1 }}
-          sm={{ span: 14, offset: 5 }}
-          md={{ span: 12, offset: 6 }}
-          lg={{ span: 8, offset: 8 }}
-        >
-          <Container>
-            <Form layout="horizontal" onSubmit={this.handleRegister}>
-              <TextHeader title="Sign up" />
-              <FormItem {...formItemLayout} label="Username">
-                {getFieldDecorator('username', {
-                  rules: [{ required: true, message: 'Please input your username!' }],
-                })(<Input placeholder="username" />)}
-              </FormItem>
-              <FormItem {...formItemLayout} label="Email">
-                {getFieldDecorator('email', {
-                  rules: [{ required: true, message: 'Please input your email!' }],
-                })(<Input placeholder="email" />)}
-              </FormItem>
-              <FormItem {...formItemLayout} label="Password">
-                {getFieldDecorator('password', {
-                  rules: [{ required: true, message: 'Please input your password!' }],
-                })(<Input placeholder="password" type="password" />)}
-              </FormItem>
-              <FormItem>
-                <Col span={18} offset={6}>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    disabled={hasErrors(getFieldsError())}
-                  >
-                    Sign in
-                  </Button>
-                </Col>
-              </FormItem>
-            </Form>
-          </Container>
-        </Col>
-      </Row>
+      <Form layout="horizontal" onSubmit={this.handleRegister}>
+        <FormItem {...formItemLayout} label="Username">
+          {getFieldDecorator('username', {
+            rules: [{ required: true, message: 'Please input your username!' }],
+          })(<Input placeholder="username" />)}
+        </FormItem>
+        <FormItem {...formItemLayout} label="Email">
+          {getFieldDecorator('email', {
+            rules: [{ required: true, message: 'Please input your email!' }],
+          })(<Input placeholder="email" />)}
+        </FormItem>
+        <FormItem {...formItemLayout} label="Password">
+          {getFieldDecorator('password', {
+            rules: [{ required: true, message: 'Please input your password!' }],
+          })(<Input placeholder="password" type="password" />)}
+        </FormItem>
+        <FormItem>
+          <Col span={18} offset={6}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={hasErrors(getFieldsError())}
+            >
+              Sign in
+            </Button>
+          </Col>
+        </FormItem>
+      </Form>
     );
   }
 }

@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { Menu, Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import { UserState } from 'src/User/containers/Signup';
-import { logout } from '../../User/actions';
+import { logout, toggleSignin, toggleSignup } from '../../User/actions';
 import 'antd/dist/antd.css';
 
 type Props = {
   logged: boolean;
   logoutUser: () => void;
   user: UserState;
+  toggleSignin: (show: boolean) => void;
+  toggleSignup: (show: boolean) => void;
 };
 
 type StateProps = {
@@ -19,28 +21,29 @@ type StateProps = {
   };
 };
 
-const Navbar: React.SFC<Props> = ({ logged, user, logoutUser }: Props) => {
+const Navbar: React.SFC<Props> = ({
+  logged,
+  user,
+  logoutUser,
+  toggleSignin: showSignIn,
+  toggleSignup: showSingUp,
+}: Props) => {
   return (
     <Row>
       <Col md={{ span: 22, offset: 1 }} lg={{ span: 14, offset: 4 }}>
         {!logged ? (
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['2']}
-            style={{ lineHeight: '64px' }}
-          >
+          <Menu theme="dark" mode="horizontal" style={{ lineHeight: '64px' }}>
             <Menu.Item eventKey={1}>
               <Link to="/">Home</Link>
             </Menu.Item>
             <Menu.Item eventKey={2}>
               <Link to="/cart">Cart</Link>
             </Menu.Item>
-            <Menu.Item eventKey={4} style={{ float: 'right' }}>
-              <Link to="/signup">Sign up</Link>
+            <Menu.Item onClick={showSingUp} style={{ float: 'right' }}>
+              Sign up
             </Menu.Item>
-            <Menu.Item eventKey={3} style={{ float: 'right' }}>
-              <Link to="/signin">Sign in</Link>
+            <Menu.Item onClick={showSignIn} style={{ float: 'right' }}>
+              Sign in
             </Menu.Item>
           </Menu>
         ) : null}
@@ -84,5 +87,7 @@ export default connect(
   mapStateToProps,
   {
     logoutUser: logout,
+    toggleSignin,
+    toggleSignup,
   },
 )(Navbar);

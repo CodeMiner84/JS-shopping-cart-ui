@@ -4,5 +4,10 @@ export const SignInReducer = {
     logged: true,
     user: action.payload.user,
     token: action.payload.token,
+    toggleSignIn: false,
+  }),
+  TOGGLE_SIGNIN: (state: any, action: any) => ({
+    ...state,
+    toggleSignIn: !state.toggleSignIn,
   }),
 };

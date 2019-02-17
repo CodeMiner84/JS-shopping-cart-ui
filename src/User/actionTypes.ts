@@ -5,3 +5,5 @@ export const USER_LOGIN = 'USER_LOGIN';
 export const TOKEN_REQUEST = 'TOKEN_REQUEST';
 export const USER_AUTH = 'USER_AUTH';
 export const REQ_LOGOUT = 'REQ_LOGOUT';
+export const TOGGLE_SIGNIN = 'TOGGLE_SIGNIN';
+export const TOGGLE_SIGNUP = 'TOGGLE_SIGNUP';

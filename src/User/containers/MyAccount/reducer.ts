@@ -12,14 +12,10 @@ export const UserReducer = {
     ...state,
     logged: false,
   }),
-  USER_AUTH: (state: any, action: any) => {
-    console.log('in userAuth', action.payload);
-
-    return {
-      ...state,
-      loading: false,
-      logged: action.payload.id ? true : false,
-      user: action.payload,
-    };
-  },
+  USER_AUTH: (state: any, action: any) => ({
+    ...state,
+    loading: false,
+    logged: action.payload.id ? true : false,
+    user: action.payload,
+  }),
 };
