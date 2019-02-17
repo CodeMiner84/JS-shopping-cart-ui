@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@nestjs/common": "^5.7.2",
     "@types/react-redux": "^7.0.1",
     "@types/react-router-dom": "^4.3.1",
     "@types/redux-actions": "^2.3.1",

@@ -22,30 +22,10 @@ type Props = {
   updatePersonalData: (values: any) => void;
   user: InputPersonalDataModel;
   tokenRequest: () => void;
+  form: FormComponentProps;
 };
 
 class UserDetailsForm extends React.Component<Props & FormComponentProps, {}> {
-  constructor(props: Props) {
-    super(props);
-    // const token = await this.props.tokenRequest();
-
-    // console.log('this.props', this.props);
-
-    console.log('this.props.user ###################', props.user);
-    // console.log('token', token);
-    props.form.setFields({
-      username: {
-        value: props.user.username,
-      },
-      firstName: {
-        value: props.user.firstName,
-      },
-      lastName: {
-        value: props.user.lastName,
-      },
-    });
-  }
-
   handleSubmit = (e: any) => {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
@@ -64,22 +44,25 @@ class UserDetailsForm extends React.Component<Props & FormComponentProps, {}> {
         <Form onSubmit={this.handleSubmit} className="login-form">
           <Form.Item {...formItemLayout} label="Username">
             {getFieldDecorator('username', {
+              initialValue: this.props.user.username,
               rules: [{ required: true, message: 'Please input your username!' }],
             })(<Input />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="First name">
             {getFieldDecorator('firstName', {
+              initialValue: this.props.user.firstName,
               rules: [{ required: true, message: 'Please input your first name!' }],
             })(<Input />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Last name">
             {getFieldDecorator('lastName', {
+              initialValue: this.props.user.lastName,
               rules: [{ required: true, message: 'Please input your last name!' }],
             })(<Input />)}
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button">
-              Submit
+              Save
             </Button>
           </Form.Item>
         </Form>
