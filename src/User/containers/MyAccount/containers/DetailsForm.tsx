@@ -38,6 +38,12 @@ class UserDetailsForm extends React.Component<Props & FormComponentProps, {}> {
               rules: [{ required: true, message: 'Please input your username!' }],
             })(<Input />)}
           </Form.Item>
+          <Form.Item {...formItemLayout} label="Email">
+            {getFieldDecorator('email', {
+              initialValue: this.props.user.email,
+              rules: [{ required: true, message: 'Please input your email!' }],
+            })(<Input />)}
+          </Form.Item>
           <Form.Item {...formItemLayout} label="First name">
             {getFieldDecorator('firstName', {
               initialValue: this.props.user.firstName,

@@ -27,7 +27,7 @@ function* updatePersonalData(action: ActionUpdateProps) {
       message.success('Personal data updated succesfully');
     }
   } catch (error) {
-    message.error(error.message);
+    message.error('User already exist');
     yield put(getFailure(error));
   }
 }
