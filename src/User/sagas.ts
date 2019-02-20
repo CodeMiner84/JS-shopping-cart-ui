@@ -24,7 +24,7 @@ interface RegisterUserProps {
 function* registerUser(action: RegisterUserProps) {
   try {
     const response = yield call(() => callRegisterUser(action.payload));
-    if (response.status === 200) {
+    if (response.status === 201) {
       yield put(userRegister(response.data));
       message.success('You have succesfully register');
       saveToken(response.data.token);
@@ -42,7 +42,7 @@ function* registerUser(action: RegisterUserProps) {
 function* loginUser(action: RegisterUserProps) {
   try {
     const response = yield call(() => callLoginUser(action.payload));
-    if (response.status === 200) {
+    if (response.status === 201) {
       yield put(userLogin(response.data));
       saveToken(response.data.token);
       message.success('You are logged in');
