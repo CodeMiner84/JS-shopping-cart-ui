@@ -1,4 +1,4 @@
-import { API_URL } from 'src/config';
+import { API_URL } from '../config';
 import axios from 'axios';
 import { getToken } from '../User/selectors';
 

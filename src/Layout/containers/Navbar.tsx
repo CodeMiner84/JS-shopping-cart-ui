@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
-import { UserState } from 'src/User/containers/Signup';
+import { UserState } from '../../User/containers/Signup';
 import { logout, toggleSignin, toggleSignup } from '../../User/actions';
 import 'antd/dist/antd.css';
 import LoggedMenu from './LoggedMenu';

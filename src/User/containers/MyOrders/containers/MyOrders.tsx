@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import { getOrders } from '../actions';
 import { Collapse } from 'antd';
 import OrderItem from './Item';
-import { TextHeader } from 'src/Layout/index';
-import { Row, Col } from 'antd';
+import { TextHeader } from '../../../../Layout/index';
 import { OrderProps } from '../models/UserOrder';
-import withLoading from 'src/Loading/WithLoading';
-import Loading from 'src/Loading/Loading';
+import withLoading from '../../../../Loading/WithLoading';
+import Loading from '../../../../Loading/Loading';
 
 const Panel = Collapse.Panel;
 

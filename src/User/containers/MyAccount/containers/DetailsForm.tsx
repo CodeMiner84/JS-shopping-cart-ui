@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Form, Input, Button } from 'antd';
-import { TextHeader } from 'src/Layout/index';
+import { TextHeader } from '../../../../Layout/index';
 import { connect } from 'react-redux';
 import { updatePersonalData } from '../actions';
 import { tokenRequest } from '../../../actions';

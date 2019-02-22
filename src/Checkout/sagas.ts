@@ -6,7 +6,7 @@ import { getToken } from '../User/selectors';
 import { PLACE_ORDER } from './actionTypes';
 import { orderPlaced } from './actions';
 import { postRequest } from '../Common/api';
-import routes from 'src/Common/routes';
+import routes from '../Common/routes';
 
 function* placeOrder() {
   try {

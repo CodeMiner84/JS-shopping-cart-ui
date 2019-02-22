@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Container, Row } from 'src/Cart/components/SummaryComponents';
+import { Container, Row } from '../../Cart/components/SummaryComponents';
 import { Button } from 'antd';
-import { placeOrder } from 'src/Checkout/actions';
+import { placeOrder } from '../../Checkout/actions';
 import StyledRow from '../components/StyledRow';
 
 type Props = {

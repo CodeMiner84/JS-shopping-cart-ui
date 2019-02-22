@@ -1,9 +1,9 @@
 import { call, put, takeLatest, select, take } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { message } from 'antd';
-import { UserState } from 'src/User/containers/Signup';
+import { UserState } from '../User/containers/Signup';
 import { saveToken, getToken, logout } from './selectors';
-import { getCartFromState, getUserId } from 'src/Cart/sagas';
+import { getCartFromState, getUserId } from '../Cart/sagas';
 import { userRegister, userLogin, userAuth } from './actions';
 import { getFailure } from '../Common/actions';
 import {
@@ -12,9 +12,9 @@ import {
   TOKEN_REQUEST,
   REQ_LOGOUT,
 } from './actionTypes';
-import { clearCart } from 'src/Cart/actions';
-import { postRequest, getRequest } from 'src/Common/api';
-import routes from 'src/Common/routes';
+import { clearCart } from '../Cart/actions';
+import { postRequest, getRequest } from '../Common/api';
+import routes from '../Common/routes';
 
 interface RegisterUserProps {
   type: string;

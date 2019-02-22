@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../../Loading/Loading';
-import withLoading from 'src/Loading/WithLoading';
+import withLoading from '../../Loading/WithLoading';
 
 type Props = {
   loading?: boolean;

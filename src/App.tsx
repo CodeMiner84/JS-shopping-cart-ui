@@ -5,7 +5,7 @@ import { Router, Route, Switch } from 'react-router';
 import { Cart } from './Cart/index';
 import { Dashboard } from './Dashboard';
 import { Navbar } from './Layout';
-import store, { history } from 'src/Common/store/store';
+import store, { history } from './Common/store/store';
 import { getToken } from './User/selectors';
 import { Layout } from 'antd';
 const { Header, Content } = Layout;

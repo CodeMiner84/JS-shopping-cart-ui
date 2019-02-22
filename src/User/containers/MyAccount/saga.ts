@@ -1,7 +1,7 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { UPDATE_PERSONAL_DATA, CHANGE_PASSWORD } from './actionTypes';
 import { message } from 'antd';
-import { getFailure } from 'src/Common/actions';
+import { getFailure } from '../../../Common/actions';
 import * as HttpStatus from 'http-status-codes';
 import { personalDataUpdated } from './actions';
 import { InputPersonalDataModel } from './dtos/input.personal-data.model';
