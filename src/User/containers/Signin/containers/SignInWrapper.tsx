@@ -9,7 +9,7 @@ type Props = {
   toggleSignIn: boolean;
 };
 
-const SignInWrapper: React.SFC<Props> = ({
+const SignInWrapper: React.FC<Props> = ({
   toggleSignin: onClose,
   toggleSignIn: visible,
 }) => (

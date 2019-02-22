@@ -23,7 +23,7 @@ type StateProps = {
   };
 };
 
-const Navbar: React.SFC<Props> = ({
+const Navbar: React.FC<Props> = ({
   logged,
   user,
   logoutUser,

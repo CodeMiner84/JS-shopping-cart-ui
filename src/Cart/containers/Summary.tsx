@@ -17,7 +17,7 @@ type StateProps = {
   };
 };
 
-const Summary: React.SFC<Props> = props => (
+const Summary: React.FC<Props> = props => (
   <Container>
     <Row>
       <label>ORDER TOTAL: </label>

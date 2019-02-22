@@ -12,7 +12,7 @@ type ProductProps = {
   addToCart: (product: ProductModel) => void;
 };
 
-const Product: React.SFC<ProductProps> = (props: ProductProps) => (
+const Product: React.FC<ProductProps> = (props: ProductProps) => (
   <Col className="gutter-row" span={6}>
     <div className="gutter-box">
       <Card

@@ -9,7 +9,7 @@ type Props = {
   toggleSignUp: boolean;
 };
 
-const SingUpwrapper: React.SFC<Props> = ({
+const SingUpwrapper: React.FC<Props> = ({
   toggleSignup: onClose,
   toggleSignUp: visible,
 }) => (

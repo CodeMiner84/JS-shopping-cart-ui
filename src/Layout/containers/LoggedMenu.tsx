@@ -10,7 +10,7 @@ type Props = {
   showSignIn: (param: ClickParam) => void;
 };
 
-const LoggedMenu: React.SFC<Props> = ({ showSingUp, showSignIn }: Props) => (
+const LoggedMenu: React.FC<Props> = ({ showSingUp, showSignIn }: Props) => (
   <Menu theme="dark" mode="horizontal" style={{ lineHeight: '64px' }}>
     <MenuItem>
       <Link to="/">Home</Link>

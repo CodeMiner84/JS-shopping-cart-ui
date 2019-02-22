@@ -9,7 +9,7 @@ type Props = {
   username: string;
 };
 
-const NotLoggedMenu: React.SFC<Props> = ({ logoutUser, username }: Props) => (
+const NotLoggedMenu: React.FC<Props> = ({ logoutUser, username }: Props) => (
   <Menu
     theme="dark"
     mode="horizontal"

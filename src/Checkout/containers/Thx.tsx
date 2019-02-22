@@ -7,7 +7,7 @@ type Props = {
   loading?: boolean;
 };
 
-const ThankYouPage: React.SFC<Props> = ({ loading }) => {
+const ThankYouPage: React.FC<Props> = ({ loading }) => {
   if (loading) {
     return <Loading />;
   }

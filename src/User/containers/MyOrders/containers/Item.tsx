@@ -7,7 +7,7 @@ type Props = {
   order: OrderProps;
 };
 
-const OrderItem: React.SFC<Props> = ({ order }: Props) => {
+const OrderItem: React.FC<Props> = ({ order }: Props) => {
   const products = order.orderItems;
   return (
     <React.Fragment>

@@ -8,7 +8,7 @@ type Props = {
   products: ProductModel[];
 };
 
-const ProductList: React.SFC<Props> = ({ products }) => (
+const ProductList: React.FC<Props> = ({ products }) => (
   <Row>
     <Col md={{ span: 22, offset: 1 }} lg={{ span: 14, offset: 4 }}>
       <TextHeader title="Product list" />

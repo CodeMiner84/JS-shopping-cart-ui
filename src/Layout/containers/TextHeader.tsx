@@ -5,7 +5,7 @@ type Props = {
   title: string;
 };
 
-const TextHeader: React.SFC<Props> = ({ title }: Props) => (
+const TextHeader: React.FC<Props> = ({ title }: Props) => (
   <HeaderComponent>{title}</HeaderComponent>
 );
 
