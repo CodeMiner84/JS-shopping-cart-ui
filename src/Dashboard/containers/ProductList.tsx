@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Row, Col } from 'antd';
-import { TextHeader } from 'src/Layout';
+import { TextHeader } from '../../Layout';
 import Product from './Product';
 import { ProductModel } from '../index';
 

@@ -11,9 +11,9 @@ type Props = {
   ShouldComponentUpdate: (nextProps: any) => boolean;
 };
 
-type State = typeof initialState;
-
 const initialState = { quantity: 0 };
+
+type State = typeof initialState;
 
 class CartElement extends React.PureComponent<Props, State> {
   readonly state: State = initialState;

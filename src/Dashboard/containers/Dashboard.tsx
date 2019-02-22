@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getProducts } from '../actions';
 import { ProductModel } from '../index';
 import ProductList from './ProductList';
-import withLoading from 'src/Loading/WithLoading';
+import withLoading from '../../Loading/WithLoading';
 import Loading from '../../Loading/Loading';
 
 type Props = {

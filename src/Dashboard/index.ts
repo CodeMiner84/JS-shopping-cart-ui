@@ -1,6 +1,4 @@
-import Dashboard from './containers/Dashboard';
-import Product from './containers/Product';
-import ProductList from './containers/ProductList';
-import { ProductModel } from './models/product';
-
-export { Dashboard, Product, ProductList, ProductModel };
+export { default as Dashboard } from './containers/Dashboard';
+export { default as Product } from './containers/Product';
+export { default as ProductList } from './containers/ProductList';
+export { ProductModel } from './models/product';

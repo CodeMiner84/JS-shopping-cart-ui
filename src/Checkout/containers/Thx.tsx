@@ -18,7 +18,7 @@ const ThankYouPage: React.SFC<Props> = ({ loading }) => {
 
       <div>
         Your order is placed. You can view it on your orders list page{' '}
-        <Link to="/orders">here</Link>.
+        <Link to="/account/my-orders">here</Link>.
       </div>
     </>
   );

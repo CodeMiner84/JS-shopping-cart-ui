@@ -1,3 +1,1 @@
-import MyOrders from './containers/MyOrders';
-
-export { MyOrders };
+export { default as MyOrders } from './containers/MyOrders';

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Container, Row } from 'src/Cart/components/SummaryComponents';
 import { Button } from 'antd';
 import { placeOrder } from 'src/Checkout/actions';
+import StyledRow from '../components/StyledRow';
 
 type Props = {
   canMakeOrder: boolean;
@@ -22,14 +23,7 @@ const Summary: React.SFC<Props> = props => (
       <label>ORDER TOTAL: </label>
       <span>${props.price}</span>
     </Row>
-    <Row
-      style={{
-        display: 'flex',
-        justifyContent: 'flex-end',
-        alignItems: 'flex-end',
-        width: '100%',
-      }}
-    >
+    <StyledRow>
       <Button
         disabled={!props.canMakeOrder}
         type="primary"
@@ -38,7 +32,7 @@ const Summary: React.SFC<Props> = props => (
       >
         PLACE ORDER
       </Button>
-    </Row>
+    </StyledRow>
   </Container>
 );
 

@@ -32,6 +32,10 @@ interface RecalculateProps {
   };
 }
 
+export const getUserId = (state: any) => state.auth.user.id;
+
+export const getCartFromState = (state: any) => state.cart.cartItems;
+
 export function* loadCartItems() {
   try {
     const token = getToken();
@@ -55,8 +59,6 @@ function* getCartItems() {
     yield put(getFailure(e));
   }
 }
-
-export const getUserId = (state: any) => state.auth.user.id;
 
 function* addToCart(action: AddToCart) {
   try {
@@ -126,8 +128,6 @@ function* cartRecalculate(action: RecalculateProps) {
     yield put(getFailure(e));
   }
 }
-
-export const getCartFromState = (state: any) => state.cart.cartItems;
 
 function* calculateOrderPrice() {
   try {

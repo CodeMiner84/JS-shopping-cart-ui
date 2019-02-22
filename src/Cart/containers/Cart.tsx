@@ -3,17 +3,17 @@ import { connect } from 'react-redux';
 import CartElement from './CartItem';
 import { getCart } from '../actions';
 import { Row, Col } from 'antd';
-import { Headers } from 'src/Cart';
+import { Headers } from '../../Cart';
 import Summary from './Summary';
-import { TextHeader } from 'src/Layout';
+import { TextHeader } from '../../Layout';
 import { CartItemModel } from '../models';
 import Loading from '../../Loading/Loading';
-import withLoading from 'src/Loading/WithLoading';
+import withLoading from '../../Loading/WithLoading';
 
 type Props = {
+  loading: boolean;
   cartItems: CartItemModel[];
   getCart: () => void;
-  loading: boolean;
 };
 
 type StateProps = {

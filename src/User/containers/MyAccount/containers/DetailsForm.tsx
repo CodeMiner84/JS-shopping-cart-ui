@@ -16,7 +16,7 @@ type Props = {
 };
 
 class UserDetailsForm extends React.Component<Props & FormComponentProps, {}> {
-  handleSubmit = (e: any) => {
+  handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {

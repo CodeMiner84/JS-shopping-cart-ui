@@ -1,4 +1,2 @@
-import Navbar from './containers/Navbar';
-import TextHeader from './containers/TextHeader';
-
-export { Navbar, TextHeader };
+export { default as Navbar } from './containers/Navbar';
+export { default as TextHeader } from './containers/TextHeader';
