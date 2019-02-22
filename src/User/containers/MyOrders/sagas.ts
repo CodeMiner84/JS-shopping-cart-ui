@@ -1,13 +1,14 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import { REQ_ORDERS } from './actionTypes';
 import { getFailure, loading, loaded } from 'src/Common/actions';
-import { getApiOrders } from './api';
 import { recvOrders } from './actions';
+import { getRequest } from '../../../Common/api';
+import routes from '../../../Common/routes';
 
 function* getOrders() {
   try {
     yield put(loading());
-    const response = yield getApiOrders();
+    const response = yield getRequest(routes.ordersList);
 
     yield put(recvOrders(response.data));
     yield put(loaded());

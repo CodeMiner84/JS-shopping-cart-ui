@@ -1,12 +1,13 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { UPDATE_PERSONAL_DATA, CHANGE_PASSWORD } from './actionTypes';
 import { message } from 'antd';
-import { getFailure, loading } from 'src/Common/actions';
-import { patchPersonalData, patchUserPassword } from './api';
+import { getFailure } from 'src/Common/actions';
 import * as HttpStatus from 'http-status-codes';
 import { personalDataUpdated } from './actions';
 import { InputPersonalDataModel } from './dtos/input.personal-data.model';
 import { InputChangePasswordModel } from './dtos/input-change-password.model';
+import { patchRequest } from '../../../Common/api';
+import routes from '../../../Common/routes';
 
 type ActionUpdateProps = {
   type: string;
@@ -20,7 +21,7 @@ type ActionChangePasswordProps = {
 
 function* updatePersonalData(action: ActionUpdateProps) {
   try {
-    const response = yield call(() => patchPersonalData(action.payload));
+    const response = yield call(() => patchRequest(routes.personalData, action.payload));
 
     if (response && response.status === HttpStatus.OK) {
       yield put(personalDataUpdated(action.payload));
@@ -34,7 +35,9 @@ function* updatePersonalData(action: ActionUpdateProps) {
 
 function* changePassword(action: ActionChangePasswordProps) {
   try {
-    const response = yield call(() => patchUserPassword(action.payload));
+    const response = yield call(() =>
+      patchRequest(routes.changePassword, action.payload),
+    );
 
     if (response && response.status === HttpStatus.OK) {
       message.success('Password updated');

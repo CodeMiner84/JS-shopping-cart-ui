@@ -2,11 +2,9 @@ import { call, put, takeLatest, select, take } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { message } from 'antd';
 import { UserState } from 'src/User/containers/Signup';
-import { callRegisterUser, callLoginUser, me } from 'src/User/api';
-import { addProductToCart } from 'src/Dashboard/api';
 import { saveToken, getToken, logout } from './selectors';
 import { getCartFromState, getUserId } from 'src/Cart/sagas';
-import { userRegister, userLogin, userAuth, toggleSignin } from './actions';
+import { userRegister, userLogin, userAuth } from './actions';
 import { getFailure } from '../Common/actions';
 import {
   REQ_USER_REGISTER,
@@ -15,6 +13,8 @@ import {
   REQ_LOGOUT,
 } from './actionTypes';
 import { clearCart } from 'src/Cart/actions';
+import { postRequest, getRequest } from 'src/Common/api';
+import routes from 'src/Common/routes';
 
 interface RegisterUserProps {
   type: string;
@@ -23,7 +23,7 @@ interface RegisterUserProps {
 
 function* registerUser(action: RegisterUserProps) {
   try {
-    const response = yield call(() => callRegisterUser(action.payload));
+    const response = yield call(() => postRequest(routes.signup, action.payload));
     if (response.status === 201) {
       yield put(userRegister(response.data));
       message.success('You have succesfully register');
@@ -41,7 +41,7 @@ function* registerUser(action: RegisterUserProps) {
 
 function* loginUser(action: RegisterUserProps) {
   try {
-    const response = yield call(() => callLoginUser(action.payload));
+    const response = yield call(() => postRequest(routes.signin, action.payload));
     if (response.status === 201) {
       yield put(userLogin(response.data));
       saveToken(response.data.token);
@@ -62,14 +62,17 @@ function* syncCartItems() {
   const cartItems = yield select(getCartFromState);
   const userId = yield select(getUserId);
   cartItems.map((item: any) => {
-    addProductToCart(getToken(), userId, item);
+    postRequest(routes.addToCart, {
+      ...item,
+      userId,
+    });
   });
 }
 
 function* isUserLogged() {
   try {
     const token = getToken();
-    const response = yield call(() => me(token));
+    const response = yield call(() => getRequest(routes.me));
 
     if (response != null && response.status === 200) {
       // yield put(push('/'));

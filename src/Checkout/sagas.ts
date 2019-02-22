@@ -1,11 +1,12 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import { getFailure, loading, loaded } from '../Common/actions';
-import { createApiOrder } from './api';
 import { message } from 'antd';
 import { push } from 'connected-react-router';
 import { getToken } from '../User/selectors';
 import { PLACE_ORDER } from './actionTypes';
 import { orderPlaced } from './actions';
+import { postRequest } from '../Common/api';
+import routes from 'src/Common/routes';
 
 function* placeOrder() {
   try {
@@ -15,7 +16,7 @@ function* placeOrder() {
       message.error('Only logged user can create order');
       return;
     }
-    yield createApiOrder();
+    yield postRequest(routes.placeOrder, {});
     message.success('Order is placed');
 
     yield put(orderPlaced());

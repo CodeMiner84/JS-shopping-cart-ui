@@ -1,7 +1,5 @@
 import { put, takeLatest, call, select } from 'redux-saga/effects';
 import { ProductModel } from '../Dashboard';
-import { getCart, removeFromCart, recalculateCartItem } from './api';
-import { addProductToCart } from 'src/Dashboard/api';
 import { getToken } from '../User/selectors';
 import { message } from 'antd';
 import {
@@ -10,10 +8,12 @@ import {
   GET_CART,
   ADD_TO_CART,
 } from './actionTypes';
-import { loading, loaded } from 'src/Common/actions';
+import { loading, loaded } from '../Common/actions';
 import { getFailure } from '../Common/actions';
 import { recvCart, addedToCart, itemRemoved, recalculated } from './actions';
-import { checkoutCalc } from 'src/Checkout/actions';
+import { checkoutCalc } from '../Checkout/actions';
+import routes from '../Common/routes';
+import { getRequest, deleteRequest, patchRequest, postRequest } from '../Common/api';
 
 interface AddToCart {
   type: string;
@@ -36,7 +36,7 @@ export function* loadCartItems() {
   try {
     const token = getToken();
     if (token) {
-      const response = yield call(() => getCart(token));
+      const response = yield call(() => getRequest(routes.cartList));
       yield put(recvCart(response.data));
     }
   } catch (e) {
@@ -79,9 +79,14 @@ function* syncProductOnAdd(action: ProductModel) {
       return;
     }
 
-    const userId = yield select(getUserId);
-    console.log('userId', userId);
-    yield call(() => addProductToCart(token, userId, action));
+    const params = {
+      productId: action.id,
+      userId: yield select(getUserId),
+      title: action.title,
+      price: action.price,
+      quantity: action.quantity ? action.quantity : 1,
+    };
+    yield call(() => postRequest(routes.addToCart, params));
   } catch (e) {
     yield put(getFailure(e));
   }
@@ -90,7 +95,9 @@ function* syncProductOnAdd(action: ProductModel) {
 function* removeFromCartSaga(action: RemoveFromCartProps) {
   try {
     yield put(loading());
-    yield call(() => removeFromCart(action.payload));
+
+    const url = routes.removeFromCart.replace(':id', action.payload);
+    yield call(() => deleteRequest(url));
     yield put(itemRemoved(action.payload));
     message.success('Product was removed from cart!');
     yield calculateOrderPrice();
@@ -105,7 +112,12 @@ function* cartRecalculate(action: RecalculateProps) {
   try {
     const token = getToken();
     if (token) {
-      yield call(() => recalculateCartItem(action.payload.id, action.payload.quantity));
+      yield call(() =>
+        patchRequest(routes.cartRecalculate, {
+          id: action.payload.id,
+          quantity: action.payload.quantity,
+        }),
+      );
     }
     yield put(recalculated(action.payload));
 

@@ -1,19 +1,30 @@
-import Axios from 'axios';
 import { API_URL } from 'src/config';
+import axios from 'axios';
+import { getToken } from '../User/selectors';
 
-export const headers = {
-  // 'Content-Type': 'application/x-www-form-urlencoded',
-  Accept: 'application/json',
-};
-
-export const authHeaders = (token?: string) => ({
-  ...headers,
-  Authorization: `Bearer ${token}`,
+const api = axios.create({
+  baseURL: API_URL,
+  timeout: 1000,
 });
 
-export const getData = async (url: string) =>
-  await Axios({
-    method: 'get',
-    url: `${API_URL}${url}`,
-    headers,
-  });
+api.interceptors.request.use(
+  (config: any) => {
+    if (getToken()) {
+      config.headers.Authorization = `Bearer ${getToken()}`;
+    }
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  },
+);
+
+export const getRequest = async (endpoint: string) => await api.get(endpoint);
+
+export const postRequest = async (endpoint: string, params: any) =>
+  await api.post(endpoint, params);
+
+export const patchRequest = async (endpoint: string, params: any) =>
+  await api.patch(endpoint, params);
+
+export const deleteRequest = async (endpoint: string) => await api.delete(endpoint);
