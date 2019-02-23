@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { register } from '../../../../User/actions';
-import { Form, Input, Button, Row, Col } from 'antd';
+import { Form, Input, Button, Col } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 const FormItem = Form.Item;
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Drawer, Button } from 'antd';
+import { Drawer } from 'antd';
 import { connect } from 'react-redux';
 import { toggleSignup } from '../../../actions';
 import { SignUp } from '..';

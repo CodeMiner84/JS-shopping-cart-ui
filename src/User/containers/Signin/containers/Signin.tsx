@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Form, Icon, Input, Button, Row, Col } from 'antd';
+import { Form, Icon, Input, Button, Col } from 'antd';
 import { login } from '../../../../User/actions';
 import { FormComponentProps } from 'antd/lib/form';
 import { hasErrors } from '../../../../User/selectors';

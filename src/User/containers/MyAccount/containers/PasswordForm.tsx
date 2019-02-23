@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Form, Icon, Input, Button } from 'antd';
 import { TextHeader } from '../../../../Layout/index';
-import { ValidationRule, ValidateCallback } from 'antd/lib/form';
+import { ValidationRule } from 'antd/lib/form';
 import { formItemLayout } from './constants';
 import { changePassword } from '../actions';
 
