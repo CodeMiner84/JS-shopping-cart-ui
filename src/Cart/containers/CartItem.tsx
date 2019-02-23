@@ -8,7 +8,6 @@ type Props = {
   product: CartItemModel;
   recalculate: (id: number, quantity: number) => void;
   remove: (id: number) => void;
-  ShouldComponentUpdate: (nextProps: any) => boolean;
 };
 
 const initialState = { quantity: 0 };

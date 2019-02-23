@@ -21,7 +21,7 @@ export default handleActions(
     ADDED_TO_CART: (state: State = initialState, action: AddedToCartAction) => {
       let newCartItems: CartItemModel[] = state.cartItems;
 
-      newCartItems = Object.keys(state.cartItems).map((key: any) => {
+      newCartItems = Object.keys(state.cartItems).map((key: string) => {
         if (state.cartItems[key].productId === action.payload.id) {
           return {
             ...state.cartItems[key],
@@ -34,7 +34,7 @@ export default handleActions(
 
       if (
         Object.keys(newCartItems).filter(
-          (key: any) => newCartItems[key].id === action.payload.id,
+          (key: string) => newCartItems[key].id === action.payload.id,
         ).length === 0
       ) {
         newCartItems.push({

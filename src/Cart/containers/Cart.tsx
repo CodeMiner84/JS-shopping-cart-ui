@@ -52,7 +52,7 @@ class Cart extends React.Component<Props> {
                   </thead>
                   <tbody className="ant-table-tbody">
                     {cartItems &&
-                      cartItems.map((item: any) => (
+                      cartItems.map((item: CartItemModel) => (
                         <CartElement key={item.id} product={item} />
                       ))}
                   </tbody>

@@ -9,7 +9,6 @@ import Loading from '../../Loading/Loading';
 type Props = {
   getProducts: () => void;
   products: ProductModel[];
-  app: any;
   loading: boolean;
 };
 
@@ -17,7 +16,6 @@ type StateProps = {
   product: {
     products: ProductModel[];
   };
-  app: any;
   loading: boolean;
 };
 
