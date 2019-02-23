@@ -1,4 +1,4 @@
-import { call, put, takeLatest, select, take } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { message } from 'antd';
 import { RegisterUserProps } from '../../dto/RegisterUserProps';
@@ -33,11 +33,13 @@ function* loginUser(action: RegisterUserProps) {
 function* isUserLogged() {
   try {
     const token = getToken();
-    const response = yield call(() => getRequest(routes.me));
+    if (token) {
+      const response = yield call(() => getRequest(routes.me));
 
-    if (response != null && response.status === 200) {
-      // yield put(push('/'));
-      yield put(userAuth(response.data));
+      if (response != null && response.status === 200) {
+        // yield put(push('/'));
+        yield put(userAuth(response.data));
+      }
     }
   } catch (e) {
     yield put(getFailure(e));
