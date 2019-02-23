@@ -6,11 +6,11 @@ const initialState = { loading: false };
 
 export default handleActions(
   {
-    LOADING: (state: State = initialState, action: any) => ({
+    LOADING: (state: State = initialState) => ({
       ...state,
       loading: true,
     }),
-    LOADED: (state: State = initialState, action: any) => ({
+    LOADED: (state: State = initialState) => ({
       ...state,
       loading: false,
     }),

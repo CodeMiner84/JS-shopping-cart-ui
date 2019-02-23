@@ -11,7 +11,6 @@ class UserPasswordForm extends React.Component<any, {}> {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
-        console.log('test');
         this.props.changePassword({
           oldPassword: values.currentPassword,
           newPassword: values.password,
