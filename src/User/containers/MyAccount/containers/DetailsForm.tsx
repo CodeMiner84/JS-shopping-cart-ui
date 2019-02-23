@@ -9,7 +9,7 @@ import { FormComponentProps } from 'antd/lib/form';
 import { formItemLayout } from './constants';
 
 type Props = {
-  updatePersonalData: (values: any) => void;
+  updatePersonalData: (values: PersonalDataInputModel) => void;
   user: PersonalDataInputModel;
   tokenRequest: () => void;
   form: FormComponentProps;

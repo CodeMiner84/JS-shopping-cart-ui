@@ -27,7 +27,13 @@ const SignInWrapper: React.FC<Props> = ({
   </div>
 );
 
-const mapStateToProps = ({ auth: { toggleSignIn } }: any) => ({
+type StateProps = {
+  auth: {
+    toggleSignIn: boolean;
+  };
+};
+
+const mapStateToProps = ({ auth: { toggleSignIn } }: StateProps) => ({
   toggleSignIn,
 });
 

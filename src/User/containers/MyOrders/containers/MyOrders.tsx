@@ -34,7 +34,7 @@ class MyOrders extends React.Component<Props> {
       <>
         <TextHeader title="Orders list" />
         <Collapse defaultActiveKey={['1']}>
-          {Object.keys(this.props.orders).map((key: any) => {
+          {Object.keys(this.props.orders).map((key: string) => {
             const order = this.props.orders[key];
             return (
               <Panel
@@ -51,7 +51,13 @@ class MyOrders extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = ({ orders: { orders } }: any) => ({
+type StateProps = {
+  orders: {
+    orders: OrderProps[];
+  };
+};
+
+const mapStateToProps = ({ orders: { orders } }: StateProps) => ({
   orders,
 });
 

@@ -27,7 +27,13 @@ const SingUpwrapper: React.FC<Props> = ({
   </div>
 );
 
-const mapStateToProps = ({ auth: { toggleSignUp } }: any) => ({
+type StateProps = {
+  auth: {
+    toggleSignUp: boolean;
+  };
+};
+
+const mapStateToProps = ({ auth: { toggleSignUp } }: StateProps) => ({
   toggleSignUp,
 });
 

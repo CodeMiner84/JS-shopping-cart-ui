@@ -3,7 +3,7 @@ import { SignInReducer } from './containers/Signin/reducer';
 import { SignUpReducer } from './containers/Signup/reducer';
 import { UserReducer } from './containers/MyAccount/reducer';
 
-const initialState = {
+export const initialState = {
   error: false,
   loading: false,
   token: '',

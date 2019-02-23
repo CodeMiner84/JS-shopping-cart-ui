@@ -1,8 +1,11 @@
 import { UserUpdateAction } from './dtos/UserUpdateAction';
 import { UserAuthAction } from './dtos/UserAuthAction';
+import { initialState } from '../../reducer';
+
+type State = typeof initialState;
 
 export const UserReducer = {
-  PERSONAL_DATA_UPDATED: (state: any, action: UserUpdateAction) => {
+  PERSONAL_DATA_UPDATED: (state: State = initialState, action: UserUpdateAction) => {
     return {
       ...state,
       user: {
@@ -11,11 +14,11 @@ export const UserReducer = {
       },
     };
   },
-  REQ_LOGOUT: (state: any) => ({
+  REQ_LOGOUT: (state: State = initialState) => ({
     ...state,
     logged: false,
   }),
-  USER_AUTH: (state: any, action: UserAuthAction) => ({
+  USER_AUTH: (state: State = initialState, action: UserAuthAction) => ({
     ...state,
     loading: false,
     logged: action.payload.id ? true : false,

@@ -4,7 +4,7 @@ import {
   Container,
   Row as SummaryRow,
 } from '../../../../Cart/components/SummaryComponents';
-import { OrderProps } from '../models/UserOrder';
+import { OrderProps, OrderProductProps } from '../models/UserOrder';
 
 type Props = {
   order: OrderProps;
@@ -29,7 +29,7 @@ const OrderItem: React.FC<Props> = ({ order }: Props) => {
                 </tr>
               </thead>
               <tbody className="ant-table-tbody">
-                {products.map((product: any) => (
+                {products.map((product: OrderProductProps) => (
                   <tr key={product.id} className="ant-table-row">
                     <td>{product.title}</td>
                     <td>${product.price}</td>
