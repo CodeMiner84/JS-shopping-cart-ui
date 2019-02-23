@@ -1,4 +1,4 @@
-export interface InputPersonalDataModel {
+export interface PersonalDataInputModel {
   username: string;
   email: string;
   firstName: string;

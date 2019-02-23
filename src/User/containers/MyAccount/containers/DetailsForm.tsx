@@ -4,13 +4,13 @@ import { TextHeader } from '../../../../Layout/index';
 import { connect } from 'react-redux';
 import { updatePersonalData } from '../actions';
 import { tokenRequest } from '../../../actions';
-import { InputPersonalDataModel } from '../dtos/input.personal-data.model';
+import { PersonalDataInputModel } from '../dtos/PersonalDataInputModel';
 import { FormComponentProps } from 'antd/lib/form';
 import { formItemLayout } from './constants';
 
 type Props = {
   updatePersonalData: (values: any) => void;
-  user: InputPersonalDataModel;
+  user: PersonalDataInputModel;
   tokenRequest: () => void;
   form: FormComponentProps;
 };
@@ -69,7 +69,7 @@ class UserDetailsForm extends React.Component<Props & FormComponentProps, {}> {
 
 type StateProps = {
   auth: {
-    user: InputPersonalDataModel;
+    user: PersonalDataInputModel;
   };
 };
 

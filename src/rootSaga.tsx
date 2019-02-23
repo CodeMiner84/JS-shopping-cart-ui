@@ -6,10 +6,11 @@ import {
   watchRemoveFromCart,
   watchRecalculate,
 } from './Cart/sagas';
-import { watchSignUp, watchSignIn, watchMe, watchLogout } from './User/sagas';
 import { watchCheckout } from './Checkout/sagas';
 import { watchOrders } from './User/containers/MyOrders/sagas';
 import { watchUpdateUser, watchChangePassword } from './User/containers/MyAccount/saga';
+import { watchSignIn, watchMe, watchLogout } from './User/containers/Signin/saga';
+import { watchSignUp } from './User/containers/Signup/saga';
 
 export function* rootSaga() {
   yield all([

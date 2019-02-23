@@ -1,6 +1,6 @@
-import { InputPersonalDataModel } from './input.personal-data.model';
+import { PersonalDataInputModel } from './PersonalDataInputModel';
 
 export interface UserUpdateAction {
   type: string;
-  payload: InputPersonalDataModel;
+  payload: PersonalDataInputModel;
 }

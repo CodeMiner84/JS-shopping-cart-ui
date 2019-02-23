@@ -4,19 +4,19 @@ import { message } from 'antd';
 import { getFailure } from '../../../Common/actions';
 import * as HttpStatus from 'http-status-codes';
 import { personalDataUpdated } from './actions';
-import { InputPersonalDataModel } from './dtos/input.personal-data.model';
-import { InputChangePasswordModel } from './dtos/input-change-password.model';
+import { PersonalDataInputModel } from './dtos/PersonalDataInputModel';
+import { ChangePasswordInputModel } from './dtos/ChangePasswordInputModel';
 import { patchRequest } from '../../../Common/api';
 import routes from '../../../Common/routes';
 
 type ActionUpdateProps = {
   type: string;
-  payload: InputPersonalDataModel;
+  payload: PersonalDataInputModel;
 };
 
 type ActionChangePasswordProps = {
   type: string;
-  payload: InputChangePasswordModel;
+  payload: ChangePasswordInputModel;
 };
 
 function* updatePersonalData(action: ActionUpdateProps) {

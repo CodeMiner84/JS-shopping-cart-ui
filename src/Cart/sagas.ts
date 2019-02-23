@@ -14,6 +14,7 @@ import { recvCart, addedToCart, itemRemoved, recalculated } from './actions';
 import { checkoutCalc } from '../Checkout/actions';
 import routes from '../Common/routes';
 import { getRequest, deleteRequest, patchRequest, postRequest } from '../Common/api';
+import { CartItemModel } from './models/index';
 
 interface AddToCart {
   type: string;
@@ -46,6 +47,17 @@ export function* loadCartItems() {
   } catch (e) {
     yield put(getFailure(e));
   }
+}
+
+export function* syncCartItems() {
+  const cartItems = yield select(getCartFromState);
+  const userId = yield select(getUserId);
+  cartItems.map((item: CartItemModel) => {
+    postRequest(routes.addToCart, {
+      ...item,
+      userId,
+    });
+  });
 }
 
 function* getCartItems() {
