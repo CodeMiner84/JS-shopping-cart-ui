@@ -119,7 +119,7 @@ function* removeFromCartSaga(action: RemoveFromCartProps) {
   } catch (e) {
     yield put(loaded());
     yield put(getFailure(e));
-    message.error("Cat't remove product from cart!");
+    message.error('Unable to remove product from cart!');
   }
 }
 
