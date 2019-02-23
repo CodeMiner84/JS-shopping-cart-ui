@@ -1,6 +1,5 @@
 import { handleActions } from 'redux-actions';
-
-type State = typeof initialState;
+import { CheckoutCalcAction } from './dto/CheckoutCalcAction';
 
 const initialState = {
   price: 0,
@@ -8,10 +7,12 @@ const initialState = {
   paymentCost: 0,
 };
 
+type State = typeof initialState;
+
 export default handleActions(
   {
     ORDER_PLACED: () => initialState,
-    CHECKOUT_CALC: (state: State = initialState, action: any) => ({
+    CHECKOUT_CALC: (state: State = initialState, action: CheckoutCalcAction) => ({
       ...state,
       price: action.payload,
     }),

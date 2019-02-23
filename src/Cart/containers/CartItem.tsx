@@ -6,8 +6,8 @@ import { Icon, Input } from 'antd';
 
 type Props = {
   product: CartItemModel;
-  recalculate: (id: string, quantity: number) => void;
-  remove: (id: string) => void;
+  recalculate: (id: number, quantity: number) => void;
+  remove: (id: number) => void;
   ShouldComponentUpdate: (nextProps: any) => boolean;
 };
 

@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { OrderProps } from './models/UserOrder';
+import { RecvOrderSAction } from './dto/RecvOrdersAction';
 
 type State = {
   orders: OrderProps[];
@@ -11,7 +12,7 @@ const initialState = {
 
 export default handleActions(
   {
-    RECV_ORDERS: (state: State = initialState, action: any) => ({
+    RECV_ORDERS: (state: State = initialState, action: RecvOrderSAction) => ({
       ...state,
       orders: action.payload,
     }),

@@ -1,7 +1,6 @@
 import { call, put, takeLatest, select, take } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { message } from 'antd';
-import { UserState } from '../User/containers/Signup';
 import { saveToken, getToken, logout } from './selectors';
 import { getCartFromState, getUserId } from '../Cart/sagas';
 import { userRegister, userLogin, userAuth } from './actions';
@@ -15,11 +14,7 @@ import {
 import { clearCart } from '../Cart/actions';
 import { postRequest, getRequest } from '../Common/api';
 import routes from '../Common/routes';
-
-interface RegisterUserProps {
-  type: string;
-  payload: UserState;
-}
+import { RegisterUserProps } from './dto/RegisterUserProps';
 
 function* registerUser(action: RegisterUserProps) {
   try {

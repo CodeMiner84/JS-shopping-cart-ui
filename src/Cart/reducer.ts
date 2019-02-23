@@ -1,5 +1,9 @@
 import { CartItemModel } from './models';
 import { handleActions } from 'redux-actions';
+import { RecvCartAction } from './dto/RecvCartAction';
+import { AddedToCartAction } from './dto/AddedToCartAction';
+import { RemovedCartItemAction } from './dto/RemovedCartItemAction';
+import { RecalculateCartAction } from './dto/RecalculateCartAction';
 
 type State = {
   cartItems: CartItemModel[];
@@ -11,10 +15,10 @@ const initialState = {
 
 export default handleActions(
   {
-    RECV_CART: (state: State = initialState, action: any) => ({
+    RECV_CART: (state: State = initialState, action: RecvCartAction) => ({
       cartItems: action.payload,
     }),
-    ADDED_TO_CART: (state: State = initialState, action: any) => {
+    ADDED_TO_CART: (state: State = initialState, action: AddedToCartAction) => {
       let newCartItems: CartItemModel[] = state.cartItems;
 
       newCartItems = Object.keys(state.cartItems).map((key: any) => {
@@ -47,11 +51,11 @@ export default handleActions(
         cartItems: newCartItems,
       };
     },
-    ITEM_REMOVED: (state: State = initialState, action: any) => ({
+    ITEM_REMOVED: (state: State = initialState, action: RemovedCartItemAction) => ({
       ...state,
       cartItems: state.cartItems.filter(item => item.id !== action.payload),
     }),
-    RECALCULATE_CART: (state: State = initialState, action: any) => {
+    RECALCULATE_CART: (state: State = initialState, action: RecalculateCartAction) => {
       const { id, quantity } = action.payload;
 
       return {

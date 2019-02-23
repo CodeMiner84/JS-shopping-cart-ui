@@ -22,7 +22,7 @@ export const {
   clearCart,
 } = createActions(
   {
-    RECALCULATE_CART: (id: string, quantity: number) => ({
+    RECALCULATE_CART: (id: number, quantity: number) => ({
       id,
       quantity,
     }),

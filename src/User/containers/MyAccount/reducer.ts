@@ -1,5 +1,8 @@
+import { UserUpdateAction } from './dtos/UserUpdateAction';
+import { UserAuthAction } from './dtos/UserAuthAction';
+
 export const UserReducer = {
-  PERSONAL_DATA_UPDATED: (state: any, action: any) => {
+  PERSONAL_DATA_UPDATED: (state: any, action: UserUpdateAction) => {
     return {
       ...state,
       user: {
@@ -8,11 +11,11 @@ export const UserReducer = {
       },
     };
   },
-  REQ_LOGOUT: (state: any, action: any) => ({
+  REQ_LOGOUT: (state: any) => ({
     ...state,
     logged: false,
   }),
-  USER_AUTH: (state: any, action: any) => ({
+  USER_AUTH: (state: any, action: UserAuthAction) => ({
     ...state,
     loading: false,
     logged: action.payload.id ? true : false,
