@@ -3,6 +3,11 @@
 # JS shopping cart UI
 
 Front (React) part of JS-shopping-cart application
+
+* [docker](https://github.com/CodeMiner84/JS-shopping-cart-docker) - docker appplication
+* [api](https://github.com/CodeMiner84/JS-shopping-cart-api) - API application
+
+
 ```
 yarn install
 ```
@@ -19,8 +24,8 @@ After all packages will be installed, application swagger will available at: `ht
 ## Built With
 
 * [React](https://reactjs.org/) - The web framework used
-* [redux-saga](https://github.com/redux-saga/redux-saga) - An alternative side effect model for Redux apps
-* [redux-actions](https://github.com/redux-utilities/redux-actions) - Flux Standard Action utilities for Redux
+* [Redux saga](https://github.com/redux-saga/redux-saga) - An alternative side effect model for Redux apps
+* [Redut actions](https://github.com/redux-utilities/redux-actions) - Flux Standard Action utilities for Redux
 * [Typescript](https://www.typescriptlang.org/) - Strict syntactical superset of JavaScript
 * [Docker](https://www.docker.com/) - Allow to run application in containers
 
