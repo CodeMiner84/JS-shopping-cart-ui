@@ -37,11 +37,11 @@ function* isUserLogged() {
       const response = yield call(() => getRequest(routes.me));
 
       if (response != null && response.status === 200) {
-        // yield put(push('/'));
         yield put(userAuth(response.data));
       }
     }
   } catch (e) {
+    yield put(push('/'));
     yield put(getFailure(e));
   }
 }
