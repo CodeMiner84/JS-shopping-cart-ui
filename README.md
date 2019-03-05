@@ -1,39 +1,16 @@
 [![DeepScan grade](https://deepscan.io/api/teams/2725/projects/4006/branches/33635/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=2725&pid=4006&bid=33635)
 
-# JS shop front
+# JS shopping cart UI
 
-Front (React) part of JS-shop application
-
-## Getting Started
-
-Witho those instructions You will be able to install and run project locally on Your ouw machine.
-
-### Prerequisites
-
-Before You install project You need to have installed on Your machine:
-
-###### Eas way
-`git`, to fetch project, and `docker` to run project
-
-###### Hard way
-`git` to fetch project, `node`, `npm` or `yarn` to start project.
-
-### Installing
-Create .env variables
+Front (React) part of JS-shopping-cart application
 ```
-cp .env.dist .env
-```
-##### with Docker
-
-```
-docker-compose build
+yarn install
 ```
 ```
-docker-compose up -d
+yarn start
 ```
-Note that `-d` flag will run project in background. For development purpose and to catch incoming errors I suggest to not use this flag
 
-After project will be builded, `yarn install` and `yarn start` will be running automatically from docker configuration files.
+After all packages will be installed, application swagger will available at: `http://localhost:3000/`
 
 ## Running the tests
 
@@ -42,16 +19,14 @@ After project will be builded, `yarn install` and `yarn start` will be running a
 ## Built With
 
 * [React](https://reactjs.org/) - The web framework used
+* [redux-saga](https://github.com/redux-saga/redux-saga) - An alternative side effect model for Redux apps
+* [redux-actions](https://github.com/redux-utilities/redux-actions) - Flux Standard Action utilities for Redux
+* [Typescript](https://www.typescriptlang.org/) - Strict syntactical superset of JavaScript
 * [Docker](https://www.docker.com/) - Allow to run application in containers
 
-## Contributing
+## Author
 
-Please read [CONTRIBUTING.md]
-
-
-## Authors
-
-* **Michał Pietrasz** - [Codeminer84](https://github.com/CodeMiner84)(https://michalpietrasz.pl)
+* [**Michał Pietrasz**](http://michalpietrasz.pl)
 
 ## License
 
