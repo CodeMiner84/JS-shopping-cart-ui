@@ -1,6 +1,7 @@
 import * as React from 'react';
 import 'antd/dist/antd.css';
 import './App.css';
+import ReactGA from 'react-ga';
 import { Router, Route, Switch } from 'react-router';
 import { Cart } from './Cart/index';
 import { Dashboard } from './Dashboard';
@@ -25,6 +26,12 @@ type Props = {
 };
 
 class App extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+
+    ReactGA.initialize('UA-138635270-1');
+    ReactGA.pageview(window.location.pathname);
+  }
   public render() {
     return (
       <Router history={history}>
